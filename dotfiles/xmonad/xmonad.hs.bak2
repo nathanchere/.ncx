@@ -1,0 +1,75 @@
+
+TODO:
+myManageHook = composeAll
+  [ className =? "terminator" --> doShift "1:main"
+   ,className =? "Pluma" --> doShift "4:misc"
+   ,className =? "Firefox" --> doShift "2:web"]
+
+
+import XMonad
+import XMonad.Config.Desktop
+import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Util.Run (safeSpawn,spawnPipe)
+import XMonad.Layout.Spacing
+import qualified Data.Map as M
+import System.Environment (getEnvironment)
+import XMonad.Util.EZConfig
+import XMonad.Hooks.DynamicLog
+import System.IO
+import XMonad.Util.EZConfig(additionalKeys)
+import System.Exit
+import XMonad.Actions.WindowGo
+import XMonad.Hooks.EwmhDesktops
+
+myWorkspaces = ["1:main","2:web","3:code","4:misc"] ++ map show [5..6]
+
+myManageHook = composeAll
+  [ classname =? "mate-panel" --> doIgnore
+   ,className =? "Firefox" --> doShift "2:web"]
+   <+> manageDocks
+
+myLogHook = do
+	logHook mateConfig
+--	dynamicLogWithPP $ xmobarPP
+--        { ppOutput = hPutStrLn xmproc
+--        , ppTitle = xmobarColor "green" "" . shorten 50
+--        }
+
+
+mateConfig = desktopConfig
+    { terminal = myTerminal
+    , keys     = mateKeys <+> keys desktopConfig
+    , workspaces = myWorkspaces
+    , manageHook = manageDocks <+> ownManageHook
+   -- , startUpHook = stHook
+    }
+
+mateKeys (XConfig {modMask = modm}) = M.fromList $
+    [((modm .|. shiftMask, xK_l), spawn "mate-screensaver-command -l")
+    ,((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
+    --,((modm .|. shiftMask, xK_s), spawn "sudo pm-suspend; mate-screensaver-command -l")
+    --,((modm .|. shiftMask, xK_h), spawn "sudo pm-hibernate; mate-screensaver-command -l")
+
+    -- Volume controls
+    , ((modm .|. controlMask, xK_m), spawn "amixer -q set Master toggle")
+    , ((modm .|. controlMask, xK_d),  spawn "amixer -q set Master 10%-")
+    , ((modm .|. controlMask, xK_i), spawn "amixer -q set Master 10%+")
+    ]
+
+main = do
+    xmproc <- spawnPipe "xmobar"
+    xmonad $ ewmh $  mateConfig
+                { modMask = mod4Mask
+                 ,logHook = myLogHook
+                 , layoutHook = myLayoutHook
+                 , borderWidth = 3
+                 , focusedBorderColor = "#7FBC71"
+                } `additionalKeysP` myKeys
+
+myKeys = [  (("M4-f"), runOrRaise "firefox" (className =? "Firefox"))
+           ,(("M4-e"), runOrRaise "/home/massyl/softs/scala/eclipse/eclipse" (className =? "Eclipse"))
+           ,(("M4-n"), runOrRaise "emacs" (className =? "Emacs"))
+           --,(("M4-i"), spawn "pidgin")
+           --,(("M4-c"), spawn "google-chrome")
+           ,(("M4-z"), kill)
+           ,(("M4-p"), spawn "dmenu_run | dmenu -b") ]
