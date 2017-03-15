@@ -18,3 +18,5 @@ NCXROOT = $(pwd)
 echo $NCXROOT
 
 yell()
+
+# TODO:  2>&1 | tee logs/install.log
