@@ -14,4 +14,38 @@ yell() { echo "$0: $*" >&2; }
 die() { yell "$*"; exit 111; }
 try() { "$@" || die "cannot $*"; }
 
-NCXROOT=$(pwd)
+# Nice formatty stuff
+
+drawTime() {
+  echo `date +"%T"`
+}
+
+drawHead() {
+  echo " "
+  echo "########################################################"
+  echo "#  $1"
+  echo "########################################################"
+  echo " "  
+}
+
+drawSubhead() {
+  echo " "
+  echo "[$(drawTime)]------------------------------------------------"  
+  echo "          ::: $1"
+  echo " "  
+}
+
+# Init common variables
+export NCXROOT=$(pwd)
+LOGROOT="$NCXROOT/logs"
+export LOGFILE="$LOGROOT/$0.log"
+
+# Init log
+mkdir -p logs
+drawHead "$0 [$(date)]" |& tee -a $LOGFILE
+
+# Function exports
+export -f drawHead
+export -f yell
+export -f die
+export -f try
