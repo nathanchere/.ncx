@@ -10,11 +10,17 @@ set -e
 set -u
 
 # Tips from http://stackoverflow.com/a/25515370/243557
-yell() { echo "$0: $*" >&2; }
+yell() { echo "$*" 2>&1 |& tee -a $LOGFILE; }
 die() { yell "$*"; exit 111; }
 try() { "$@" || die "cannot $*"; }
 
 # Nice formatty stuff
+
+requireRoot() {
+  if [ $UID != 0 ]; then
+    die "This script requires root privilege. Try again with sudo."
+  fi
+}
 
 drawTime() {
   echo `date +"%T"`
@@ -49,3 +55,4 @@ export -f drawHead
 export -f yell
 export -f die
 export -f try
+export -f requireRoot
