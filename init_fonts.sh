@@ -1,9 +1,10 @@
 #!/bin/bash
+. _.sh
 
-mkdir -p logs
+main() {
+  doStow fonts resources ~
+  fc-cache -fv
+}
 
-stow --verbose=2 -d resources -t ~ fonts >> logs/fonts.log 2>&1
-fc-cache -fv  2>&1
-
-echo Fonts done
+main 2>&1 |& tee -a $LOGFILE
 

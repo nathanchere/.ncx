@@ -1,17 +1,12 @@
 #!/bin/bash
 . _.sh
 
+# System config is handled at root ("/") level rather than home
+# For this reason it's handled separately from normal dotfiles
 requireRoot
 
-stowSysConfig() {
-  drawSubhead "Cleaning up existing $1 files"
-  stow --verbose=2 -D -d sysconfig -t / $1  
-  drawSubhead "Stowing $1"
-  stow --verbose=2 -d sysconfig -t / $1  
-}
-
 main() {
-  stowSysConfig xsessions
+  stowSysConfig xsessions sysconfig /
 }
 
 main 2>&1 |& tee -a $LOGFILE

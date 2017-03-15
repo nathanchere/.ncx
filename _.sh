@@ -41,6 +41,19 @@ drawSubhead() {
   echo " "  
 }
 
+# Stow common wrapper
+#   $1 - root name of stow source
+#   $2 - parent folder of stow source
+#   $3 - root of stow target
+# e.g. doStow compton dotfiles /home/johnnychomp
+
+doStow() {
+  drawSubhead "Cleaning up existing $1 files"
+  stow --verbose=2 -D -d $2 -t $3 $1  
+  drawSubhead "Stowing $1"
+  stow --verbose=2 -d $2 -t $3 $1
+}
+
 # Init common variables
 export NCXROOT=$(pwd)
 LOGROOT="$NCXROOT/logs"
