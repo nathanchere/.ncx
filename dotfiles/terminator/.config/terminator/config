@@ -1,6 +1,7 @@
 [global_config]
   borderless = True
   extra_styling = False
+  inactive_color_offset = 1.0
 [keybindings]
 [layouts]
   [[default]]
