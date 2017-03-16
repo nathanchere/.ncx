@@ -1,7 +1,9 @@
 packages: [
   "busy-signal"
+  "intentions"
   "language-elixir"
   "language-elm"
+  "language-fish-shell"
   "linter"
   "linter-elixirc"
   "linter-ui-default"
