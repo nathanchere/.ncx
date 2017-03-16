@@ -6,7 +6,7 @@
 requireRoot
 
 main() {
-  stowSysConfig xsessions sysconfig /
+  doStow xsessions sysconfig /
 }
 
 main 2>&1 |& tee -a $LOGFILE
