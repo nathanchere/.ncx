@@ -1,8 +1,30 @@
 "*":
+  "bracket-matcher":
+    autocompleteBrackets: false
+    wrapSelectionsInBrackets: false
   core:
     autoHideMenuBar: true
     automaticallyUpdate: false
     closeEmptyWindows: false
+    disabledPackages: [
+      "about"
+      "exception-reporting"
+      "archive-view"
+      "autoflow"
+      "background-tips"
+      "language-clojure"
+      "language-go"
+      "language-java"
+      "language-mustache"
+      "language-objective-c"
+      "language-perl"
+      "language-php"
+      "language-property-list"
+      "language-toml"
+      "metrics"
+      "open-on-github"
+      "welcome"
+    ]
     projectHome: "~/src"
     restorePreviousWindowsOnStart: true
     telemetryConsent: "no"
