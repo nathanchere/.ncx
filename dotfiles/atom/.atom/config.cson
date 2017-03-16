@@ -1,0 +1,15 @@
+"*":
+  core:
+    autoHideMenuBar: true
+    automaticallyUpdate: false
+    closeEmptyWindows: false
+    projectHome: "~/src"
+    restorePreviousWindowsOnStart: true
+    telemetryConsent: "no"
+  editor:
+    fontFamily: "Iosevka Nerd Font"
+    fontSize: 12
+    lineHeight: 1.3
+    showIndentGuide: true
+  welcome:
+    showOnStartup: false

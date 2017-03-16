@@ -1,11 +1,17 @@
 #!/bin/bash
 . _.sh
 
+doStowDots() {
+  doStow $1 dotfiles ~
+}
+
 main() {
-  doStow compton dotfiles ~
-  doStow polybar dotfiles ~
-  doStow terminator dotfiles ~
-  doStow xmonad dotfiles ~
+  doStowDots atom
+  doStowDots compton
+  doStowDots polybar
+  doStowDots terminator
+  doStowDots vivaldi
+  doStowDots xmonad
 }
 
 main 2>&1 |& tee -a $LOGFILE
