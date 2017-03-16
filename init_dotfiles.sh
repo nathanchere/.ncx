@@ -6,12 +6,15 @@ doStowDots() {
 }
 
 main() {
-  doStowDots atom
-  doStowDots compton
-  doStowDots polybar
-  doStowDots terminator
-  doStowDots vivaldi
   doStowDots xmonad
+  doStowDots terminator
+
+  doStowDots compton
+  doStowDots dunst
+  doStowDots polybar
+
+  doStowDots atom
+  doStowDots vivaldi  
 }
 
 main 2>&1 |& tee -a $LOGFILE
