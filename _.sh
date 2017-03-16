@@ -54,9 +54,16 @@ doStow() {
   stow --verbose=2 -d $2 -t $3 $1
 }
 
+# Pass in the name of a package as you would provide it to dnf/yum/etc
+
+installedVersion() {
+  echo $(rpm -qi $1 | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2)
+}
+
 # Init common variables
 export NCXROOT=$(pwd)
 LOGROOT="$NCXROOT/logs"
+TMPROOT="$NCXROOT/tmp"
 export LOGFILE="$LOGROOT/$0.log"
 
 # Init log
