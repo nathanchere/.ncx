@@ -13,4 +13,12 @@ Just my Linux box setup / bootstrap scripts / dotfiles / etc
     ./init_fonts.sh
     
     ./install_[whatever].sh
-    
+   
+### TODO
+
+* Notification support (dunst? twmn? statnot?)
+* Tracking current workspace
+* LightDM greeter
+* Clean logout/etc without mate-panel
+* Investigate other bars - taffybar, candybar, dzen
+* Investigate misc - firejail
