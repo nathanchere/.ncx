@@ -17,7 +17,7 @@ try() { "$@" || die "cannot $*"; }
 # Nice formatty stuff
 
 requireRoot() {
-  if [ $UID != 0 ]; then
+  if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
     die "This script requires root privilege. Try again with sudo."
   fi
 }
