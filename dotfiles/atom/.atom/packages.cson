@@ -1,0 +1,10 @@
+packages: [
+  "busy-signal"
+  "language-elixir"
+  "language-elm"
+  "linter"
+  "linter-elixirc"
+  "linter-ui-default"
+  "markdown-writer"
+  "package-sync"
+]
