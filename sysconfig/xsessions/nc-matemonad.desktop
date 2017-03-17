@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=xmonad-mate
-Comment=Tiling window manager
+Name=NCX MateMonad
+Comment=Xmonad in a Mate session
 TryExec=/usr/bin/mate-session
 Exec=xmonad-start mate-session
 Type=XSession
