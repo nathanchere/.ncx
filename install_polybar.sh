@@ -1,19 +1,34 @@
-# For more info on what is happening here, see blog post (link TBC - 2017/03/15)
+#!/bin/bash
+. _.sh
 
-# Install build dependencies
-sudo dnf install cmake @development-tools gcc-c++
-sudo dnf install cairo-devel xcb-proto xcb-util-devel xcb-util-wm-devel xcb-util-image-devel
+requireRoot
 
-# Install specific module dependencies
-sudo dnf install i3-ipc jsoncpp-devel alsa-lib-devel wireless-tools-devel libmpdclient-devel libcurl-devel
+ORIGINALPATH=$(pwd)
 
-# Get source
-rm -rf ~/.ncx/tmp/polybar
-git clone --recursive https://github.com/jaagr/polybar ~/.ncx/tmp/polybar
-cd ~/.ncx/tmp/polybar
+main() {
+  # For more info on what is happening here, see blog post (link TBC - 2017/03/15)
 
-# Check out the latest tagged release
-currentRelease=$(git describe --tags `git rev-list --tags --max-count=1`)
-git checkout $currentRelease
+  drawSubhead "Installing build dependencies"
+  sudo dnf install cmake @development-tools gcc-c++
+  sudo dnf install cairo-devel xcb-proto xcb-util-devel xcb-util-wm-devel xcb-util-image-devel
 
-./build.sh
+  drawSubhead "Installing module dependencies"
+  sudo dnf install i3-ipc jsoncpp-devel alsa-lib-devel wireless-tools-devel libmpdclient-devel libcurl-devel
+
+  drawSubhead "Getting latest polybar source"
+  BUILDPATH="$TMPROOT/polybar"
+  rm -rf "$BUILDPATH"
+  git clone --recursive https://github.com/jaagr/polybar "$BUILDPATH"
+  cd "$BUILDPATH"
+
+  # Check out the latest tagged release
+  currentRelease=$(git describe --tags `git rev-list --tags --max-count=1`)
+  git checkout "$currentRelease"
+
+  drawSubhead "Build polybar"
+  ./build.sh
+
+  cd "$ORIGINALPATH"
+}
+
+main 2>&1 |& tee -a "$LOGFILE"

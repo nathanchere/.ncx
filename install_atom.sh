@@ -15,27 +15,27 @@ latestAtomVersion() {
   echo $(curl -sL "https://api.github.com/repos/atom/atom/releases/latest" | grep -E "https.*atom.x86_64.rpm" | cut -d '"' -f 4 | cut -d '/' -f 8 | sed 's/v//g' )
 }
 
-main() {  
-  drawSubhead "Checking installed vs latest Atom versions"  
+main() {
+  drawSubhead "Checking installed vs latest Atom versions"
   INSTALLEDVERSION=$(installedAtomVersion)
   LATESTVERSION=$(latestAtomVersion)
-  
+
   if [ "$INSTALLEDVERSION" == "$LATESTVERSION" ]; then
     echo "Latest version $LATESTVERSION already installed; skipping..."
   else
     if [ "$INSTALLEDVERSION" == "" ]; then
-      echo "No previous Atom installation detected; installing $LATESTVERSION"    
+      echo "No previous Atom installation detected; installing $LATESTVERSION"
     else
-      echo "Outdated version $INSTALLEDVERSION installed; updating to $LATESTVERSION"    
-    fi 
-    
+      echo "Outdated version $INSTALLEDVERSION installed; updating to $LATESTVERSION"
+    fi
+
     DOWNLOADURL=$(latestAtomRpmUrl)
     INSTALLER="$TMPROOT/atom-$LATESTVERSION.rpm"
     rm -f "$INSTALLER"
-    echo "Downloading from $DOWNLOADURL to $INSTALLER"   
+    echo "Downloading from $DOWNLOADURL to $INSTALLER"
     curl -L "$(latestAtomRpmUrl)" -o "$INSTALLER" # -L to follow Github redirects
     dnf install -y "$TMPROOT/atom-$LATESTVERSION.rpm"
-  fi  
+  fi
 }
 
-main 2>&1 |& tee -a $LOGFILE
+main 2>&1 |& tee -a "$LOGFILE"

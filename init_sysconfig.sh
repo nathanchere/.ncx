@@ -12,21 +12,21 @@ installXsessions() {
 
   drawSubhead "Installing XSession .desktop files"
 
-  for SOURCEPATH in $NCXROOT/sysconfig/xsessions/*.*; do
-    FILENAME=$(basename $SOURCEPATH)
+  for SOURCEPATH in "$NCXROOT"/sysconfig/xsessions/*.*; do
+    FILENAME=$(basename "$SOURCEPATH")
     TARGETPATH="/usr/share/xsessions/$FILENAME"
 
-    if [ -f $TARGETPATH ]; then
+    if [ -f "$TARGETPATH" ]; then
       echo "$FILENAME already exists as $TARGETPATH; skipping..."
     else
 
-      if [ -L $TARGETPATH ]; then
+      if [ -L "$TARGETPATH" ]; then
         echo "$FILENAME already symlinked; unlinking..."
-        unlink $TARGETPATH
+        unlink "$TARGETPATH"
       fi
 
       echo "Hard-linking $SOURCEPATH to $TARGETPATH"
-      ln $SOURCEPATH $TARGETPATH
+      ln "$SOURCEPATH" "$TARGETPATH"
     fi
   done
 }
@@ -36,4 +36,4 @@ main() {
   installXsessions
 }
 
-main 2>&1 |& tee -a $LOGFILE
+main 2>&1 |& tee -a "$LOGFILE"

@@ -2,7 +2,7 @@
 . _.sh
 
 doStowDots() {
-  doStow $1 dotfiles ~
+  doStow "$1" dotfiles ~
 }
 
 main() {
@@ -14,7 +14,7 @@ main() {
   doStowDots polybar
 
   doStowDots atom
-  doStowDots vivaldi  
+  doStowDots vivaldi
 }
 
-main 2>&1 |& tee -a $LOGFILE
+main 2>&1 |& tee -a "$LOGFILE"

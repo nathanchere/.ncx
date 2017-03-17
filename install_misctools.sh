@@ -4,7 +4,7 @@
 requireRoot
 
 main() {
-  dnf install -y lshw
+  dnf install -y lshw feh
 }
 
-main 2>&1 |& tee -a $LOGFILE
+main 2>&1 |& tee -a "$LOGFILE"

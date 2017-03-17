@@ -10,7 +10,7 @@ set -e
 set -u
 
 # Tips from http://stackoverflow.com/a/25515370/243557
-yell() { echo "$*" 2>&1 |& tee -a $LOGFILE; }
+yell() { echo "$*" 2>&1 |& tee -a "$LOGFILE"; }
 die() { yell "$*"; exit 111; }
 try() { "$@" || die "cannot $*"; }
 
@@ -31,14 +31,14 @@ drawHead() {
   echo "########################################################"
   echo "#  $1"
   echo "########################################################"
-  echo " "  
+  echo " "
 }
 
 drawSubhead() {
   echo " "
-  echo "[$(drawTime)]------------------------------------------------"  
+  echo "[$(drawTime)]------------------------------------------------"
   echo "          ::: $1"
-  echo " "  
+  echo " "
 }
 
 # Stow common wrapper
@@ -49,15 +49,15 @@ drawSubhead() {
 
 doStow() {
   drawSubhead "Cleaning up existing $1 files"
-  stow --verbose=2 -D -d $2 -t $3 $1  
+  stow --verbose=2 -D -d "$2" -t "$3" "$1"
   drawSubhead "Stowing $1"
-  stow --verbose=2 -d $2 -t $3 $1
+  stow --verbose=2 -d "$2" -t "$3" "$1"
 }
 
 # Pass in the name of a package as you would provide it to dnf/yum/etc
 
 installedVersion() {
-  echo $(rpm -qi $1 | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2)
+  echo $(rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2)
 }
 
 # Init common variables
@@ -68,7 +68,7 @@ export LOGFILE="$LOGROOT/$0.log"
 
 # Init log
 mkdir -p logs
-drawHead "$0 [$(date)]" |& tee -a $LOGFILE
+drawHead "$0 [$(date)]" |& tee -a "$LOGFILE"
 
 # Function exports
 export -f drawHead
