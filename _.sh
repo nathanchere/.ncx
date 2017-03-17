@@ -1,8 +1,6 @@
 #!/bin/bash
 # Common config stuff
 
-#TODO:  2>&1 | tee logs/install.log
-
 # Exit on the first failure - it's bulletproof or GTFO
 set -e
 
@@ -52,6 +50,38 @@ doStow() {
   stow --verbose=2 -D -d "$2" -t "$3" "$1"
   drawSubhead "Stowing $1"
   stow --verbose=2 -d "$2" -t "$3" "$1"
+}
+
+# Since stow only works with symlinks, and because permission issues arise for
+# things like display manager config which is not run from an account which
+# has permission to access files in the main .ncx repository (when it is cloned
+# under /home/{user} as intended), this is a kind of work-around using hard links.
+# NOTE: does not recurse through subdirectories.
+# Basically intended as a simplistic shallow stow with hard links.
+#   $1 - path to the 'stow' source folder, relative from .ncx root
+#   $2 - root of stow target
+
+doHardStow() {
+  drawSubhead "Hard-stowing $1 config"
+
+  for SOURCEPATH in "$NCXROOT/$1"/*.*; do
+    FILENAME=$(basename "$SOURCEPATH")
+    TARGETPATH="$2/$FILENAME"
+
+    if [ -f "$TARGETPATH" ]; then
+      echo "$FILENAME already exists as $TARGETPATH; skipping..."
+    elif [ -d "$TARGETPATH" ]; then
+      echo "Skipping directory $TARGETPATH"
+    else
+      if [ -L "$TARGETPATH" ]; then
+        echo "$FILENAME already symlinked; unlinking..."
+        unlink "$TARGETPATH"
+      fi
+
+      echo "Hard-linking $SOURCEPATH to $TARGETPATH"
+      ln "$SOURCEPATH" "$TARGETPATH"
+    fi
+  done
 }
 
 # Pass in the name of a package as you would provide it to dnf/yum/etc
