@@ -26,6 +26,7 @@ Specifically assumes a Fedora-based system. Tested on:
 * Investigate other bars - taffybar, candybar, dzen
 * Investigate misc - firejail
 * Compton, xmonad etc - ignore i3lock etc
+* Add .utils to fishrc etc
 
 ### Notes to me
 
