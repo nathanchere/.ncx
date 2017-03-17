@@ -25,7 +25,8 @@ Specifically assumes a Fedora-based system. Tested on:
 * Clean logout/etc without mate-panel
 * Investigate other bars - taffybar, candybar, dzen
 * Investigate misc - firejail
+* Compton, xmonad etc - ignore i3lock etc
 
 ### Notes to me
 
-* dm-tool for bringing up lightdm 
+* dm-tool for bringing up lightdm
