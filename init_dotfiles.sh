@@ -13,8 +13,7 @@ main() {
   doStowDots dunst
   doStowDots polybar
 
-  doStowDots atom
-  doStowDots vivaldi
+  doStowDots atom  
 }
 
 main 2>&1 |& tee -a "$LOGFILE"
