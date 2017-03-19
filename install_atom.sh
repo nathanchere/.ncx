@@ -33,7 +33,7 @@ main() {
     INSTALLER="$TMPROOT/atom-$LATESTVERSION.rpm"
     rm -f "$INSTALLER"
     echo "Downloading from $DOWNLOADURL to $INSTALLER"
-    curl -L "$(latestAtomRpmUrl)" -o "$INSTALLER" # -L to follow Github redirects
+    download "$(latestAtomRpmUrl)" "$INSTALLER"
     dnf install -y "$TMPROOT/atom-$LATESTVERSION.rpm"
   fi
 }
