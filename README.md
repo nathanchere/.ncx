@@ -27,6 +27,7 @@ Specifically assumes a Fedora-based system. Tested on:
 * Investigate misc - firejail
 * Compton, xmonad etc - ignore i3lock etc
 * Add .utils to fishrc etc
+* easier way to maintain dots etc ongoing
 
 ### Notes to me
 

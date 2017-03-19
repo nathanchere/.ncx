@@ -6,6 +6,7 @@ doStowDots() {
 }
 
 main() {
+  doStowDots fish
   doStowDots xmonad
   doStowDots terminator
 
@@ -13,7 +14,9 @@ main() {
   doStowDots dunst
   doStowDots polybar
 
-  doStowDots atom  
+  doStowDots atom
+
+  doStowDots misc
 }
 
 main 2>&1 |& tee -a "$LOGFILE"

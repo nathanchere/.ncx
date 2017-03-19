@@ -24,6 +24,10 @@ drawTime() {
   echo `date +"%T"`
 }
 
+drawTimestamp() {
+  echo `date +"%y%m%d"`
+}
+
 drawHead() {
   echo " "
   echo "########################################################"
@@ -68,18 +72,23 @@ doHardStow() {
     FILENAME=$(basename "$SOURCEPATH")
     TARGETPATH="$2/$FILENAME"
 
-    if [ -f "$TARGETPATH" ]; then
-      echo "$FILENAME already exists as $TARGETPATH; skipping..."
-    elif [ -d "$TARGETPATH" ]; then
+    if [ -d "$TARGETPATH" ]; then
       echo "Skipping directory $TARGETPATH"
     else
       if [ -L "$TARGETPATH" ]; then
         echo "$FILENAME already symlinked; unlinking..."
         unlink "$TARGETPATH"
+      elif [ -f "$TARGETPATH" ]; then
+          echo "$FILENAME already exists as $TARGETPATH; backing up..."
+          BAKNAME="$TARGETPATH.$(drawTimestamp).bak"
+          rm -f "$BAKNAME"
+          mv "$TARGETPATH" "$BAKNAME"
       fi
 
       echo "Hard-linking $SOURCEPATH to $TARGETPATH"
       ln "$SOURCEPATH" "$TARGETPATH"
+      echo "Setting a+rx on $TARGETPATH"
+      chmod a+rx "$TARGETPATH"
     fi
   done
 }
