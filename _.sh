@@ -84,8 +84,12 @@ doHardStow() {
   done
 }
 
-# Pass in the name of a package as you would provide it to dnf/yum/etc
+download () {
+  # -L to follow Github redirects like e.g. Github uses
+  curl -L "$1" --create-dirs -o "$2"
+}
 
+# Pass in the name of a package as you would provide it to dnf/yum/etc
 installedVersion() {
   echo $(rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2)
 }

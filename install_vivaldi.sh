@@ -24,12 +24,12 @@ main() {
     else
       echo "Outdated version $INSTALLEDVERSION installed; updating to $LATESTVERSION"
     fi
-    exit
+
     DOWNLOADURL=$(latestVivaldiRpmUrl)
     INSTALLER="$TMPROOT/vivaldi-$LATESTVERSION.rpm"
     rm -f "$INSTALLER"
     echo "Downloading from $DOWNLOADURL to $INSTALLER"
-    curl -L "$(latestVivaldiRpmUrl)" -o "$INSTALLER" # -L to follow Github redirects
+    download "$(latestVivaldiRpmUrl)" "$INSTALLER"
     dnf install -y "$TMPROOT/vivaldi-$LATESTVERSION.rpm"
   fi
 }

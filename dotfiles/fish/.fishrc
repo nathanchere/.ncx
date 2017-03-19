@@ -1,0 +1,10 @@
+set PATH $HOME/.util $PATH
+
+setenv EDITOR "vim"
+setenv GIT_EDITOR "vim"
+
+# todo alias for .ncx sync
+# alias restart xmonad
+# alias restart bars
+
+# enable keys backlight
