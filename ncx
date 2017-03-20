@@ -3,12 +3,12 @@
 
 # set up a new system
 install () {
-
+  echo "TODO: install"
 }
 
 # update existing system
 update () {
-
+  echo "TODO: update"
 }
 
 # clean up silly oversights
@@ -19,4 +19,31 @@ fix() {
   chmod a+rx dotfiles/misc/.util/*
 }
 
-eval $1
+help() {
+  echo "Usage:
+
+  ncx [option]
+
+Options:
+
+  install
+    Set up a new system. Should only be run once.
+
+  {up|update}
+    Still deciding if this should git pull first or not
+    Either way, run any non-install scripts (e.g. sync new dots)
+
+  push
+    Commit all changes and push to git remote
+
+  fix
+    Lazy sweeping fixes. Shouldn't need but, you know."
+
+}
+
+case $1 in
+  up|update) update;;
+  install) install;;
+  fix) fix;;
+  *) help;;
+esac
