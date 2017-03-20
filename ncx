@@ -1,10 +1,17 @@
 #!/bin/sh
 
-#TODO:
-# Update - commit and push
-# Startup - pull and run non-install scripts
-# fix -
 
+# set up a new system
+install () {
+
+}
+
+# update existing system
+update () {
+
+}
+
+# clean up silly oversights
 fix() {
   echo "Fixing permissions"
   chmod a+rx *.sh
