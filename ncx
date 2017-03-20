@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. "./_.sh"
+. "./_.sh"
 
 # set up a new system
 install () {
@@ -40,6 +42,11 @@ Options:
     Lazy sweeping fixes. Shouldn't need but, you know."
 
 }
+
+if [ $# -lt 2 ]; then
+  help
+  exit
+fi
 
 case $1 in
   up|update) update;;
