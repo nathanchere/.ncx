@@ -4,4 +4,4 @@ allow_markup = yes
 format = "<b>%a</b>\n\n%s\n%b"
 sort = yes
 indicate_hidden = yes
-alignment = center
+alignment = right

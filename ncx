@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#TODO:
+# Update - commit and push
+# Startup - pull and run non-install scripts
+# fix -
+
+fix() {
+  echo "Fixing permissions"
+  chmod a+rx *.sh
+  chmod a+rx dotfiles/xmonad/.xmonad/*.sh
+  chmod a+rx dotfiles/misc/.util/*
+}
+
+eval $1

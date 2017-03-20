@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=NCX MateMonad
-Comment=Xmonad in a Mate session
-TryExec=/usr/bin/mate-session
-Exec=xmonad-start mate-session
-Type=XSession

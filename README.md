@@ -23,9 +23,8 @@ Specifically assumes a Fedora-based system. Tested on:
 * Tracking current workspace
 * LightDM greeter
 * Clean logout/etc without mate-panel
-* Investigate other bars - taffybar, candybar, dzen
+* Investigate other bars - taffybar, candybar, dzen, yabar
 * Investigate misc - firejail
-* Compton, xmonad etc - ignore i3lock etc
 * Add .utils to fishrc etc
 
 ### Notes to me
