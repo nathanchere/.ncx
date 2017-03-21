@@ -43,6 +43,7 @@ Specifically assumes a Fedora-based system. Tested on:
 * termite, urvxt?
 * refactor installers for common GitHub releases installer script
 * vodik xmonad
+* replace figlet with toilet?
 
 ### Thanks / inspiration
 

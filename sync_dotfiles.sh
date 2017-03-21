@@ -7,6 +7,10 @@ doStowDots() {
 
 main() {
 
+  echo "Fixing bin script permissions"
+  chmod a+rx dotfiles/utils/bin/*
+  doStowDots utils
+
   doStowDots xmonad
   doStowDots terminator
   doStowDots git
@@ -18,8 +22,6 @@ main() {
   doStowDots atom
 
   doStowDots htop
-
-  doStowDots misc
 }
 
 main 2>&1 |& tee -a "$LOGFILE"
