@@ -94,6 +94,7 @@ installedVersion() {
 }
 
 # Init common variables
+export HOME="$(dirname $(pwd))" # make sure sudo doesn't mess up $HOME
 export NCXROOT=$(pwd)
 LOGROOT="$NCXROOT/logs"
 TMPROOT="$NCXROOT/tmp"

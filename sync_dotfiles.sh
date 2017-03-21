@@ -2,7 +2,7 @@
 . _.sh
 
 doStowDots() {
-  doStow "$1" dotfiles ~
+  doStow "$1" dotfiles $HOME
 }
 
 main() {
