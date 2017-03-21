@@ -1,11 +1,19 @@
 #!/bin/sh
 
 . "./_.sh"
-. "./_.sh"
 
 # set up a new system
 install () {
-  echo "TODO: install"
+  echo "This will install:
+
+  * fonts to ~/.local
+  * xsessions
+  * various software
+
+Should only need to be run once."
+
+
+  ./install_vivaldi.sh
 }
 
 # update existing system

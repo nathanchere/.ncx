@@ -21,7 +21,7 @@ width=80%
 height=17
 bottom=true
 modules-left = separator1 workspaces separator2
-font-0 = MonofurForPowerline Nerd Font:size=12;0
+font-0 = ProggyCleanTTSZ Nerd Font:antialias=false;size=8;0
 
 [bar/top]
 width=100%
@@ -48,8 +48,8 @@ format=<label>
 label=" %date% | %time% "
 label-background=${colors.deepgreen}
 
-format-prefix=  
-format-suffix= 
+format-prefix=
+format-suffix=
 format-prefix-font=2
 format-suffix-font=2
 format-prefix-foreground=${self.label-background}
@@ -160,14 +160,14 @@ ramp-headphones-0 = 
 [module/powermenu]
 type = custom/menu
 
-label-open =   
+label-open = 
 ;label-open-background = #dd0000
 ;label-open-foreground = #fff
 label-close = cancel
 ;label-close-background = #dd0000
 ;label-close-foreground = #fff
-label-open-padding = 4 
-label-close-padding = 3 
+label-open-padding = 4
+label-close-padding = 3
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
@@ -176,10 +176,10 @@ menu-0-1-exec = menu-open-2
 menu-0-0-padding = 3
 menu-0-1-padding = 3
 
-menu-1-0 = reboot?  
+menu-1-0 = reboot?
 menu-1-0-exec = sudo reboot
 menu-1-0-padding = 3
 
-menu-2-0 = power off?  
+menu-2-0 = power off?
 menu-2-0-exec = sudo poweroff
 menu-2-0-padding = 3

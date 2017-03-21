@@ -33,6 +33,8 @@
     fontSize: 12
     lineHeight: 1.3
     showIndentGuide: true
+  "linter-ui-default":
+    showPanel: true
   "package-sync":
     createOnChange: true
     forceOverwrite: true
