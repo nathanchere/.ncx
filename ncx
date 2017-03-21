@@ -6,18 +6,18 @@ requireRoot
 
 # set up a new system
 install () {
-  echo "This will install:
+  ./install_misctools.sh
+  ./install_lightdm.sh
+  ./install_xmonad.sh
+  ./install_polybar.sh
 
-  * various software
-
-Should only need to be run once."
-
-
+  ./install_atom.sh
   ./install_vivaldi.sh
 }
 
 # update existing system
 update () {
+  ./sync_dotfiles.sh
   ./sync_fonts.sh
   ./sync_lightdm.sh
   ./sync_xsessions.sh
@@ -25,7 +25,7 @@ update () {
 
 # clean up silly oversights
 fix() {
-  echo "Fixing permissions"
+  echo "Fixing permissions - not maintained yet caveat emptor"
   chmod a+rx *.sh
   chmod a+rx dotfiles/xmonad/.xmonad/*.sh
   chmod a+rx dotfiles/misc/.util/*

@@ -44,6 +44,7 @@ Specifically assumes a Fedora-based system. Tested on:
 * refactor installers for common GitHub releases installer script
 * vodik xmonad
 * replace figlet with toilet?
+* * add ASDF to bash and fish
 
 ### Thanks / inspiration
 

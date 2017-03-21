@@ -4,6 +4,8 @@
 requireRoot
 
 main() {
+  dnf install -y automake autoconf readline-devel ncurses-devel openssl-devel
+  dnf install -y libyaml-devel libxslt-devel libfft-devel libtool unixODBC-devel
   dnf install -y lshw
   dnf install -y feh i3lock scrot ImageMagick
   dnf install -y tint2
