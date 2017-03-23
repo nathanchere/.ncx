@@ -12,6 +12,10 @@ Specifically assumes a Fedora-based system. Tested on:
     git clone https://github.com/nathanchere/.ncx.git ~/.ncx
     cd ~/.ncx
 
+    sudo ./ncx install
+
+From there
+
     ./init_dotfiles.sh
     ./init_fonts.sh
 
@@ -53,6 +57,8 @@ Specifically assumes a Fedora-based system. Tested on:
 * launcher - albert? dmenu?
 * quakish terminal - altyo?
 * stuff on k4m4-terminalsaresexy for inspiration
+
+* helper function to get latest tags and releases from github by project
 
 ### Thanks / inspiration
 

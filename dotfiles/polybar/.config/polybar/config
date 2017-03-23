@@ -21,7 +21,7 @@ width=80%
 height=17
 bottom=true
 modules-left = separator1 workspaces separator2
-font-0 = ProggyCleanTTSZ Nerd Font:antialias=false;size=8;0
+font-0 = TerminessTTF Nerd Font:antialias=false;size=8;0
 
 [bar/top]
 width=100%

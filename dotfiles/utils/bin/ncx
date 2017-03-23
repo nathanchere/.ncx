@@ -1,1 +1,1 @@
-(cd "$HOME/.ncx"; ./ncx $@)
+(cd "$HOME/.ncx"; ./ncx-main.sh $@)
