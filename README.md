@@ -45,6 +45,13 @@ Specifically assumes a Fedora-based system. Tested on:
 * vodik xmonad
 * replace figlet with toilet?
 * * add ASDF to bash and fish
+* feed reader - newsbueter? Termfeed? snownews? turses?
+* Email - mutt?
+* Some kind of start page
+* noice, rover, ranger, mc
+* launcher - albert? dmenu?
+* quakish terminal - altyo?
+* stuff on k4m4-terminalsaresexy for inspiration
 
 ### Thanks / inspiration
 
