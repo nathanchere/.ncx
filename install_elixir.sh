@@ -9,7 +9,11 @@ latestElixirSourceUrl() {
 }
 
 installedElixirVersion() {
-  echo $(rpm -qi elixir | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2)
+  if [ -x /usr/local/bin/iex ]; then
+    echo $(/usr/local/bin/iex -v | grep IEx | cut -d ' ' -f 2)
+  else
+    echo ""
+  fi
 }
 
 latestElixirVersion() {
