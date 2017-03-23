@@ -1,4 +1,7 @@
 #!/bin/bash
+
+[[ ${INCLUDEONCE:-} -eq 1 ]] && return || readonly INCLUDEONCE=1
+
 # Common config stuff
 
 # Exit on the first failure - it's bulletproof or GTFO
@@ -104,14 +107,18 @@ installedVersion() {
 }
 
 # Init common variables
+export HOME="$(dirname $(pwd))" # make sure sudo doesn't mess up $HOME
 export NCXROOT=$(pwd)
 LOGROOT="$NCXROOT/logs"
 TMPROOT="$NCXROOT/tmp"
 export LOGFILE="$LOGROOT/$0.log"
 
-# Init log
-mkdir -p logs
-drawHead "$0 [$(date)]" |& tee -a "$LOGFILE"
+if [ $0 != "ncx" ]; then
+  # Init log
+  mkdir -p logs
+  # Common header format
+  drawHead "$0 [$(date)]" |& tee -a "$LOGFILE"
+fi
 
 # Function exports
 export -f drawHead

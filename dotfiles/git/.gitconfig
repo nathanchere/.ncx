@@ -1,0 +1,54 @@
+[user]
+  name = Nathan Chere
+  email = "git@nathanchere.com.au"
+  signingkey = X
+
+[credential]
+  helper = cache
+
+[alias]
+  # Status with less noise
+  stat = status -sb
+  # Also show untracked files
+  statex = status -sbu
+
+  # Short diff of current state
+  df = diff --stat
+  # Diff-style review last commit
+  last = log -1 --stat
+
+  unstage = reset HEAD --
+
+  amend = commit --amend --no-edit
+
+  # Varying degrees of detail
+  l = log --decorate --date=short --pretty=format:"%C(reset)%h\\ %C(yellow)%ad%d\\ %C(reset)%s%C(blue)\\ [%cn]"
+  ll = log --decorate --date=short --pretty=format:"%C(reset)%h\\ %C(yellow)%ad%d\\ %C(reset)(%ar)%n\\ \\-\\ %s%C(blue)\\ [%cN]"
+
+  lll = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%C(blue)%x20(%ce)%x20%C(cyan)[gpg:%GK%x20%G?]%C(reset)%n%x"
+  llll = log --pretty=format"%C(yellow)%h%C(red)%d\\ %C(reset)%s%C(blue)\\ [%cn]" --decorate --numstat
+
+  # List all aliases
+  aliases = "!git config -l | grep alias | cut -c 7-"
+
+  # Find files in repo by name search
+  find = "!git ls-files | grep -i"
+  # Find files in repo by content search
+  findex = grep -Ii
+
+  # Show last tag
+  lasttag = describe --tags --abbrev=0  
+
+  # Lazy
+  up = "!git pull --rebase --prune $@ && git submodule update --init --recursive"
+  ca = "!git add -A && git commit -m"
+  wip = commit -am "WIP"
+
+[color]
+  ui = auto
+
+[difftool]
+  tool = meld
+
+[gpg]
+  program = gpg

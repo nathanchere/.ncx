@@ -2,13 +2,19 @@
 . _.sh
 
 doStowDots() {
-  doStow "$1" dotfiles ~
+  doStow "$1" dotfiles $HOME
 }
 
 main() {
   doStowDots fish
+
+  echo "Fixing bin script permissions"
+  chmod a+rx dotfiles/utils/bin/*
+  doStowDots utils
+
   doStowDots xmonad
   doStowDots terminator
+  doStowDots git
 
   doStowDots compton
   doStowDots dunst
@@ -16,7 +22,7 @@ main() {
 
   doStowDots atom
 
-  doStowDots misc
+  doStowDots htop
 }
 
 main 2>&1 |& tee -a "$LOGFILE"

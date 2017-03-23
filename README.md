@@ -23,12 +23,42 @@ Specifically assumes a Fedora-based system. Tested on:
 * Tracking current workspace
 * LightDM greeter
 * Clean logout/etc without mate-panel
-* Investigate other bars - taffybar, candybar, dzen
+* Investigate other bars and panels- taffybar, candybar, dzen, yabar, tint2, bmpanel
 * Investigate misc - firejail
-* Compton, xmonad etc - ignore i3lock etc
 * Add .utils to fishrc etc
 * easier way to maintain dots etc ongoing
 
 ### Notes to me
 
 * dm-tool for bringing up lightdm
+* rss on launch
+* docker (firejail?)
+* fish aliases
+* * pgp / gpg
+* git config
+* music - cmus/cmus-remote?
+* Nerdfonted Dina or Gohufont?
+* weechat
+* icon packs
+* taskwarrior or similar
+* termite, urvxt?
+* refactor installers for common GitHub releases installer script
+* vodik xmonad
+* replace figlet with toilet?
+* * add ASDF to bash and fish
+* feed reader - newsbueter? Termfeed? snownews? turses?
+* Email - mutt?
+* Some kind of start page
+* noice, rover, ranger, mc
+* launcher - albert? dmenu?
+* quakish terminal - altyo?
+* stuff on k4m4-terminalsaresexy for inspiration
+
+### Thanks / inspiration
+
+* jaagr
+* rawsh
+* joedicastro
+* xero
+
+Apologies to anyone else who I've stolen from but forgotten to mention

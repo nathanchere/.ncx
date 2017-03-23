@@ -1,0 +1,2 @@
+# if ! zenity --question --text="Example question here?"; then
+# fi

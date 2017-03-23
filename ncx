@@ -1,0 +1,66 @@
+#!/bin/sh
+
+. "./_.sh"
+
+requireRoot
+
+# set up a new system
+install () {
+  ./install_misctools.sh
+  ./install_lightdm.sh
+  ./install_xmonad.sh
+  ./install_polybar.sh
+
+  ./install_atom.sh
+  ./install_vivaldi.sh
+}
+
+# update existing system
+update () {
+  ./sync_dotfiles.sh
+  ./sync_fonts.sh
+  ./sync_lightdm.sh
+  ./sync_xsessions.sh
+}
+
+# clean up silly oversights
+fix() {
+  echo "Fixing permissions - not maintained yet caveat emptor"
+  chmod a+rx *.sh
+  chmod a+rx dotfiles/xmonad/.xmonad/*.sh
+  chmod a+rx dotfiles/misc/.util/*
+}
+
+help() {
+  echo "Usage:
+
+  ncx [option]
+
+Options:
+
+  install
+    Set up a new system. Should only be run once.
+
+  {up|update}
+    Still deciding if this should git pull first or not
+    Either way, run any non-install scripts (e.g. sync new dots)
+
+  push
+    Commit all changes and push to git remote
+
+  fix
+    Lazy sweeping fixes. Shouldn't need but, you know."
+
+}
+
+if [ $# -lt 1 ]; then
+  help
+  exit
+fi
+
+case $1 in
+  up|update) update;;
+  install) install;;
+  fix) fix;;
+  *) help;;
+esac

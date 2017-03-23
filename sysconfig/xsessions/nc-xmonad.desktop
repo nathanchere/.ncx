@@ -1,8 +1,7 @@
 [Desktop Entry]
 Name=NCX Xmonad
 Comment=Xmonad minimalist session
-Exec=xmonad-start
-Terminal=false
+Exec=$HOME/.xmonad/xmonad-start
 
 [Window Manager]
 SessionManaged=true

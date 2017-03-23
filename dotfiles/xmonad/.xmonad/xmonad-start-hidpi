@@ -1,0 +1,5 @@
+#!/bin/sh
+
+xrandr --dpi 276 #for XPS 13 9350 QHD
+
+exec xmonad-start-hidpi
