@@ -1,5 +1,6 @@
 #!/bin/bash
-. _.sh
+
+. "./_.sh"
 
 doStowDots() {
   doStow "$1" dotfiles $HOME

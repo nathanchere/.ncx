@@ -1,5 +1,6 @@
 #!/bin/bash
-. _.sh
+
+. "./_.sh"
 
 requireRoot
 

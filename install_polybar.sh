@@ -1,5 +1,6 @@
 #!/bin/bash
-. _.sh
+
+. "./_.sh"
 
 requireRoot
 
@@ -16,7 +17,7 @@ main() {
   sudo dnf install i3-ipc jsoncpp-devel alsa-lib-devel wireless-tools-devel libmpdclient-devel libcurl-devel
 
   BUILDPATH="$TMPROOT/polybar"
-  drawSubhead "Getting latest polybar source into $BUILDPATH"  
+  drawSubhead "Getting latest polybar source into $BUILDPATH"
   rm -rf "$BUILDPATH"
   git clone --recursive https://github.com/jaagr/polybar "$BUILDPATH"
   cd "$BUILDPATH"

@@ -96,6 +96,8 @@ doHardStow() {
   done
 }
 
+# $1- url
+# $2- local path to download to
 download () {
   # -L to follow Github redirects like e.g. Github uses
   curl -L "$1" --create-dirs -o "$2"
