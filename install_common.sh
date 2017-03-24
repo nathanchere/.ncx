@@ -5,9 +5,9 @@
 requireRoot
 
 main() {
-  dnf copr enable konimex/neofetch
+  dnf copr enable -y konimex/neofetch
   dnf install -y automake autoconf readline-devel ncurses-devel openssl-devel
-  dnf install -y libyaml-devel libxslt-devel libfft-devel libtool unixODBC-devel
+  dnf install -y libyaml-devel libxslt-devel libffi-devel libtool unixODBC-devel
   dnf install -y gem
   dnf install -y lshw nmap
   dnf install -y feh i3lock scrot ImageMagick
