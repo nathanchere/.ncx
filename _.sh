@@ -108,6 +108,19 @@ installedVersion() {
   echo $(rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2)
 }
 
+# ensure a value is only added to a file once
+# $1 - FILENAME
+# $2 - content
+appendOnce () {
+  touch "$1"
+  if [ ! cat "$1" | grep -q "$2" ]; then
+    echo "Appeding to $1"
+    echo -e "$2" >> "$1"
+  else
+    echo "$1 already contains target string, skipping..."
+  fi
+}
+
 # Init common variables
 export HOME="$(dirname $(pwd))" # make sure sudo doesn't mess up $HOME
 export NCXROOT=$(pwd)
