@@ -1,0 +1,27 @@
+! special
+.foreground: #eeeeee .background: #101610
+*.cursorColor: #eeeeee
+
+! black
+.color0: #202820 .color8: #666666
+
+! red
+.color1: #bb3333 .color9: #ee6666
+
+! green
+.color2: #667711 .color10: #aabb33
+
+! yellow
+.color3: #dd7733 .color11: #ffcc66
+
+! blue
+.color4: #447788 .color12: #88bbdd
+
+! magenta
+.color5: #775577 .color13: #cc88cc
+
+! cyan
+.color6: #668877 .color14: #aaddcc
+
+! white
+.color7: #888888 .color15: #cccccc
