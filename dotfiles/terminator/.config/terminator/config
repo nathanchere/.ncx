@@ -13,14 +13,14 @@
       type = Window
 [plugins]
 [profiles]
-  [[default]]
-    background_color = "#282828"
+[[default]]
+    palette = "#202820:#bb3333:#667711:#dd7733:#447788:#775577:#668877:#888888:#666666:#ee6666:#aabb33:#ffcc66:#88bbdd:#cc88cc:#aaddcc:#cccccc"
+    foreground_color = "#eeeeee"
+    background_color = "#101610"
+    cursor_color = "#eeeeee"
     background_darkness = 0.9
     background_type = transparent
-    cursor_color = "#aaaaaa"
     font = Iosevka Nerd Font 8
-    foreground_color = "#ebdbb2"
-    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
     scrollbar_position = hidden
     show_titlebar = False
     urgent_bell = True
