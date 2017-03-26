@@ -1,4 +1,4 @@
-set PATH $HOME/.util $PATH
+set PATH $HOME/bin $PATH
 
 setenv EDITOR "vim"
 setenv GIT_EDITOR "vim"
