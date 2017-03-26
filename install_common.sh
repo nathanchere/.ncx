@@ -14,10 +14,14 @@ main() {
 
   dnf install -y automake autoconf readline-devel ncurses-devel openssl-devel
   dnf install -y libyaml-devel libxslt-devel libffi-devel libtool unixODBC-devel
+
+  #polybar dependencies
+  dnf install -y cmake @development-tools gcc-c++ cairo-devel xcb-proto xcb-util-devel xcb-util-wm-devel xcb-util-image-devel
+
   dnf install -y fish terminator
   dnf install -y gem
   dnf install -y lshw nmap
-  dnf install -y feh i3lock scrot ImageMagick lightdm-webkit-greeter compton zathura
+  dnf install -y feh i3lock scrot ImageMagick lightdm-webkit-greeter compton
   dnf install -y tint2
   dnf install -y htop neofetch
   dnf install -y lynx

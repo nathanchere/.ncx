@@ -4,17 +4,13 @@
 
 requireRoot
 
-ORIGINALPATH=$(pwd)
-
 main() {
   # For more info on what is happening here, see blog post (link TBC - 2017/03/15)
 
   drawSubhead "Installing build dependencies"
-  sudo dnf install cmake @development-tools gcc-c++
-  sudo dnf install cairo-devel xcb-proto xcb-util-devel xcb-util-wm-devel xcb-util-image-devel
-
+  dnf install -y cmake @development-tools gcc-c++ cairo-devel xcb-proto xcb-util-devel xcb-util-wm-devel xcb-util-image-devel
   drawSubhead "Installing module dependencies"
-  sudo dnf install i3-ipc jsoncpp-devel alsa-lib-devel wireless-tools-devel libmpdclient-devel libcurl-devel
+  dnf install i3-ipc jsoncpp-devel alsa-lib-devel wireless-tools-devel libmpdclient-devel libcurl-devel
 
   BUILDPATH="$TMPROOT/polybar"
   drawSubhead "Getting latest polybar source into $BUILDPATH"
@@ -40,8 +36,6 @@ main() {
 
   make || die "make failed"
   make install
-
-  cd "$ORIGINALPATH"
 }
 
 main 2>&1 |& tee -a "$LOGFILE"
