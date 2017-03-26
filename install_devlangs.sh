@@ -5,6 +5,7 @@
 requireRoot
 
 ASDFPATH="$HOME/.asdf"
+ASDFBIN="$ASDFPATH/bin/asdf"
 
 installAsdf() {
   if [ ! -d "$ASDFPATH" ]; then
