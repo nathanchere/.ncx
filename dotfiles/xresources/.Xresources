@@ -1,3 +1,11 @@
+! Fonts {{{
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.hintstyle: hintfull
+Xft.dpi:       140
+! }}}
+
 ! special
 .foreground: #eeeeee .background: #101610
 *.cursorColor: #eeeeee

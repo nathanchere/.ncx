@@ -7,23 +7,14 @@ doStowDots() {
 }
 
 main() {
-  doStowDots fish
 
   echo "Fixing bin script permissions"
   chmod a+rx dotfiles/utils/bin/*
-  doStowDots utils
 
-  doStowDots xmonad
-  doStowDots terminator
-  doStowDots git
-
-  doStowDots compton
-  doStowDots dunst
-  doStowDots polybar
-
-  doStowDots atom
-
-  doStowDots htop
+  for DOTS in "$NCXROOT/dotfiles/"*; do
+    DOTNAME=$(basename "$DOTS")
+    doStowDots "$DOTNAME"
+  done
 }
 
 main 2>&1 |& tee -a "$LOGFILE"
