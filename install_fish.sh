@@ -5,7 +5,7 @@
 requireRoot
 
 main() {
-  dnf install -y fish
+
   curl -L https://get.oh-my.fish | fish
 
 }

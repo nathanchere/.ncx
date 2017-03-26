@@ -1,7 +1,12 @@
-killall -q polybar compton
-sleep 1
-compton
+#!/bin/bash
 
+killall -q polybar compton
+
+
+while pgrep -x polybar >/dev/null; do sleep 1; done
+while pgrep -x compton >/dev/null; do sleep 1; done
+notify-send "compton"
+compton
 polybar top
-sleep 1
 polybar bottom
+notify-send "bottom"

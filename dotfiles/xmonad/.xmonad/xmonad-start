@@ -2,6 +2,8 @@
 
 XMONAD_DIR=$HOME/.xmonad
 
+xrdb -merge "$HOME/.Xresources"
+
 # TODO: not sure if this is really needed... need to investigate
 # recompile if broken shared libs after an upgrade
 XMONAD_CUSTOM=$XMONAD_DIR/xmonad-$(uname -i)-linux
@@ -13,4 +15,7 @@ fi
 
 dunst &
 notify-send "It's alive" &
-xmonad
+polybar top &
+polybar bottom &
+notify-send "Done polybar"
+exec /usr/bin/xmonad

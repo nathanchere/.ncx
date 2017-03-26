@@ -34,7 +34,7 @@ main() {
     INSTALLER="$TMPROOT/atom-$LATESTVERSION.rpm"
     rm -f "$INSTALLER"
     echo "Downloading from $DOWNLOADURL to $INSTALLER"
-    download "$(latestAtomRpmUrl)" "$INSTALLER"
+    download "$DOWNLOADURL" "$INSTALLER"
     dnf install -y "$TMPROOT/atom-$LATESTVERSION.rpm"
   fi
 }

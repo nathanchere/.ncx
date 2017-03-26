@@ -54,11 +54,20 @@ From there
 * Email - mutt?
 * Some kind of start page
 * noice, rover, ranger, mc
-* launcher - albert? dmenu?
+* launcher - albert? dmenu? synapse?
 * quakish terminal - altyo?
 * stuff on k4m4-terminalsaresexy for inspiration
-
+* udiskie (usb mounting etc)
+* notify-osd, statnot
+* ssh-agent, gpg-agent
 * helper function to get latest tags and releases from github by project
+* clean xmonad quit script -= https://github.com/thblt/DotFiles/blob/master/.xmonad/quit-xmonad.sh
+* openvpn
+* good xmonad multimon setup https://github.com/IvanMalison/dotfiles/blob/d49eb65e7eb06cff90e171c0f5c44d4dae3a5510/dotfiles/xmonad/xmonad.hs#L671
+* gem install lolcat
+* xmonad inspirat https://www.youtube.com/watch?v=70IxjLEmomg&feature=youtu.be
+* dots https://github.com/OrionDB5/dotfiles
+* xmonad conf https://static.charlieharvey.org.uk/src/xmonad.hs.txt
 
 ### Thanks / inspiration
 

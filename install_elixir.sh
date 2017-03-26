@@ -34,9 +34,6 @@ main() {
       echo "Outdated version $INSTALLEDVERSION installed; updating to $LATESTVERSION"
     fi
 
-    echo "Installing prerequisites"
-    dnf install -y erlang
-
     DOWNLOADURL=$(latestElixirSourceUrl)
     INSTALLER="$TMPROOT/elixir-$LATESTVERSION.tar.gz"
     SOURCEDIR="$TMPROOT/elixir-src"
