@@ -21,11 +21,11 @@ myConfig = mateConfig
   , borderWidth = myBorderWidth
   , focusedBorderColor = myFocusedBorderColor
   , normalBorderColor = myNormalBorderColor
-  
+
   , layoutHook = myLayoutHook
   , workspaces = myWorkspaces
   }
 
 main = do
-    spawn "bash ~/.xmonad/startup.sh"
+  --  spawn "bash ~/.xmonad/startup.sh"
     xmonad $ myConfig

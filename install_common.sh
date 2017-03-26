@@ -5,6 +5,7 @@
 requireRoot
 
 main() {
+  dnf copr enable -y kzmd/compton
   dnf copr enable -y konimex/neofetch
   dnf copr enable -y youssefmsourani/telegram-desktop
   dnf copr enable -y antergos/lightdm-webkit2-greeter
@@ -16,7 +17,7 @@ main() {
   dnf install -y fish terminator
   dnf install -y gem
   dnf install -y lshw nmap
-  dnf install -y feh i3lock scrot ImageMagick lightdm-webkit-greeter
+  dnf install -y feh i3lock scrot ImageMagick lightdm-webkit-greeter compton zathura
   dnf install -y tint2
   dnf install -y htop neofetch
   dnf install -y lynx
