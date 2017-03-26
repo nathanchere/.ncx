@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+if [ "$PGDATA" = "" ]; then
+  export PGDATA="$ASDF_INSTALL_PATH/data"
+else
+  export PGDATA="$PGDATA"
+fi
+
+if [ "$LD_LIBRARY_PATH" = "" ]; then
+  export LD_LIBRARY_PATH="$ASDF_INSTALL_PATH/lib"
+else
+  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
+fi
+
+if [ "$PGHOST" = "" ]; then
+  export PGHOST="localhost"
+else
+  export PGHOST="$PGHOST"
+fi
+
+if [ "$PGPORT" = "" ]; then
+  export PGPORT="5432"
+else
+  export PGPORT="$PGPORT"
+fi
