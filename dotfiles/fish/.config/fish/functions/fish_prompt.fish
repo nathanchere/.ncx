@@ -1,1 +1,1 @@
-/home/norfen/.local/share/omf/themes/bobthefish/fish_prompt.fish
+/home/ferret/.local/share/omf/themes/bobthefish/fish_prompt.fish
