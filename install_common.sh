@@ -4,17 +4,11 @@
 
 requireRoot
 
-main() {
-  dnf copr enable -y kzmd/compton
-  dnf copr enable -y konimex/neofetch
-  dnf copr enable -y youssefmsourani/telegram-desktop
-  dnf copr enable -y antergos/lightdm-webkit2-greeter
-  dnf copr enable -y baoboa/cmatrix
-  #dnf copr enable -y baoboa/cool-retro-term # No support for Fedora 25
-
+main() {      
   dnf install -y automake autoconf readline-devel ncurses-devel openssl-devel
   dnf install -y libyaml-devel libxslt-devel libffi-devel libtool unixODBC-devel
 
+  dnf install -y lightdm-webkit2-greeter
   dnf install -y fish terminator
   dnf install -y lshw nmap
   dnf install -y feh i3lock scrot ImageMagick lightdm-webkit-greeter compton
