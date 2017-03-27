@@ -1,5 +1,23 @@
 #!/bin/sh
 
-xrandr --dpi 276 #for XPS 13 9350 QHD
+XMONAD_DIR=$HOME/.xmonad
 
-exec xmonad-start
+xrdb -merge "$HOME/.Xresources"
+xrdb -merge "$HOME/.Xresources.hidpi"
+
+# TODO: not sure if this is really needed... need to investigate
+# recompile if broken shared libs after an upgrade
+XMONAD_CUSTOM=$XMONAD_DIR/xmonad-$(uname -i)-linux
+if [ -r $XMONAD_DIR/xmonad.hs -a -x $XMONAD_CUSTOM ]; then
+  if ldd $XMONAD_CUSTOM | grep -q "not found"; then
+    xmonad --recompile
+  fi
+fi
+
+compton &
+dunst &
+polybar top &
+polybar bottom &
+tint2 &
+notify-send "Launching xmonad"
+exec /usr/bin/xmonad

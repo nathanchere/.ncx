@@ -1,7 +1,9 @@
 [global_config]
   borderless = True
   extra_styling = False
+  handle_size = 3
   inactive_color_offset = 1.0
+  tab_position = bottom
 [keybindings]
 [layouts]
   [[default]]
@@ -13,14 +15,14 @@
       type = Window
 [plugins]
 [profiles]
-[[default]]
-    palette = "#202820:#bb3333:#667711:#dd7733:#447788:#775577:#668877:#888888:#666666:#ee6666:#aabb33:#ffcc66:#88bbdd:#cc88cc:#aaddcc:#cccccc"
-    foreground_color = "#eeeeee"
+  [[default]]
     background_color = "#101610"
-    cursor_color = "#eeeeee"
     background_darkness = 0.9
     background_type = transparent
+    cursor_color = "#eeeeee"
     font = Iosevka Nerd Font 8
+    foreground_color = "#eeeeee"
+    palette = "#202820:#bb3333:#667711:#dd7733:#447788:#775577:#668877:#888888:#666666:#ee6666:#aabb33:#ffcc66:#88bbdd:#cc88cc:#aaddcc:#cccccc"
     scrollbar_position = hidden
     show_titlebar = False
     urgent_bell = True

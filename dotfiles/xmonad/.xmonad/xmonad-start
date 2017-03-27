@@ -2,14 +2,6 @@
 
 XMONAD_DIR=$HOME/.xmonad
 
-if [ -z $SETDPI]; then
-  SETDPI=140
-fi
-
-echo $SETDPI > ~/dpi
-
-xrandr --dpi $SETDPI #for XPS 13 9350 QHD
-
 xrdb -merge "$HOME/.Xresources"
 
 # TODO: not sure if this is really needed... need to investigate
@@ -21,8 +13,10 @@ if [ -r $XMONAD_DIR/xmonad.hs -a -x $XMONAD_CUSTOM ]; then
   fi
 fi
 
+compton &
 dunst &
 polybar top &
 polybar bottom &
+tint2 &
 notify-send "Launching xmonad"
 exec /usr/bin/xmonad
