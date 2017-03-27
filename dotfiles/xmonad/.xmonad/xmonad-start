@@ -2,6 +2,14 @@
 
 XMONAD_DIR=$HOME/.xmonad
 
+if [ -z $SETDPI]; then
+  SETDPI=140
+fi
+
+echo $SETDPI > ~/foo
+
+xrandr --dpi $SETDPI #for XPS 13 9350 QHD
+
 xrdb -merge "$HOME/.Xresources"
 
 # TODO: not sure if this is really needed... need to investigate
