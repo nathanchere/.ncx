@@ -6,5 +6,5 @@ skip_if_unavailable=True
 gpgcheck=1
 gpgkey=https://copr-be.cloud.fedoraproject.org/results/kzmd/lemonbar/pubkey.gpg
 repo_gpgcheck=0
-enabled=0
+enabled=1
 enabled_metadata=1

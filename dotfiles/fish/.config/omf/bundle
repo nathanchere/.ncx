@@ -1,4 +1,5 @@
 package bang-bang
+package pyenv
 theme bobthefish
 theme default
 theme shellder

@@ -25,7 +25,11 @@ main() {
 
   doStow fish dotfiles "$HOME"
 
-  echo "Don't forget to chsh to set fish as your default shell"
+  drawSubhead "Restoring OhMyFish bundles"
+  echo "omf install" | fish
+
+  drawSubhead "Don't forget to `chsh -s /usr/bin/fish` if you want fish as default"
+  chsh -s /bin/bash
 }
 
 main 2>&1 |& tee -a "$LOGFILE"

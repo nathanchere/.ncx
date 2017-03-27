@@ -14,8 +14,7 @@ if [ -r $XMONAD_DIR/xmonad.hs -a -x $XMONAD_CUSTOM ]; then
 fi
 
 dunst &
-notify-send "It's alive" &
 polybar top &
 polybar bottom &
-notify-send "Done polybar"
+notify-send "Launching xmonad"
 exec /usr/bin/xmonad
