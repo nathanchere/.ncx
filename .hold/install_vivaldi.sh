@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# turns out there's a vivaldi repo
+
 . "./_.sh"
 
 requireRoot
