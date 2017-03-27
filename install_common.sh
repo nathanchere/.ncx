@@ -12,13 +12,8 @@ main() {
   dnf copr enable -y baoboa/cmatrix
   #dnf copr enable -y baoboa/cool-retro-term # No support for Fedora 25
 
-  # TODO: Optimise this
-
   dnf install -y automake autoconf readline-devel ncurses-devel openssl-devel
   dnf install -y libyaml-devel libxslt-devel libffi-devel libtool unixODBC-devel
-
-  #polybar dependencies
-  dnf install -y cmake @development-tools gcc-c++ cairo-devel xcb-proto xcb-util-devel xcb-util-wm-devel xcb-util-image-devel
 
   dnf install -y fish terminator
   dnf install -y lshw nmap

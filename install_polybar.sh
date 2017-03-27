@@ -6,7 +6,6 @@ requireRoot
 
 main() {
   # For more info on what is happening here, see blog post (link TBC - 2017/03/15)
-
   drawSubhead "Installing build dependencies"
   dnf install -y cmake @development-tools gcc-c++ cairo-devel xcb-proto xcb-util-devel xcb-util-wm-devel xcb-util-image-devel
   drawSubhead "Installing module dependencies"
