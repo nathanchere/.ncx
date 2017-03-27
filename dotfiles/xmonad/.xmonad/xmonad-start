@@ -6,7 +6,7 @@ if [ -z $SETDPI]; then
   SETDPI=140
 fi
 
-echo $SETDPI > ~/foo
+echo $SETDPI > ~/dpi
 
 xrandr --dpi $SETDPI #for XPS 13 9350 QHD
 

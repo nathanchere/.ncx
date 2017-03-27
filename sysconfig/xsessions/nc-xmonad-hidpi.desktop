@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=NCX Xmonad HiDPI
 Comment=Xmonad minimalist session for high-DPI displays
-Exec=$HOME/.xmonad/xmonad-hidpi-start
+Exec=$HOME/.xmonad/xmonad-start-hidpi
 
 [Window Manager]
 SessionManaged=true
