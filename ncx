@@ -14,7 +14,7 @@ fix() {
   echo "Fixing permissions - not maintained yet caveat emptor"
   chmod a+rx *.sh
   chmod a+rx dotfiles/xmonad/.xmonad/*.sh
-  chmod a+rx dotfiles/misc/.util/*
+  chmod a+rx dotfiles/utils/bin/*
 }
 
 help() {
