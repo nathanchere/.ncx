@@ -1,0 +1,10 @@
+[baoboa-cmatrix]
+name=Copr repo for cmatrix owned by baoboa
+baseurl=https://copr-be.cloud.fedoraproject.org/results/baoboa/cmatrix/fedora-$releasever-$basearch/
+type=rpm-md
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://copr-be.cloud.fedoraproject.org/results/baoboa/cmatrix/pubkey.gpg
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1

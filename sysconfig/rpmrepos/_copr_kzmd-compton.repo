@@ -1,0 +1,10 @@
+[kzmd-compton]
+name=Copr repo for compton owned by kzmd
+baseurl=https://copr-be.cloud.fedoraproject.org/results/kzmd/compton/fedora-$releasever-$basearch/
+type=rpm-md
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://copr-be.cloud.fedoraproject.org/results/kzmd/compton/pubkey.gpg
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1
