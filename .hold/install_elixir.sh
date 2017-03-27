@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# easier with asdf
+
 . "./_.sh"
 
 requireRoot

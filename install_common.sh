@@ -31,7 +31,7 @@ main() {
 
   dnf install -y xmonad ghc-xmonad-contrib ghc-xmonad-devel ghc-xmonad-contrib-devel
 
-  dnf install -y gem
+  dnf install -y gem ruby python python3
   gem install lolcat
 }
 
