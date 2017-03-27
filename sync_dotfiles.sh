@@ -2,6 +2,8 @@
 
 . "./_.sh"
 
+requireNotRoot
+
 doStowDots() {
   doStow "$1" dotfiles $HOME
 }

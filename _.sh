@@ -23,6 +23,13 @@ requireRoot() {
   fi
 }
 
+requireNotRoot() {
+  if [ "$(whoami)" = "root" ]; then # Can also check $UID != 0
+    die "This script should not be run as root."
+  fi
+}
+
+
 drawTime() {
   echo `date +"%T"`
 }
