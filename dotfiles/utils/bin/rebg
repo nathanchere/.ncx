@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+# feh --bg-scale --force-aliasing "$HOME/.ncx/resources/pixel/009_by_khos.png"
+
+feh --bg-scale --force-aliasing --randomize --no-fehbg $HOME/.ncx/resources/wallpaper/pixel/*
+feh --bg-scale --force-aliasing --randomize --no-fehbg $HOME/.ncx/resources/wallpaper/pixel/*

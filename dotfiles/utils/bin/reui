@@ -8,5 +8,6 @@ while pgrep -x compton >/dev/null; do sleep 1; done
 compton &
 polybar top &
 polybar bottom &
-notify-send "Restarted compton and polybar" &
+
+feh --bg-scale --force-aliasing --randomize --no-fehbg $HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png &
 exit
