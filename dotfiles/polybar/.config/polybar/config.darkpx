@@ -11,9 +11,11 @@ screenchange-reload = true
 ;throttle-output = 5
 ;throttle-input-for = 40
 
-compositing-background = screen
-compositing-foreground = source
-compositing-border = over
+;compositing-background = over
+;compositing-background = screen
+;compositing-foreground = xor
+;compositing-foreground = source
+;compositing-border = over
 
 [global/wm]
 margin-top = 0
@@ -21,7 +23,7 @@ margin-bottom = 0
 
 [bar/top]
 enable-ipc = true
-;monitor = ${env:MONITOR:eDP1}
+monitor = ${env:MONITOR:eDP1}
 width = 100%
 height = 24
 ;radius = 5.0
@@ -59,8 +61,8 @@ font-0 = dina:pixelsize=9;1
 font-1 = siji:pixelsize=10;1
 font-2 = unifont:size=6;1
 
-modules-left =
-;modules-center =
+modules-left = bspwm i3
+;modules-center = mpd
 modules-center = xwindow
 modules-right = xkeyboard xbacklight volume wifi battery memory cpu date
 
@@ -308,7 +310,9 @@ label-foreground = ${root.foreground}
 
 [module/volume]
 type = internal/volume
-
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
 
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%

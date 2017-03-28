@@ -21,7 +21,7 @@ main() {
   currentRelease=$(git describe --tags `git rev-list --tags --max-count=1`)
   git checkout "$currentRelease"
   git submodule update --init --recursive
-
+  
   drawSubhead "Build polybar"
   mkdir "$BUILDPATH/build"
   cd "$BUILDPATH/build"
