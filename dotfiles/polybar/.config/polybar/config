@@ -1,5 +1,5 @@
 [colors]
-background = #222
+background = #66000000
 foreground = #eee
 linecolor = #fba922
 bordercolor = #333
@@ -7,13 +7,6 @@ accent = #e60053
 
 [settings]
 screenchange-reload = true
-;throttle-output-for = 10
-;throttle-output = 5
-;throttle-input-for = 40
-
-compositing-background = screen
-compositing-foreground = source
-compositing-border = over
 
 [global/wm]
 margin-top = 0
@@ -25,7 +18,7 @@ enable-ipc = true
 width = 100%
 height = 24
 ;radius = 5.0
-;fixed-center = false
+fixed-center = true
 ;override-redirect = true
 
 background = ${colors.background}
@@ -41,10 +34,10 @@ foreground = ${colors.foreground}
 ;background-7 = #111
 
 line-color = ${colors.linecolor}
-underline-size = 1
-overline-size = 2
+underline-size = 4
+overline-size = 6
 
-;border-size = 5
+border-size = 5
 ;border-color = 0
 ;border-bottom-size = 0
 border-bottom-size = 2
@@ -60,9 +53,8 @@ font-1 = siji:pixelsize=10;1
 font-2 = unifont:size=6;1
 
 modules-left =
-;modules-center =
 modules-center = xwindow
-modules-right = xkeyboard xbacklight volume wifi battery memory cpu date
+modules-right = xkeyboard volume wifi battery memory cpu fs-root date power-menu
 
 tray-position = right
 tray-padding = 4
@@ -88,48 +80,6 @@ scroll-down = bspwm-desknext
 # bar/module specific vars
 bspwm-focused-overline = ${colors.linecolor}
 bspwm-focused-underline = #cc333333
-
-[bar/bottom]
-inherit = bar/top
-
-enable-ipc = true
-monitor = ${env:MONITOR:HDMI1}
-;monitor-fallback = eDP-1
-bottom = true
-;override-redirect = true
-
-underline-size = ${bar/top.overline-size}
-overline-size = ${bar/top.underline-size}
-
-;border-top-size = 2
-;border-top-color = ${colors.bordercolor}
-;border-bottom-size = 0
-
-modules-left = bspwm i3
-;modules-left =
-;modules-left = xwindow
-;modules-center = xwindow
-modules-center =
-modules-right = github fs-root date power-menu
-
-wm-restack = ${bar/top.wm-restack}
-
-tray-position = none
-
-# bar/module specific vars
-bspwm-focused-overline = #cc333333
-bspwm-focused-underline = ${colors.linecolor}
-
-[module/github]
-type = internal/github
-token = ${file:/home/jaagr/.git-token}
-
-;empty-notifications = true
-
-label = %notifications%
-label-padding = 2
-label-background = #f0c209
-label-foreground = #000
 
 [module/fs-root]
 type = internal/fs
@@ -205,37 +155,6 @@ label-dimmed-overline = ${root.background}
 label-dimmed-underline = ${root.background}
 label-dimmed-active-foreground = #f00
 
-[module/i3]
-type = internal/i3
-index-sort = true
-pin-workspaces = true
-wrapping-scroll = true
-;reverse-scroll = false
-;enable-scroll = false
-
-format = <label-state> <label-mode>
-
-label-mode = %mode%
-label-mode-padding = 2
-label-mode-background = ${colors.accent}
-
-label-focused = %index%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-foreground = ${module/bspwm.label-focused-foreground}
-label-focused-overline= ${module/bspwm.label-focused-overline}
-label-focused-underline= ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-
-label-unfocused = %index%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-label-urgent = %index%!
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-label-visible = %index%
-label-visible-padding = ${module/bspwm.label-empty-padding}
-
 [module/cpu]
 type = internal/cpu
 interval = 2
@@ -252,7 +171,7 @@ format-prefix-foreground = #666
 
 [module/wifi]
 type = internal/network
-interface = net1
+interface = wlp58s0
 interval = 3.0
 ;udspeed-minwidth = 0
 

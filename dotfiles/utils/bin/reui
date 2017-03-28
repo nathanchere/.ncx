@@ -1,13 +1,15 @@
 #!/bin/bash
 
-killall -q polybar compton
+killall -q polybar compton dunst tint2
 
 while pgrep -x polybar >/dev/null; do sleep 1; done
 while pgrep -x compton >/dev/null; do sleep 1; done
+while pgrep -x tint2 >/dev/null; do sleep 1; done
 
+dunst &
 compton &
+tint2 &
 polybar top &
-polybar bottom &
 
 feh --bg-scale --force-aliasing --randomize --no-fehbg $HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png &
 exit
