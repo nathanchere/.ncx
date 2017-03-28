@@ -10,7 +10,7 @@ main() {
 
   dnf install -y lightdm-webkit2-greeter
   dnf install -y fish terminator
-  dnf install -y lshw nmap
+  dnf install -y lshw nmap net-tools
   dnf install -y feh i3lock scrot ImageMagick lightdm-webkit-greeter compton
   dnf install -y tint2 rofi polybar
   dnf install -y htop neofetch cmatrix
@@ -20,7 +20,7 @@ main() {
 
   dnf install -y xmonad ghc-xmonad-contrib ghc-xmonad-devel ghc-xmonad-contrib-devel
 
-  dnf install -y gem ruby python python3
+  dnf install -y gem ruby python python3 python3-wheel
   gem install lolcat
 }
 
