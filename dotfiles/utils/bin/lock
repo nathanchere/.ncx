@@ -5,8 +5,9 @@ BKGFILENAME="$(mktemp).png"
 scrot "$BKGFILENAME"
 
 # Essentially pixelate 10x10
-convert "$BKGFILENAME" -scale 10% -scale 1000% "$BKGFILENAME"
+convert "$BKGFILENAME" -scale 5% -scale 2000% "$BKGFILENAME"
 
 #concert "$BKGFILENAME" "$ICON" -gravity center -composite -matte "$BKGFILENAME"
 
-i3lock -u -i "$BKGFILENAME"
+i3lock -e -f -i "$BKGFILENAME"
+rm -f "$BKGFILENAME"

@@ -10,6 +10,9 @@ doStowDots() {
 
 main() {
 
+  echo "Fixing general permissions"
+  chmod a+r -R dotfiles/
+  
   echo "Fixing bin script permissions"
   chmod a+rx dotfiles/utils/bin/*
 
