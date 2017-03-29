@@ -56,12 +56,12 @@ modules-left =
 modules-center = xwindow
 modules-right = xkeyboard volume wifi battery memory cpu fs-root date power-menu
 
-tray-position = right
-tray-padding = 4
+tray-position = left
+tray-padding = 2
 tray-maxsize = 16
 ;tray-transparent = true
 ;tray-detached = true
-;tray-offset-x = 50
+tray-offset-x = 510
 
 wm-restack = bspwm
 

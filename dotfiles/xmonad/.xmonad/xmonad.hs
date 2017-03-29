@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Config.Mate
 import XMonad.Layout.Spacing
+import XMonad.Util.EZConfig
 
 myTerminal = "terminator"
 myModMask = mod4Mask
@@ -25,6 +26,13 @@ myConfig = mateConfig
   , layoutHook = myLayoutHook
   , workspaces = myWorkspaces
   }
+--  `additionalKeysP`
+--  [ ("M-r", )
+--  , ("M-S-k", kill)
+--  , ("M-d", sinkAll)
+--  , ("M-.", focusUrgent)
+--  , ("M-,", clearUrgents)
+--  ]
 
 main = do
   --  spawn "bash ~/.xmonad/startup.sh"
