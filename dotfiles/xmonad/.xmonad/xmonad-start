@@ -13,5 +13,10 @@ if [ -r $XMONAD_DIR/xmonad.hs -a -x $XMONAD_CUSTOM ]; then
   fi
 fi
 
-. "$HOME/bin/reui"
+compton &
+dunst &
+polybar top &
+polybar bottom &
+tint2 &
+notify-send "Launching xmonad"
 exec /usr/bin/xmonad
