@@ -1,0 +1,28 @@
+#!/bin/bash
+
+waitForTermination() {
+  end=$(($SECONDS+$2))
+  while [ $SECONDS -lt $end ]; do
+    if [[ -z `wmctrl -l | grep "^$1\s"` ]]; then
+      return 0;
+    fi
+    sleep .05
+  done
+
+  return -1
+}
+
+for win in $(wmctrl -l | awk '{print $1}'); do
+  wmctrl -ic $win
+  waitForTermination $win 10
+  if [[ $? != 0 ]]; then
+    notify-send -u critical "Cannot quit" "$win cannot be closed"
+    exit -1
+  fi
+done
+
+if [[ -z `wmctrl -l` ]]; then
+  pkill -q xmonad
+else
+  notify-send -u normal "Quit failed"
+fi
