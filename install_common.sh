@@ -14,13 +14,13 @@ main() {
   dnf install -y feh i3lock scrot ImageMagick lightdm-webkit-greeter compton
   dnf install -y tint2 rofi polybar
   dnf install -y htop neofetch cmatrix
-  dnf install -y lynx
-  dnf install -y figlet ddate
+  dnf install -y figlet ddate shutter
   dnf install -y docker
 
   dnf install -y xmonad ghc-xmonad-contrib ghc-xmonad-devel ghc-xmonad-contrib-devel
 
-  dnf install -y gem ruby python python3 python3-wheel
+  dnf install -y gem ruby python python3 python3-wheel python3-devel python-devel
+  dnf install -y
   gem install lolcat
 }
 
