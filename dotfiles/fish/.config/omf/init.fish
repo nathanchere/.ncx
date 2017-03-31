@@ -12,3 +12,5 @@ set -g theme_title_use_abbreviated_path no
 set -g theme_date_format "+%Y/%m/%d %H:%M:%S"
 set -g theme_nerd_fonts yes
 set -g theme_color_scheme gruvbox
+set -g fish_prompt_pwd_dir_length 0
+set -g theme_project_dir_length 0
