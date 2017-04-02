@@ -12,9 +12,9 @@ main() {
 
   echo "Fixing general permissions"
   chmod a+r -R dotfiles/
-  
+
   echo "Fixing bin script permissions"
-  chmod a+rx dotfiles/utils/bin/*
+  chmod a+rx dotfiles/bin/bin/*
 
   for DOTS in "$NCXROOT/dotfiles/"*; do
     DOTNAME=$(basename "$DOTS")
