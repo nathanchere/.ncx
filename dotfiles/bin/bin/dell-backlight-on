@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Find tokens with:
+# smbios-token-ctl -d | grep Backlight
+
+KEYAC=0x0451
+KEYBATTERY=0x0452
+
+sudo smbios-token-ctl -i $KEYAC --set-string true
+sudo smbios-token-ctl -i $KEYBATTERY --set-string true

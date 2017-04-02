@@ -5,34 +5,19 @@ LOGFILE=$LOGDIR/reui
 mkdir -p $LOGDIR
 touch $LOGFILE
 
-drawLabel() {
-  echo ":::::::::::::::::::::::::::::::::::::::"
-  echo ":: $1"
-  echo ":::::::::::::::::::::::::::::::::::::::"
-}
-
 main() {
-  drawLabel "Killing old processes"
   killall -q polybar compton dunst tint2
 
-  drawLabel "Confirming old processes dead"
   while pgrep -x polybar >/dev/null; do sleep 1; done
   while pgrep -x compton >/dev/null; do sleep 1; done
   while pgrep -x tint2 >/dev/null; do sleep 1; done
 
-  drawLabel "Starting dunst"
   dunst &
-  drawLabel "Starting compton"
   compton &
-  drawLabel "Starting tint2"
   tint2 &
-  drawLabel "Starting polybar"
   polybar top &
 
-  drawLabel "Setting background"
-  feh --bg-scale --force-aliasing --randomize --no-fehbg $HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png &
-  drawLabel "Finished main"
+  feh --bg-scale --force-aliasing --randomize --no-fehbg "$HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png" &
 }
 
 main 2>&1 |& tee -a "$LOGFILE"
-drawLabel "Finished"
