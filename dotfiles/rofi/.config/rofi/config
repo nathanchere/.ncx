@@ -1,0 +1,8 @@
+rofi.padding: 10
+rofi.width: 500
+rofi.height: 300
+rofi.top: 0
+
+rodi.color-enabled: true
+rofi.color-window: #bbff00, #000000, #ffbb00
+!rofi.color-normal:

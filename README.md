@@ -68,6 +68,7 @@ From there
 * xmonad inspirat https://www.youtube.com/watch?v=70IxjLEmomg&feature=youtu.be
 * dots https://github.com/OrionDB5/dotfiles
 * xmonad conf https://static.charlieharvey.org.uk/src/xmonad.hs.txt
+* mreq dotfiles for monitor management script select_display
 
 ### Thanks / inspiration
 
