@@ -1,5 +1,5 @@
 import XMonad
-import XMonad.Config.Mate
+import XMonad.Config.Desktop
 import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig
 
@@ -11,11 +11,12 @@ myFocusedBorderColor = "#BBFF00"
 myNormalBorderColor = "#778877"
 
 myLayoutHook = spacingWithEdge 4
-  $ layoutHook mateConfig
+  $ layoutHook desktopConfig
 
+-- TODO: workspaces 9..16 for minimised windows
 myWorkspaces = ["1:\xf121","2:\xf02d","3:code", "4:misc"] ++ map show [5..8]
 
-myConfig = mateConfig
+myConfig = desktopConfig
   { terminal = myTerminal
   , modMask = myModMask
 
