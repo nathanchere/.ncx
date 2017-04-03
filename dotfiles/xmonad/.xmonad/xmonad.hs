@@ -16,6 +16,12 @@ myLayoutHook = spacingWithEdge 4
 -- TODO: workspaces 9..16 for minimised windows
 myWorkspaces = ["1:\xf121","2:\xf02d","3:code", "4:misc"] ++ map show [5..8]
 
+myKeys =
+	[(("M4-l"), runOrRaise "lock" (className =? "Firefox"))	
+	,(("M4-r"), spawn "rofi --show")
+	]
+
+
 myConfig = desktopConfig
   { terminal = myTerminal
   , modMask = myModMask
@@ -26,7 +32,8 @@ myConfig = desktopConfig
 
   , layoutHook = myLayoutHook
   , workspaces = myWorkspaces
-  }
+  } `additionalKeysP` myKeys
+  
 --  `additionalKeysP`
 --  [ ("M-r", )
 --  , ("M-S-k", kill)
