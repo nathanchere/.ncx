@@ -6,6 +6,17 @@ import XMonad.Util.EZConfig
 myTerminal = "terminator"
 myModMask = mod4Mask
 
+-- vivaldi-snapshot
+myBrowser = "vivaldi-stable"
+
+-- ranger
+myFileManager = "mc"
+
+------------------------------
+-- General layout
+------------------------------
+
+mySpacingWidth = 4
 myBorderWidth = 3
 myFocusedBorderColor = "#BBFF00"
 myNormalBorderColor = "#778877"
