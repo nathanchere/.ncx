@@ -44,7 +44,7 @@ myLayoutHook = spacingWithEdge mySpacingWidth
   $ avoidStruts
   $ mkToggle (single REFLECTX)
   $ mkToggle (single REFLECTY)
-  $ simpleTabbed ||| tall ||| Mirror tall ||| dragPane Horizontal 0.1 0.5 ||| Full
+  $ tall ||| Mirror tall ||| dragPane Horizontal 0.1 0.5 ||| Full ||| simpleTabbed
   where
     tall = Tall 1 0.03 0.5
 
