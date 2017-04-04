@@ -1,3 +1,11 @@
 #!/bin/bash
 
+TIMESTAMP=`date "+%Y-%m-%d"`
+BAKFILE="$HOME/.xmonad/xmonad.$TIMESTAMP.bak.hs"
+echo  "Backing up current xmonad config to $BAKFILE"
+mv "$HOME/.xmonad/xmonad.hs" "$HOME/.xmonad/xmonad.$TIMESTAMP.bak.hs"
+echo "Restoring default xmonad config"
 cp -p /usr/share/xmonad/xmonad.hs "$HOME/.xmonad/xmonad.hs"
+echo "Recompiling xmonad"
+xmonad --recompile
+echo "Finished; use $(tput bold)xmonad --restart$(tput sgr0) to load xmonad with default config"
