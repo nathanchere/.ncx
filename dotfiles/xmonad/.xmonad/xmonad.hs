@@ -19,6 +19,8 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.Reflect
 
+import Graphics.X11.ExtraTypes.XF86
+
 myTerminal = "terminator"
 myModMask = mod4Mask
 
@@ -53,10 +55,21 @@ myWorkspaces = ["1:\xf121","2:\xf02d","3:code", "4:misc"] ++ map show [5..8]
 
 myKeys =
 	--[(("M4-l"), runOrRaise "lock" (className =? "Firefox"))
+
+  -- Layout manipulatiom
   [(("M4-["), sendMessage $ Toggle REFLECTX)
   ,(("M4-]"), sendMessage $ Toggle REFLECTY)
   ,(("M4-\\"), sendMessage $ ToggleStruts)
+
+  -- OS Misc
 	,(("M4-r"), spawn "rofi -show run")
+
+  -- Multimedia keys
+  ,(("<XF86MonBrightnessUp>"), spawn "notify-send bright-up")
+  ,(("<XF86MonBrightnessDown>"), spawn "notify-send bright-down")
+  ,(("<XF86AudioLowerVolume>"), spawn "notify-send audio-down")
+  ,(("<XF86AudioRaiseVolume>"), spawn "notify-send audio-up")
+  ,(("<XF86AudioMute>"), spawn "notify-send audio-mute")
 	]
 
 

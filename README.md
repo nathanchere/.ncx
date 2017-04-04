@@ -25,37 +25,36 @@ These docs are shit but what can you do?
 
 ### Summary
 
-Display manager: LightDM
-Window manager: XMonad
-Bars/tray/etc: polybar, tint2
-Notifications: dunst
-Launcher: rofi
-Shell: fish (w/ ohmyfish)
-Terminal: terminator
+* Display manager: LightDM
+* Window manager: XMonad
+* Bars/tray/etc: polybar, tint2
+* Notifications: dunst
+* Launcher: rofi
+* Shell: fish (w/ ohmyfish)
+* Terminal: terminator
 
 ### Cheat sheet
 
 #### Key bindings
 
-Win+Shift+Enter : open new terminal window
-Win+[1..9] : switch to workspaces n
-Win+Shift+[1..9] : send focused window to workspace n
-Win+Space :  toggle window layout for current workspace
-Win+R : run dialog
-
-Ctrl+`backtick` or Ctrl+Esc : drop-down terminal
-? : kill focused window
-? : restart Xmonad
-? : monitor focusing
-? : dmenu / gmrun ?
-
+* Win+Shift+Enter : open new terminal window
+* Win+[1..9] : switch to workspaces n
+* Win+Shift+[1..9] : send focused window to workspace n
+* Win+Space :  toggle window layout for current workspace
+* Win+R : run dialog
+-------
+* Ctrl+`backtick` or Ctrl+Esc : drop-down terminal
+* ? : kill focused window
+* ? : restart Xmonad
+* ? : monitor focusing
+* ? : dmenu / gmrun ?
 
 #### Shell commands
 
-lock : lock the desktop; password required to unlock
-reui : reload desktop candy (bars, compositor etc)
-logout : cleanly log out from Xmonad (use from rofi, not terminal)
-recoverxmonad : for when shit hits the fan; restore default Xmonad config
+* lock : lock the desktop; password required to unlock
+* reui : reload desktop candy (bars, compositor etc)
+* logout : cleanly log out from Xmonad (use from rofi, not terminal)
+* recoverxmonad : for when shit hits the fan; restore default Xmonad config
 
 ### Misc notes
 
@@ -64,9 +63,9 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 ### TODO
 
 * Better laptop sleep/resume on lid close
-* media keys / backlight / etc bindings
+* remap caps lock to something not shit (probably mod key)
 * LightDM greeter
-* Investigate other bars and panels- taffybar, candybar, dzen, yabar, tint2, bmpanel
+* Investigate other bars and panels- taffybar, candybar, dzen, yabar, bmpanel
 * Investigate misc - firejail
 * ssh agent
 
@@ -112,5 +111,6 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * rawsh
 * joedicastro
 * xero
+* sn0rlax
 
 Apologies to anyone else who I've stolen from but forgotten to mention
