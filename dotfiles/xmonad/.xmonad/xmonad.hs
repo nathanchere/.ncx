@@ -71,7 +71,7 @@ myKeys =
   ,(("<XF86AudioRaiseVolume>"), spawn "notify-send audio-up")
   ,(("<XF86AudioMute>"), spawn "notify-send audio-mute")
 
-  ,(("<XF86AudioPlay>"), spawn "notify-send play")
+  ,(("<XF86AudioPlay>"), spawn "notify-send ▶")
   ,(("<XF86AudioPause>"), spawn "notify-send pause") -- not used on XPS13?
   ,(("<XF86AudioPrev>"), spawn "notify-send <<")
   ,(("<XF86AudioNext>"), spawn "notify-send >>")

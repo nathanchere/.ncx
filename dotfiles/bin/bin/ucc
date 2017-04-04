@@ -3,4 +3,4 @@
 # convert 4-digit index to unicode character
 
 echo -e "\u$1"
-echo -e "\u$1" | xclip -selection c
+echo -e -n "\u$1" | xclip -selection c
