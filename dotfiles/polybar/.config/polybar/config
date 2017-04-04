@@ -14,14 +14,15 @@ margin-bottom = 0
 
 [bar/tophidpi]
 inherit = bar/top
-font-0 = dina:pixelsize=18;1
-font-1 = siji:pixelsize=20;1
-font-2 = unifont:size=12;1
-height = 36
+font-0 = ProggyCleanTTSZ Nerd Font:pixelsize=30;1
+font-1 = Siji:pixelsize=30;1
+font-2 = ProggyCleanTTSZ Nerd Font:pixelsize=30;1
+;font-2 = Hurmit Nerd Font:size=18;1
+height = 48
 
 [bar/top]
 enable-ipc = true
-monitor = ${env:MONITOR:eDP1}
+;monitor = ${env:MONITOR:eDP1}
 width = 100%
 height = 24
 ;radius = 5.0
@@ -62,13 +63,6 @@ font-2 = unifont:size=6;1
 modules-left =
 modules-center = xwindow
 modules-right = xkeyboard volume wifi battery memory cpu fs-root date power-menu
-
-tray-position = left
-tray-padding = 2
-tray-maxsize = 16
-;tray-transparent = true
-;tray-detached = true
-tray-offset-x = 510
 
 wm-restack = bspwm
 

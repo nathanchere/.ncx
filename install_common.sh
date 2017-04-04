@@ -8,12 +8,12 @@ main() {
   dnf install -y automake autoconf readline-devel ncurses-devel openssl-devel
   dnf install -y libyaml-devel libxslt-devel libffi-devel libtool unixODBC-devel
 
-  dnf install -y lightdm-webkit2-greeter
-  dnf install -y fish terminator
+  dnf install -y fish terminator mc ranger
   dnf install -y lshw nmap net-tools wmctrl
-  dnf install -y feh i3lock scrot ImageMagick lightdm-webkit-greeter compton
-  dnf install -y tint2 rofi polybar
-  dnf install -y htop neofetch cmatrix
+  dnf install -y feh i3lock scrot ImageMagick lightdm-webkit2-greeter compton
+  dnf install -y tint2 rofi
+  dnf install -y htop glances
+  dnf install -y neofetch cmatrix
   dnf install -y figlet ddate shutter
   dnf install -y docker
 
