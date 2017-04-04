@@ -14,7 +14,7 @@ main() {
   dnf install -y tint2 rofi
   dnf install -y htop glances
   dnf install -y neofetch cmatrix
-  dnf install -y figlet ddate shutter
+  dnf install -y figlet ddate shutter xclip
   dnf install -y docker
 
   dnf install -y xmonad ghc-xmonad-contrib ghc-xmonad-devel ghc-xmonad-contrib-devel

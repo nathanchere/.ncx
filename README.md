@@ -55,6 +55,7 @@ These docs are shit but what can you do?
 * reui : reload desktop candy (bars, compositor etc)
 * logout : cleanly log out from Xmonad (use from rofi, not terminal)
 * recoverxmonad : for when shit hits the fan; restore default Xmonad config
+* uc : convert 4-character unicode value to symbol
 
 ### Misc notes
 
