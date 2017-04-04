@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# Note: if calling from terminator/etc you'll need to
-# run as `logout &` or the script will abort when
-# the host terminal is closed
+# Really hacky way of determining if we are running in foreground or not
+if [ ! -z `ps -o stat= | tail -n 1 | grep +` ]; then
+  echo "Running in foreground; forking..."
+  $0 &
+  exit
+fi
 
 waitForAllTerminated() {
   end=$(($SECONDS+$1))
@@ -10,7 +13,7 @@ waitForAllTerminated() {
     if [[ -z `wmctrl -l` ]]; then
       return 0;
     fi
-    sleep .05
+     sleep .05
   done
   return -1
 }
