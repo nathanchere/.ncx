@@ -2,4 +2,4 @@
 
 # convert 4-digit index to unicode character
 
-echo -e "\u$1"
+echo -e "\U$1"

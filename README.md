@@ -72,6 +72,28 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 
 ### Notes to me
 
+* Interesting unicode ranges
+ * 16A0 - 16F8 runes
+ * 2160-2182 roman numerals
+ * 2190 - 21FF arrows
+ * 2200 - 2307 math symbols
+ * 2308 - 23CC lines boxes misc
+ * 23CF, 23E9 - 23FA - clocks and media navigation symbols
+ * 244A - double slash
+ * 2460-24FF numbers and letters in bubbles etc
+ * 2500 - 25FF - ASCII-style geometry
+ * 2600 - 2753 - weather symbols, phones, checkboxes, hazard symbols, pointing fingers, ideological symbols, chess pieces, zodiac symbols, music symbols, recycle symbols, dice, accessibility, alignment, flags, checkmarks, stars etc
+ * 2754 - 27FF - fat arrows, punctuation etc
+ * 2800 - 28FF - 4x2 light matrix combinations
+ * 2E80 - 2EF0 - chinese characters
+ * 2F00 - 2FD0 more
+ * 3041 - 309F - hiragana
+ * 30A0 - 30FF - katakana
+ * 1f4b0 money bag
+ * 1f4c8-1f4c9 trend charts
+ * 1f300 - 14320 more weather symbols
+ * 1f44d - 1f44e thumbs up/down
+
 * dm-tool for bringing up lightdm
 * rss on launch
 * docker (firejail?)
