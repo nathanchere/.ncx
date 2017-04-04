@@ -1,1 +1,3 @@
+#!/bin/bash
+
 cp -p /usr/share/xmonad/xmonad.hs "$HOME/.xmonad/xmonad.hs"

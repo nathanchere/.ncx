@@ -1,1 +1,3 @@
+#!/bin/bash
+
 (cd "$HOME/.ncx"; ./ncx-main.sh $@)
