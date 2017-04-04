@@ -4,7 +4,7 @@ Just my Linux box setup / bootstrap scripts / dotfiles / etc.
 
 Specifically assumes a Fedora-based system. Tested on:
 
-* Korora 25 (XPS 13 9350)
+* Korora 25 (XPS 13 9350, VirtualBox)
 * Fedora 25 (Raspberry Pi 3)
 
 ### Install
@@ -21,12 +21,41 @@ From there
 
     ./install_[whatever].sh
 
+These docs are shit but what can you do?
+
+### Summary
+
+Display manager: LightDM
+Window manager: XMonad
+Bars/tray/etc: polybar, tint2
+Notifications: dunst
+Launcher: rofi
+Shell: fish (w/ ohmyfish)
+Terminal: terminator
+
+### Cheat sheet
+
+#### Key bindings
+
+Win+Shift+Enter : open new terminal window
+Win+[1..9] : switch to workspaces n
+Win+Shift+[1..9] : send focused window to workspace n
+Win+Space :  toggle window layout for current workspace
+Win+R : run dialog
+
+#### Shell commands
+
+lock : lock the desktop; password required to unlock
+reui : reload desktop candy (bars, compositor etc)
+logout : cleanly log out from Xmonad (use from rofi, not terminal)
+
+recoverxmonad : for when shit hits the fan; restore default Xmonad config
+
 ### TODO
 
 * Notification support (dunst? twmn? statnot?)
 * Tracking current workspace
 * LightDM greeter
-* Clean logout/etc without mate-panel
 * Investigate other bars and panels- taffybar, candybar, dzen, yabar, tint2, bmpanel
 * Investigate misc - firejail
 * Add .utils to fishrc etc
