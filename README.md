@@ -68,7 +68,9 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * LightDM greeter
 * Investigate other bars and panels- taffybar, candybar, dzen, yabar, bmpanel
 * Investigate misc - firejail
-* ssh agent
+* xmonad screenshot / printscreen binding
+* better launcher / run dialog
+* xmonad mouse bindings (how to un-float?)
 
 ### Notes to me
 
