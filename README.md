@@ -43,23 +43,32 @@ Win+Shift+[1..9] : send focused window to workspace n
 Win+Space :  toggle window layout for current workspace
 Win+R : run dialog
 
+Ctrl+`backtick` or Ctrl+Esc : drop-down terminal
+? : kill focused window
+? : restart Xmonad
+? : monitor focusing
+? : dmenu / gmrun ?
+
+
 #### Shell commands
 
 lock : lock the desktop; password required to unlock
 reui : reload desktop candy (bars, compositor etc)
 logout : cleanly log out from Xmonad (use from rofi, not terminal)
-
 recoverxmonad : for when shit hits the fan; restore default Xmonad config
+
+### Misc notes
+
+Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka preferred for everything else.
 
 ### TODO
 
-* Notification support (dunst? twmn? statnot?)
-* Tracking current workspace
+* Better laptop sleep/resume on lid close
+* media keys / backlight / etc bindings
 * LightDM greeter
 * Investigate other bars and panels- taffybar, candybar, dzen, yabar, tint2, bmpanel
 * Investigate misc - firejail
-* Add .utils to fishrc etc
-* easier way to maintain dots etc ongoing
+* ssh agent
 
 ### Notes to me
 
@@ -67,10 +76,8 @@ recoverxmonad : for when shit hits the fan; restore default Xmonad config
 * rss on launch
 * docker (firejail?)
 * fish aliases
-* * pgp / gpg
-* git config
+* pgp / gpg
 * music - cmus/cmus-remote?
-* Nerdfonted Dina or Gohufont?
 * weechat
 * icon packs
 * taskwarrior or similar
