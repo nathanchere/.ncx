@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Really hacky way of determining if we are running in foreground or not
+
+if [ ! -z `ps -o stat= | tail -n 1 | grep +` ]; then
+  echo 'Running in foreground'
+else
+  echo 'Running in background'
+fi
