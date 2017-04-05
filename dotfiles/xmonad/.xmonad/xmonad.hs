@@ -65,18 +65,18 @@ myKeys =
 	,(("M4-r"), spawn "rofi -show run")
 
   -- Multimedia keys
-  ,(("<XF86MonBrightnessUp>"), spawn "notify-send ☀ up")
-  ,(("<XF86MonBrightnessDown>"), spawn "notify-send ☀ down")
-  ,(("<XF86AudioLowerVolume>"), spawn "notify-send ")
-  ,(("<XF86AudioRaiseVolume>"), spawn "notify-send  && amixer -D pulse set Master 5%+")
-  ,(("C-<XF86AudioLowerVolume>"), spawn "notify-send  && amixer -D pulse set Master 1%")
-  ,(("C-<XF86AudioRaiseVolume>"), spawn "notify-send  && amixer -D pulse set Master 100%")
-  ,(("<XF86AudioMute>"), spawn "notify-send ")
+  ,(("<XF86MonBrightnessUp>"), spawn "notify-send bright up")
+  ,(("<XF86MonBrightnessDown>"), spawn "notify-send bright down")
+  ,(("<XF86AudioLowerVolume>"), spawn "amixer set Master 5%-")
+  ,(("<XF86AudioRaiseVolume>"), spawn "amixer set Master 5%+")
+  ,(("C-<XF86AudioLowerVolume>"), spawn "amixer set Master 5%")
+  ,(("C-<XF86AudioRaiseVolume>"), spawn "amixer set Master 100%")
+  ,(("<XF86AudioMute>"), spawn "amixer set Master toggle")
 
-  ,(("<XF86AudioPlay>"), spawn "notify-send ")
-  ,(("<XF86AudioPause>"), spawn "notify-send ") -- not used on XPS13?
-  ,(("<XF86AudioPrev>"), spawn "notify-send ")
-  ,(("<XF86AudioNext>"), spawn "notify-send ")
+  ,(("<XF86AudioPlay>"), spawn "notify-send play")
+  ,(("<XF86AudioPause>"), spawn "notify-send pause") -- not used on XPS13?
+  ,(("<XF86AudioPrev>"), spawn "notify-send back")
+  ,(("<XF86AudioNext>"), spawn "notify-send forward")
   ,(("<XF86Search>"), spawn "notify-send search")
 	]
 
