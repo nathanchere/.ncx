@@ -23,6 +23,11 @@ From there
 
 These docs are shit but what can you do?
 
+Manual things required:
+
+* Excercism key from http://www.exercism.io/account/key
+* Git user/pass for Github for uploading SSH public key
+
 ### Summary
 
 * Display manager: LightDM
