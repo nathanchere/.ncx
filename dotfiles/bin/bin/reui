@@ -14,10 +14,11 @@ main() {
 
   dunst &
   compton &
-  tint2 &
-  polybar top &
-
+  tint2 -c ~/.config/tint2/tint2rc-bottom &
+  tint2 -c ~/.config/tint2/tint2rc-top &
+  # polybar top &
   feh --bg-scale --force-aliasing --randomize --no-fehbg "$HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png" &
 }
 
 main 2>&1 |& tee -a "$LOGFILE"
+echo "done"
