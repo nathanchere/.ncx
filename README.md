@@ -4,8 +4,10 @@ Just my Linux box setup / bootstrap scripts / dotfiles / etc.
 
 Specifically assumes a Fedora-based system. Tested on:
 
-* Korora 25 (XPS 13 9350, VirtualBox)
+* Korora 24, 25 (XPS 13 9350, VirtualBox)
 * Fedora 25 (Raspberry Pi 3)
+
+... and found to be horribly inconsistent and buggy. Caveat emptor.
 
 ### Install
 
@@ -40,6 +42,13 @@ Manual things required:
 
 ### Cheat sheet
 
+#### Wifi stuff
+
+* `nmcli device wifi` to list available WiFi connections
+* `nmcli c` to list saved WiFi connections
+* `nmcli c up <name>` to connecto to a saved WiFi connection
+* `nmcli c add con-name <hotspotname> type wifi ifname wlp58s0 ssid <hotspotname>` connect to new hotspot, then `nmcli c up <name>` - wtf this is bullshit... needs to be made less bullshit
+
 #### Key bindings
 
 * Win+Shift+Enter : open new terminal window
@@ -68,6 +77,8 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 
 ### TODO
 
+* Wifi connection script
+* Monitor connection script
 * Better laptop sleep/resume on lid close
 * remap caps lock to something not shit (probably mod key)
 * LightDM greeter

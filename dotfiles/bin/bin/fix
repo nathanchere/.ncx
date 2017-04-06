@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+
+import sys
+from sh import xrandr
+
+print(xrandr("--query"))
+
+# Really hacky way of determining if we are running in foreground or not
+# if [ ! -z `ps -o stat= | tail -n 1 | grep +` ]; then
+#   echo 'Running in foreground'
+# else
+#   echo 'Running in background'
+# fi
+
+# FOO=1
+# while true ; do
+#   FOO=$FOO+1
+# done <<<
+#
+# PARAMS="--output eDP-1 --auto "
+#
+# CMD=""
+# foo=0
+# xrandr --query | grep "disconnected" | while read -r line ; do
+#   CHANNEL=`echo "$line" | cut -d ' ' -f 1`
+#   CMD="$CMD --output $CHANNEL --off"
+#   echo "$CHANNEL disconnected; disabling"
+#   foo=$foo + 1
+# done
+# echo $foo
+#
+# xrandr --query | grep " connected" | while read -r line ; do
+#   CHANNEL=`echo "$line" | cut -d ' ' -f 1`
+#   CMD="$CMD --output $CHANNEL --auto"
+#   echo "$CHANNEL connected; enabling"
+#   if [ ! $CHANNEL == "eDP-1" ]; then
+#     CMD="$CMD --right-of $LAST"
+#   fi
+#   LAST=$CHANNEL
+#   echo "xrandr $CMD"
+# done
+#
+# echo "xrandr $CMD"
+# # DP1=xrandr --query
+# #
+#  xrandr  --output DP1 --auto --scale 2x2 --right-of eDP1 --output DP2 --auto

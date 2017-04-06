@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/python3
 
 # Really hacky way of determining if we are running in foreground or not
 # if [ ! -z `ps -o stat= | tail -n 1 | grep +` ]; then
@@ -6,6 +6,11 @@
 # else
 #   echo 'Running in background'
 # fi
+
+FOO=1
+while true ; do
+  FOO=$FOO+1
+done <<<
 
 PARAMS="--output eDP-1 --auto "
 
@@ -33,5 +38,4 @@ done
 echo "xrandr $CMD"
 # DP1=xrandr --query
 #
-# xrandr
-# --output DP1 --auto --scale 2x2 --right-of eDP1 --output DP2 --auto
+ xrandr  --output DP1 --auto --scale 2x2 --right-of eDP1 --output DP2 --auto
