@@ -16,6 +16,7 @@ main() {
   compton &
   tint2 -c ~/.config/tint2/tint2rc-bottom &
   tint2 -c ~/.config/tint2/tint2rc-top &
+  tint2 -c ~/.config/tint2/tint2rc-left &
   # polybar top &
   feh --bg-scale --force-aliasing --randomize --no-fehbg "$HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png" &
 }

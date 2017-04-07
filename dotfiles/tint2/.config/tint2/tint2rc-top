@@ -69,7 +69,7 @@ task_urgent_icon_asb = 100 0 0
 task_iconified_icon_asb = 100 0 0
 
 # Fonts
-task_font = Aller 7
+task_font = Iosevka Nerd Font 16
 task_font_color = #FFFFFF 100
 task_active_font_color = #CDFF00 100
 task_urgent_font_color = #FFFFFF 100
@@ -86,7 +86,7 @@ systray_icon_asb = 100 0 0
 
 # Clock
 time1_format = %H:%M
-time1_font = Aller Bold 10
+time1_font = Iosevka Nerd Font 18
 clock_font_color = #656565 100
 clock_padding = 17 0
 clock_background_id = 1
