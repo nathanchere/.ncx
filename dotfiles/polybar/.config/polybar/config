@@ -30,11 +30,11 @@ height = 48
 enable-ipc = true
 bottom = true
 width = 100%
-height = 24
+height = 26
 fixed-center = true
 
-font-0 = Iosevka Nerd Font:pixelsize=22;1
-font-1 = Iosevka Nerd Font:pixelsize=9;1
+font-0 = Iosevka Nerd Font:pixelsize=16;1
+font-1 = Iosevka Nerd Font:pixelsize=26;1
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -46,17 +46,31 @@ overline-size = 1
 border-size = 0
 border-color = ${colors.bordercolor}
 border-top-size = 2
-border-bottom-size = 2
+border-bottom-size = 0
 
 padding-left = 0
-padding-right = 8
+padding-right = 0
 module-margin-left = 1
 module-margin-right = 2
+
+tray-position = right
+tray-detached = true
+
+tray-maxsize = 18
+
+tray-transparent = false
+tray-background = ${root.background}
+
+tray-offset-x = 0
+tray-offset-y = -16
+tray-padding = 0
+tray-scale = 1.0
+
 
 modules-left = xworkspaces xwindow
 modules-center =
 ;modules-right = xkeyboard volume wifi battery memory cpu fs-root date
-modules-right = wifi  memory cpu date
+modules-right = wifi memory cpu date
 
 ;----------------------------------
 ;
@@ -90,9 +104,10 @@ label-mounted = %{F#e60053}%percentage_used%%{F-} used of %mountpoint%
 [module/cpu]
 type = internal/cpu
 interval = 2
-label = %percentage%%
-format-prefix = " "
+label = %percentage%
+format-prefix = "CPU"
 format-prefix-foreground = #666
+
 
 ;----------------------------------
 ;
@@ -104,7 +119,7 @@ format-prefix-foreground = #666
 type = internal/memory
 interval = 2
 label = %percentage_used%%
-format-prefix = " "
+format-prefix = "RAM"
 format-prefix-foreground = #666
 
 ;----------------------------------
@@ -116,27 +131,21 @@ format-prefix-foreground = #666
 [module/wifi]
 type = internal/network
 interface = wlp58s0
-interval = 3.0
+interval = 2.0
 ;udspeed-minwidth = 0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-prefix = " "
-format-connected-prefix-foreground = #666
-format-connected-prefix-offset = -6
-label-connected = %downspeed:8%
+label-connected = %downspeed%
 
-;format-disconnected = <label-disconnected>
-;format-disconnected-prefix = " "
-;format-disconnected-prefix-foreground = #666
-;label-disconnected = not connected
-;label-disconnected-foreground = #999
+format-disconnected = <label-disconnected>
+label-disconnected = not connected
+label-disconnected-foreground = #999
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = #666
+ramp-signal-0 = %{F#C03}%{F-}
+ramp-signal-1 = %{F#a60}%{F-}
+ramp-signal-2 = %{F#990}%{F-}
+ramp-signal-3 = %{F#6a0}%{F-}
+ramp-signal-4 = %{F#0c6}%{F-}
 
 ;----------------------------------
 ;
