@@ -168,10 +168,12 @@ label-connected = %local_ip%
 
 [module/date]
 type = internal/date
-label = %{F#666}%{F-} %date%  %{F#e60053}%{F-} %time%
-date = %Y-%m-%d
-time = %H:%M
-interval = 5
+label = %{F#666} %{F-}%date% %{F#666} %{F-}%time%
+date = %a %Y-%m-%d (wk%V)
+time = %H:%M.%S
+interval = 1
+date-alt = %a, %d %B %Y
+time-alt = %H:%M:%S
 
 ;----------------------------------
 ;
