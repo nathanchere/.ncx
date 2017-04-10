@@ -6,6 +6,7 @@ mkdir -p $LOGDIR
 touch $LOGFILE
 
 main() {
+
   killall -q polybar compton dunst tint2
 
   while pgrep -x polybar >/dev/null; do sleep 1; done
@@ -17,7 +18,9 @@ main() {
   tint2 -c ~/.config/tint2/tint2rc-bottom &
   tint2 -c ~/.config/tint2/tint2rc-top &
   tint2 -c ~/.config/tint2/tint2rc-left &
-  # polybar top &
+  tint2 -c ~/.config/tint2/.tint2.ncx.left &
+  #tint2 -c ~/.tint2.ncx.left
+  polybar top &
   feh --bg-scale --force-aliasing --randomize --no-fehbg "$HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png" &
 }
 

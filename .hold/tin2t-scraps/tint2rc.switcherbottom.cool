@@ -39,35 +39,23 @@ background_color = #ffffff 20
 border_color = #000000 0
 
 # Panel
-panel_items = TC
-panel_size = 90% 50
-panel_margin = 0 0
-panel_padding = 0 0 0
-panel_background_id = 0
-wm_menu = 1
-panel_dock = 0
-panel_position = bottom center horizontel
-panel_layer = top
 panel_monitor = all
-primary_monitor_first = 1
-panel_shrink = 0
-autohide = 0
-autohide_show_timeout = 0
-autohide_hide_timeout = 0
-autohide_height = 1
-strut_policy = follow_size
-panel_window_name = tint2
-disable_transparency = 0
-mouse_effects = 0
-font_shadow = 0
-mouse_hover_icon_asb = 100 0 10
+panel_position = bottom center horizontal
+panel_items = T
+panel_size = 50% 80
+panel_margin = 10 10
+panel_padding = 10 10
+panel_dock = 0
+wm_menu = 1
+panel_layer = bottom
+panel_background_id = 1
 
 # Panel Autohide
 autohide = 0
 autohide_show_timeout = 0.3
 autohide_hide_timeout = 1.5
 autohide_height = 6
-
+strut_policy = none
 
 # Taskbar
 taskbar_mode = multi_desktop

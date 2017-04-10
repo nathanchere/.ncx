@@ -25,7 +25,8 @@ border_color = #FFFFFF 100
 
 # Panel
 
-panel_monitor = eDP-1
+;panel_monitor = eDP-1
+panel_monitor = DP-1
 panel_position = top center horizontal
 panel_size = 90% 28
 panel_margin = 0 0
@@ -45,16 +46,16 @@ strut_policy = follow_size
 # Taskbar
 taskbar_name = 1
 taskbar_name_font_color = #bbff00 100
-taskbar_mode = multi_desktop
+taskbar_mode = single_desktop
 taskbar_padding = 4 4 7
 taskbar_background_id = 1
 taskbar_active_background_id = 1
 
 # Tasks
 urgent_nb_of_blink = 7
-task_icon = 0
-task_text = 1
-task_centered = 0
+task_icon = 1
+task_text = 0
+task_centered = 1
 task_maximum_size = 100 32
 task_padding = 7 4
 task_background_id = 3

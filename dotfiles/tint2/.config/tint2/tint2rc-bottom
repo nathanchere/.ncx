@@ -1,11 +1,11 @@
 # Background definitions
-# ID 1
+# Panel
 rounded = 0
 border_width = 0
 background_color = #222222 100
 border_color = #656565 100
 
-# ID 2
+# Task 
 rounded = 4
 border_width = 1
 background_color = #111111 100
