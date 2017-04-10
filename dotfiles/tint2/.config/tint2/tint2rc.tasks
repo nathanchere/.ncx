@@ -1,5 +1,5 @@
 #---------------------------------------------
-# TINT2 CONFIG FILE
+# Show the current tasks in the bottom middle of the screen
 #---------------------------------------------
 
 # ID 1
@@ -13,7 +13,7 @@ rounded = 0
 border_width = 0
 background_color = #000000 10
 border_color = #000000 90
-
+9
 # ID 3 - taskbar
 rounded = 0
 border_width = 0
@@ -23,13 +23,13 @@ border_color = #000000 0
 # ID 4 - active taskbar
 rounded = 0
 border_width = 0
-background_color = #ffffff 40
+background_color = #ffffff 00
 border_color = #000000 0
 
 # ID 5 - task
 rounded = 0
 border_width = 0
-background_color = #ffffff 10
+background_color = #000000 40
 border_color = #000000 0
 
 # ID 6 - active task
@@ -40,17 +40,17 @@ border_color = #000000 0
 
 # Panel
 panel_items = TC
-panel_size = 90% 50
+panel_size = 40% 50
 panel_margin = 0 0
 panel_padding = 0 0 0
 panel_background_id = 0
 wm_menu = 1
 panel_dock = 0
-panel_position = bottom center horizontel
-panel_layer = top
+panel_position = bottom center horizontal
+panel_layer = bottom
 panel_monitor = all
 primary_monitor_first = 1
-panel_shrink = 0
+panel_shrink = 1
 autohide = 0
 autohide_show_timeout = 0
 autohide_hide_timeout = 0
@@ -70,7 +70,7 @@ autohide_height = 6
 
 
 # Taskbar
-taskbar_mode = multi_desktop
+taskbar_mode = single_desktop
 taskbar_padding = 10 10 10
 taskbar_background_id = 3
 taskbar_active_background_id = 4
@@ -83,10 +83,10 @@ taskbar_name_active_font_color = #eeeeee 100
 
 # Tasks
 urgent_nb_of_blink = 20
-task_icon = 0
-task_text = 0
-task_centered = 1
-task_maximum_size = 300 40
+task_icon = 1
+task_text = 1
+task_centered = 0
+task_maximum_size = 160 40
 task_padding = 2 2
 task_background_id = 5
 task_active_background_id = 6
