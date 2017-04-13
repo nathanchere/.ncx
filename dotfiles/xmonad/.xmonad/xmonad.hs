@@ -109,5 +109,5 @@ myConfig = desktopConfig
 --  ]
 
 main = do
-  --  spawn "bash ~/.xmonad/startup.sh"
+    spawn "~/bin/reui"
     xmonad $ myConfig

@@ -13,8 +13,4 @@ if [ -r $XMONAD_DIR/xmonad.hs -a -x $XMONAD_CUSTOM ]; then
   fi
 fi
 
-compton &
-dunst &
-polybar main &
-feh --bg-scale --force-aliasing --randomize --no-fehbg "$HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png" &
 exec /usr/bin/xmonad
