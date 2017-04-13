@@ -7,16 +7,16 @@ touch $LOGFILE
 
 main() {
 
-  killall -q polybar compton dunst tint2
+  killall -q polybar compton dunst
 
   while pgrep -x polybar >/dev/null; do sleep 1; done
   while pgrep -x compton >/dev/null; do sleep 1; done
-  while pgrep -x tint2 >/dev/null; do sleep 1; done
+  #while pgrep -x tint2 >/dev/null; do sleep 1; done
 
-  dunst &
   compton &
+  dunst &
   polybar main &
-  tint2 -c ~/.config/tint2/tint2rc.tasks &
+  # tint2 -c ~/.config/tint2/tint2rc.tasks &
   feh --bg-scale --force-aliasing --randomize --no-fehbg "$HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png" &
 }
 
