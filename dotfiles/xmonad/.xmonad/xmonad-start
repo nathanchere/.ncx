@@ -15,6 +15,6 @@ fi
 
 compton &
 dunst &
-polybar top &
+polybar main &
 feh --bg-scale --force-aliasing --randomize --no-fehbg "$HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png" &
 exec /usr/bin/xmonad

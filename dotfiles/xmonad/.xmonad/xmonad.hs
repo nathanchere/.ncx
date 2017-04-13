@@ -63,6 +63,7 @@ myKeys =
 
   -- OS Misc
 	,(("M4-r"), spawn "rofi -show run")
+  ,(("<>"), spawn "shutter")
 
   -- Multimedia keys
   ,(("<XF86MonBrightnessUp>"), spawn "notify-send bright up")
@@ -71,7 +72,10 @@ myKeys =
   ,(("<XF86AudioRaiseVolume>"), spawn "amixer set Master 5%+")
   ,(("C-<XF86AudioLowerVolume>"), spawn "amixer set Master 5%")
   ,(("C-<XF86AudioRaiseVolume>"), spawn "amixer set Master 100%")
-  ,(("<XF86AudioMute>"), spawn "amixer set Master toggle")
+
+  ,(("<Print>"), spawn "shutter -f") -- capture entire screen
+  ,(("M1-<Print>"), spawn "shutter -a") -- capture active window
+  ,(("M4-<Print>"), spawn "shutter --section") -- dialog
 
   ,(("<XF86AudioPlay>"), spawn "notify-send play")
   ,(("<XF86AudioPause>"), spawn "notify-send pause") -- not used on XPS13?

@@ -30,7 +30,7 @@ height = 48
 enable-ipc = true
 bottom = true
 width = 100%
-height = 26
+height = 28
 fixed-center = true
 
 font-0 = Iosevka Nerd Font:pixelsize=16;1
@@ -49,22 +49,22 @@ border-top-size = 2
 border-bottom-size = 0
 
 padding-left = 0
-padding-right = 0
+padding-right = 3
 module-margin-left = 1
 module-margin-right = 2
 
 tray-position = right
-tray-detached = true
+tray-detached = false
 
-tray-maxsize = 18
+tray-maxsize = 28
 
-tray-transparent = false
+tray-transparent = true
 tray-background = ${root.background}
 
-tray-offset-x = 0
-tray-offset-y = -16
+tray-offset-x = 2
+tray-offset-y = -2
 tray-padding = 0
-tray-scale = 1.0
+tray-scale = 1
 
 
 modules-left = xworkspaces xwindow
@@ -120,7 +120,7 @@ format-prefix-foreground = #666
 type = internal/network
 interface = wlp58s0
 interval = 2.0
-;udspeed-minwidth = 0
+;udspeed-minwidth = 0bvbvbvbv
 
 format-connected = <ramp-signal> <label-connected>
 label-connected = %downspeed% %local_ip%
