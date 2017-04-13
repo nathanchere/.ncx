@@ -30,7 +30,7 @@
     telemetryConsent: "no"
   editor:
     fontFamily: "Iosevka Nerd Font"
-    fontSize: 11
+    fontSize: 15
     lineHeight: 1.3
     showIndentGuide: true
   "linter-ui-default":

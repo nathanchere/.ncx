@@ -10,6 +10,7 @@ main() {
 
   dnf install -y fish terminator mc ranger
   dnf install -y lshw nmap net-tools wmctrl
+  dnf install -y wicd wicd-gtk volumeicon
   dnf install -y feh i3lock scrot ImageMagick lightdm-webkit2-greeter compton
   dnf install -y tint2 rofi
   dnf install -y htop glances
