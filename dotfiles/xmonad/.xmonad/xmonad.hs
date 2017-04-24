@@ -18,6 +18,7 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.Reflect
+import XMonad.Layout.DecorationMadness
 
 import Graphics.X11.ExtraTypes.XF86
 
@@ -46,7 +47,12 @@ myLayoutHook = spacingWithEdge mySpacingWidth
   $ avoidStruts
   $ mkToggle (single REFLECTX)
   $ mkToggle (single REFLECTY)
-  $ tall ||| Mirror tall ||| dragPane Horizontal 0.1 0.5 ||| Full ||| simpleTabbed
+  $ tall
+  ||| Mirror tall
+  --- ||| dragPane Horizontal 0.1 0.5
+  ||| tallSimpleDecoResizable
+  ||| Full
+  --- ||| simpleTabbed
   where
     tall = Tall 1 0.03 0.5
 
@@ -63,7 +69,6 @@ myKeys =
 
   -- OS Misc
 	,(("M4-r"), spawn "rofi -show run")
-  ,(("<>"), spawn "shutter")
 
   -- Multimedia keys
   ,(("<XF86MonBrightnessUp>"), spawn "notify-send bright up")
