@@ -1,0 +1,2 @@
+nmcli dev wifi
+# also nmcli dev wifi connect SSID
