@@ -18,6 +18,7 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.Reflect
+import XMonad.Layout.DecorationMadness
 
 import Graphics.X11.ExtraTypes.XF86
 
@@ -46,7 +47,12 @@ myLayoutHook = spacingWithEdge mySpacingWidth
   $ avoidStruts
   $ mkToggle (single REFLECTX)
   $ mkToggle (single REFLECTY)
-  $ tall ||| Mirror tall ||| dragPane Horizontal 0.1 0.5 ||| Full ||| simpleTabbed
+  $ tall
+  ||| Mirror tall
+  --- ||| dragPane Horizontal 0.1 0.5
+  ||| tallSimpleDecoResizable
+  ||| Full
+  --- ||| simpleTabbed
   where
     tall = Tall 1 0.03 0.5
 
@@ -71,7 +77,10 @@ myKeys =
   ,(("<XF86AudioRaiseVolume>"), spawn "amixer set Master 5%+")
   ,(("C-<XF86AudioLowerVolume>"), spawn "amixer set Master 5%")
   ,(("C-<XF86AudioRaiseVolume>"), spawn "amixer set Master 100%")
-  ,(("<XF86AudioMute>"), spawn "amixer set Master toggle")
+
+  ,(("<Print>"), spawn "shutter -f") -- capture entire screen
+  ,(("M1-<Print>"), spawn "shutter -a") -- capture active window
+  ,(("M4-<Print>"), spawn "shutter --section") -- dialog
 
   ,(("<XF86AudioPlay>"), spawn "notify-send play")
   ,(("<XF86AudioPause>"), spawn "notify-send pause") -- not used on XPS13?
@@ -105,5 +114,5 @@ myConfig = desktopConfig
 --  ]
 
 main = do
-  --  spawn "bash ~/.xmonad/startup.sh"
+    spawn "~/bin/reui"
     xmonad $ myConfig

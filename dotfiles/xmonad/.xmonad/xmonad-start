@@ -1,11 +1,23 @@
 #!/bin/sh
 
-XMONAD_DIR=$HOME/.xmonad
+XMONAD_DIR="$HOME/.xmonad"
 
 xrdb -merge "$HOME/.Xresources"
 
-# TODO: not sure if this is really needed... need to investigate
-# recompile if broken shared libs after an upgrade
+# Shitty hack for setting DPI by passing an argument
+# from the display manager.
+if [ ! -z "$1" ]; then
+  TMPFILE=$(mktemp)
+  echo "! Fonts {{{
+Xft.dpi: $1
+! }}}" > "$TMPFILE"
+
+  xrdb -merge "$TMPFILE"
+  notify-send "Setting DPI to $1"
+  rm -f "$TMPFILE"
+fi
+
+# Recompile xmonad config if an upgrade breaks shared libs
 XMONAD_CUSTOM=$XMONAD_DIR/xmonad-$(uname -i)-linux
 if [ -r $XMONAD_DIR/xmonad.hs -a -x $XMONAD_CUSTOM ]; then
   if ldd $XMONAD_CUSTOM | grep -q "not found"; then
@@ -13,10 +25,4 @@ if [ -r $XMONAD_DIR/xmonad.hs -a -x $XMONAD_CUSTOM ]; then
   fi
 fi
 
-compton &
-dunst &
-polybar top &
-tint2 &
-feh --bg-scale --force-aliasing --randomize --no-fehbg "$HOME/.ncx/resources/wallpaper/pixel/plato_by_fool-d74d48d.png" &
-notify-send "Launching xmonad"
 exec /usr/bin/xmonad

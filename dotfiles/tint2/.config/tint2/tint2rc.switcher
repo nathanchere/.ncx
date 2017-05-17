@@ -1,0 +1,124 @@
+#---------------------------------------------
+# Show the current tasks in the bottom middle of the screen
+#---------------------------------------------
+
+# ID 1
+rounded = 0
+border_width = 0
+background_color = #000000 0
+border_color = #000000 0
+
+# ID 2 - tooltip
+rounded = 0
+border_width = 0
+background_color = #000000 10
+border_color = #000000 90
+9
+
+# ID 3 - taskbar
+rounded = 5
+border_width = 3
+background_color = #ffffff 0
+border_color = #008855 70
+
+# ID 4 - active taskbar
+rounded = 0
+border_width = 0
+background_color = #ffffff 00
+border_color = #000000 0
+
+# ID 5 - task
+rounded = 0
+border_width = 0
+background_color = #000000 60
+border_color = #000000 0
+
+# ID 6 - active task
+rounded = 0
+border_width = 0
+background_color = #000000 100
+border_color = #000000 0
+
+# Panel
+panel_items = TC
+panel_size = 100% 50
+panel_margin = 0 0
+panel_padding = 0 0 0
+panel_background_id = 0
+wm_menu = 1
+panel_dock = 0
+panel_position = bottom center horizontal
+panel_layer = top
+panel_monitor = all
+primary_monitor_first = 1
+panel_shrink = 1
+autohide = 0
+autohide_show_timeout = 0
+autohide_hide_timeout = 0
+autohide_height = 1
+strut_policy = follow_size
+panel_window_name = tint2
+disable_transparency = 0
+mouse_effects = 0
+font_shadow = 0
+mouse_hover_icon_asb = 100 0 10
+
+# Panel Autohide
+autohide = 0
+autohide_show_timeout = 0.3
+autohide_hide_timeout = 1.5
+autohide_height = 6
+
+
+# Taskbar
+taskbar_mode = single_desktop
+taskbar_padding = 0 0 0
+taskbar_background_id = 3
+taskbar_active_background_id = 4
+taskbar_name = 0
+taskbar_name_background_id = 0
+taskbar_name_active_background_id = 0
+taskbar_name_font = Droid Sans 9
+taskbar_name_font_color = #888888 100
+taskbar_name_active_font_color = #eeeeee 100
+
+# Tasks
+urgent_nb_of_blink = 20
+task_icon = 1
+task_text = 0
+task_centered = 0
+task_maximum_size = 50 50
+task_padding = 2 2
+task_background_id = 5
+task_active_background_id = 6
+task_urgent_background_id = 6
+task_iconified_background_id = 5
+
+# Task Icons
+task_icon_asb = 60 -100 0
+task_active_icon_asb = 100 0 0
+task_urgent_icon_asb = 100 0 0
+task_iconified_icon_asb = 80 0 0
+
+# Fonts
+task_font = Droid Sans 06_55 9
+task_font_color = #aaaaaa 70
+task_active_font_color = #eeeeee 100
+task_urgent_font_color = #064D99 100
+task_iconified_font_color = #aaaaaa 60
+font_shadow = 0
+
+# Tooltips
+tooltip = 1
+tooltip_padding = 10 10
+tooltip_show_timeout = 0.0
+tooltip_hide_timeout = 0.0
+tooltip_background_id = 2
+tooltip_font_color = #d8d8d8 100
+tooltip_font = Droid Sans normal 10.0
+
+# Mouse
+mouse_middle = none
+mouse_right = toggle
+mouse_scroll_up = toggle
+mouse_scroll_down = iconify
