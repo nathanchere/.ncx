@@ -42,30 +42,72 @@ import json
 import urllib3
 import subprocess
 
-def install(**args):
-  print(f"Installing: {fg.white}{args[0]}{colors.reset}" )
+# setup / bootstrap options
 
-def wifi(**args):
-  subprocess.call('nmcli', 'd w')
+def install(args):
+  print(f"Installing: {fg.white}{args[0]}{text.reset}" )
 
-def sync(**args):
+def sync(args):
   print("Syncing settings...")
 
-def help(**args):
+# utils
+
+def wifi(args):
+    subprocess.call('nmcli', 'd w')
+
+def backlight(args):
+
+    # TODO: make configurable on setup
+    backlight_value = '/sys/class/backlight/intel_backlight/brightness'
+
+    if(len(args) == 0):
+        brightness = open(backlight_maxvalue, "r").read()
+        print(f"Current backlight value: {brightness} / {get_backlight_max()}")
+        return
+
+    if(args[0] == 'max'):
+        print('Setting to max')
+        return
+
+
+
+    if(args[0] == 'min'):
+        print('Setting to min')
+        return
+
+    if(args[0] in ['+','-']):
+        operator = args[:1]
+        arg=args[1:]
+        print('Setting to x')
+        return
+
+    print(f"Setting value to: {args[0]}")
+    #subprocess.call('xbacklight' '-?')
+    return
+
+def get_backlight_max():
+    # TODO: make configurable on setup
+    backlight_maxvalue = '/sys/class/backlight/intel_backlight/max_brightness'
+    return open(backlight_maxvalue, "r").read()
+
+# misc
+
+def help(args):
     print(f"Usage: etc" )
 
 if len(sys.argv) == 1:
-    print("Showing help")
+    help()
     exit(0)
 
-valid_actions = ['install','sync','help','version', 'wifi']
-action = sys.argv[1]
-args = list(sys.argv)
-args.pop(0)
-args.pop(0)
+valid_actions = ['install','sync','help','version', 'wifi', 'backlight']
+cmdargs = list(sys.argv)
+cmdargs.pop(0)
+action = cmdargs.pop(0)
 
 if action in valid_actions:
-    eval(action + "(args)")
+    eval(action + "(cmdargs)")
     exit(0)
 
 print("Invalid action: " + action)
+help()
+exit(0)
