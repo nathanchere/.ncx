@@ -7,6 +7,8 @@
 # [DONE] detect environemnt (which package manager to use etc)
 # [DONE] config goes into ~/.config
 # install dependencies (python etc)
+# install essentials e.g. fish stow git
+# configure essentials e.g git omf
 
 # standardise output (e.g. die format, headers etc)
 
