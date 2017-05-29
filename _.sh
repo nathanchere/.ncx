@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 [[ ${INCLUDEONCE:-} -eq 1 ]] && return || readonly INCLUDEONCE=1
 
@@ -51,6 +51,22 @@ drawSubhead() {
   echo "[$(drawTime)]------------------------------------------------"
   echo "          ::: $1"
   echo " "
+}
+
+verboseOut() {
+	printf "\033[1;31m:: \033[0m$1\n"
+}
+
+highlightOut() {
+	printf "\033[1;37m[[ \033[1;36m* \033[1;37m]] \033[0m$1\n"
+}
+
+warnOut() {
+	printf "\033[1;37m[[ \033[1;33m! \033[1;37m]] \033[0m$1\n"
+}
+
+errorOut() {
+	printf "\033[1;37m[[ \033[1;31m! \033[1;37m]] \033[0m$1\n"
 }
 
 # Stow common wrapper

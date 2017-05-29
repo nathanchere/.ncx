@@ -1,43 +1,23 @@
 #!/usr/bin/env bash
 
+. "./_.sh"
+
 # TODO:
 
 # [DONE] detect environemnt (which package manager to use etc)
-# config goes into ~/.config
+# [DONE] config goes into ~/.config
 # install dependencies (python etc)
 
-function verboseOut {
-	printf "\033[1;31m:: \033[0m$1\n"
-}
-
-function highlightOut {
-	printf "\033[1;37m[[ \033[1;36m$1 \033[1;37m]] \033[0m$2\n"
-}
-
-function warnOut {
-	printf "\033[1;37m[[ \033[1;33m! \033[1;37m]] \033[0m$1\n"
-}
-
-function errorOut {
-	printf "\033[1;37m[[ \033[1;31m! \033[1;37m]] \033[0m$1\n"
-}
-
-function die {
-	errorOut "$1"
-  exit 1
-}
-
-function stderrOut {
-	while IFS='' read -r line; do printf "\033[1;37m[[ \033[1;31m! \033[1;37m]] \033[0m${line}\n"; done
-}
+# standardise output (e.g. die format, headers etc)
 
 # Important stuff
 
+CONFIG_FILE="$HOME/.config/.ncx"
 distro='Unknown'
 
 detectEnvironment () {
 
-  highlightOut "*" "Checking distro"
+  highlightOut "Checking distro"
 
   distro_id='Unknown'
   distro_name='Unknown'
@@ -78,4 +58,28 @@ detectEnvironment () {
   distro=$distro_family
 }
 
+detectAlreadyInstalled() {
+  if [ -f "$CONFIG_FILE" ]; then
+    die ".ncx has already been installed"
+  fi
+
+  touch "$CONFIG_FILE"
+}
+
+confirmBeforeContinue() {
+  read -p "Are you sure you want to run the installer? [y/n]" choice
+  case "$choice" in
+    y|Y ) return ;;
+    n|N ) die "Exiting..." ;;
+    * ) echo "Invalid response" ;;
+  esac
+  confirmBeforeContinue
+}
+
+# Pre-install validations
+
 detectEnvironment
+#detectAlreadyInstalled
+confirmBeforeContinue
+
+echo "Installing!!"
