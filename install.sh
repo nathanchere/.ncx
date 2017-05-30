@@ -2,15 +2,19 @@
 
 . "./_.sh"
 
-# TODO:
+requireNotRoot
 
+# TODO:
 # [DONE] detect environemnt (which package manager to use etc)
 # [DONE] config goes into ~/.config
 # install dependencies (python etc)
 # install essentials e.g. fish stow git
 # configure essentials e.g git omf
+# verify install
+# - and cleanup partial install on fail? overkill?
 
 # standardise output (e.g. die format, headers etc)
+# Add --force flag support to re-install
 
 # Important stuff
 
@@ -62,10 +66,8 @@ detectEnvironment () {
 
 detectAlreadyInstalled() {
   if [ -f "$CONFIG_FILE" ]; then
-    die ".ncx has already been installed"
+    die ".ncx has already been installed. Use 'ncx help' to see usage."
   fi
-
-  touch "$CONFIG_FILE"
 }
 
 confirmBeforeContinue() {
@@ -73,15 +75,54 @@ confirmBeforeContinue() {
   case "$choice" in
     y|Y ) return ;;
     n|N ) die "Exiting..." ;;
-    * ) echo "Invalid response" ;;
+    * ) echo "Invalid response (choose 'y' or 'n')" ;;
   esac
   confirmBeforeContinue
 }
 
+initConfigFile() {
+  rm -f "$CONFIG_FILE"
+  touch "$CONFIG_FILE"
+}
+
+addExtraPath(){
+  case :$PATH: in
+    *:$1:*)
+      echo "'$1' already exists in \$PATH"
+      ;;
+    *)
+      echo "Adding '$1' to \$PATH"
+      PATH=$1:$PATH
+      ;;
+  esac
+}
+
+addExtraPaths() {
+  highlightOut "Configuring \$PATH"
+  addExtraPath /home/usr/bin
+  addExtraPath /usr/bin
+  addExtraPath foo/e
+}
+
+debugCleanInstall() {
+  echo "DEBUG: cleaning existing install"
+  rm -f "$CONFIG_FILE"
+}
+
+
+# # # # # # # # # # # # # # # # # #
+# Main
+# # # # # # # # # # # # # # # # # #
+
+debugCleanInstall
+
 # Pre-install validations
 
 detectEnvironment
-#detectAlreadyInstalled
+detectAlreadyInstalled
 confirmBeforeContinue
 
-echo "Installing!!"
+echo "Installing, hold on to your hats..."
+
+initConfigFile
+addExtraPaths
