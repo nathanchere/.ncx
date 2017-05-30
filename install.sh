@@ -59,15 +59,23 @@ detectEnvironment () {
      warnOut 'Fedora and Korora are the only tested Fedora variants. Experiences with other distros may vary. Caveat emptor.'
   fi
 
-  highlightOut "Detected: ${distro_name} (${distro_family} family)"
+  highlightOut "Distro: OK; detected: ${distro_name} (${distro_family} family)"
 
   distro=$distro_family
+}
+
+detectCorrectPath() {
+  if [ "$HOME/.ncx" != $(pwd) ]; then
+    die ".ncx installer must be run from '\$HOME/.ncx'. Because reasons."
+  fi
+  echo "Install path: OK"
 }
 
 detectAlreadyInstalled() {
   if [ -f "$CONFIG_FILE" ]; then
     die ".ncx has already been installed. Use 'ncx help' to see usage."
   fi
+  echo "No prior install: OK"
 }
 
 confirmBeforeContinue() {
@@ -105,21 +113,22 @@ addExtraPaths() {
 }
 
 debugCleanInstall() {
+  # TODO: repurpose as a --force flag
   echo "DEBUG: cleaning existing install"
   rm -f "$CONFIG_FILE"
 }
-
 
 # # # # # # # # # # # # # # # # # #
 # Main
 # # # # # # # # # # # # # # # # # #
 
-debugCleanInstall
+debugCleanInstall # To manually force to treat as a 'clean install'
 
 # Pre-install validations
 
 detectEnvironment
 detectAlreadyInstalled
+detectCorrectPath
 confirmBeforeContinue
 
 echo "Installing, hold on to your hats..."
