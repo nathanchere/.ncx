@@ -156,12 +156,17 @@ installPackage() {
 installPrereqs() {
   # These should be the only packages to need installing outside ncx
   installPackage stow stow "GNU stow"
+  installPackage python3 python "Python 3.x"
 }
 
 debugCleanInstall() {
   # TODO: repurpose as a --force flag
   echo "DEBUG: cleaning existing install"
   rm -f "$CONFIG_FILE"
+}
+
+installNcxUtil () {
+  # TODO: stow to /usr/bin
 }
 
 # # # # # # # # # # # # # # # # # #
@@ -182,3 +187,4 @@ echo "Installing, hold on to your hats..."
 initConfigFile
 addExtraPaths
 installPrereqs
+installNcxUtil
