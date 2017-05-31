@@ -12,6 +12,8 @@ Specifically assumes a Fedora-based system. Tested on:
 * Arch (circa 2017-05)
 * Manjaro 17.0.1
 
+ There are some things which I suspect might cause issues with different language or regional settings, like string comparison to check if a package is installed on Fedora sytstems. So to that end, assume if your system language is anything other than English things will break.
+
  Caveat emptor.
 
 # TODO - Initial setup

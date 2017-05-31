@@ -112,6 +112,52 @@ addExtraPaths() {
   addExtraPath foo/e
 }
 
+isPackageInstalled() {
+  if [ $distro != "fedora" ]; then
+    rpm -q "$1" &> /dev/null
+  fi
+
+  if [ $distro != "arch" ]; then
+    pacman -Qi "$1" &> /dev/null
+  fi
+
+  # note: shitty way of doing this. If any other errors occur,
+  #  it will give the impression the package isn't installed when
+  #  you really have no idea
+  echo $?
+}
+
+# Meh, does the job
+# $1: dnf package name
+# $2: pacman package name
+# $3: package description
+installPackage() {
+  if [ $distro != "fedora" ]; then
+    if [ $(isPackageInstalled "$1") ]; then
+        echo "Package $1 is already installed; skipping..."
+       return
+    fi
+    echo "Installing $1..."
+    sudo dnf install -y $1
+    return
+  fi
+
+  if [ $distro != "arch" ]; then
+    if [ $(isPackageInstalled "$2") ]; then
+        echo "Package $2 is already installed; skipping..."
+        return
+    fi
+    echo "Installing $2..."
+    sudo pacman --no-confirm -S $2
+    return
+  fi
+}
+
+installPrereqs() {
+  # These should be the only packages to need installing outside ncx
+  installPackage stow stow "GNU stow"
+}
+
 debugCleanInstall() {
   # TODO: repurpose as a --force flag
   echo "DEBUG: cleaning existing install"
@@ -135,3 +181,4 @@ echo "Installing, hold on to your hats..."
 
 initConfigFile
 addExtraPaths
+installPrereqs
