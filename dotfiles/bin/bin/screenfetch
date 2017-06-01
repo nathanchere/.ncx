@@ -1,27 +1,9 @@
 #!/usr/bin/env bash
 
 # screenFetch - a CLI Bash script to show system/theme info in screenshots
-
 # Copyright (c) 2010-2014 Brett Bohnenkamper <kittykatt@kittykatt.us>
-
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-# Yes, I do realize some of this is horribly ugly coding. Any ideas/suggestions would be
-# appreciated by emailing me or by stopping by http://github.com/KittyKatt/screenFetch . You
-# could also drop in on my IRC network, SilverIRC, at irc://kittykatt.silverirc.com/me0wz
-# to put forth suggestions/ideas. Thank you.
-
+# Licensed under GPLv3: http://www.gnu.org/licenses/
+# http://github.com/KittyKatt/screenFetch
 
 LANG=C
 LANGUAGE=C
@@ -259,7 +241,7 @@ displayHelp() {
 case $1 in
 	--help) displayHelp; exit 0;;
 esac
-		
+
 
 while getopts ":hsmevVEnNtlS:A:D:o:Bc:d:" flags; do
 	case $flags in
@@ -373,7 +355,7 @@ detectdistro () {
 			elif [[ "${distro_detect}" == "elementary" || "${distro_detect}" == "elementary OS" ]]; then
 				distro="elementary OS"
 			elif [[ "${distro_detect}" == "KaOS" || "${distro_detect}" == "kaos" ]]; then
-				distro="KaOS"	
+				distro="KaOS"
 			elif [[ "${distro_detect}" == "Fedora" ]]; then
 				distro="Fedora"
 			elif [[ "${distro_detect}" == "frugalware" ]]; then
@@ -734,9 +716,9 @@ detectpkgs () {
 		'Gentoo'|'Sabayon'|'Funtoo') pkgs=$(ls -d /var/db/pkg/*/* | wc -l) ;;
 		'Fedora'|'openSUSE'|'Red Hat Enterprise Linux'|'CentOS'|'Mandriva'|'Mandrake'|'Mageia'|'Viperr') pkgs=$(rpm -qa | wc -l) ;;
 		'Mac OS X')
-			if [ -d "/usr/local/bin" ]; then 
+			if [ -d "/usr/local/bin" ]; then
 				loc_pkgs=$(ls -l /usr/local/bin/ | grep -v "\(../Cellar/\|brew\)" | wc -l)
-				pkgs=$((${loc_pkgs} -1)); 
+				pkgs=$((${loc_pkgs} -1));
 			fi
 
 			if type -p port >/dev/null 2>&1; then
@@ -749,7 +731,7 @@ detectpkgs () {
 				pkgs=$((${pkgs} + ${brew_pkgs}))
 			fi
 		;;
-		'OpenBSD') 
+		'OpenBSD')
 			pkgs=$(pkg_info | wc -l | awk '{sub(" ", "");print $1}')
 			if type -p portmaster >/dev/null 2>&1; then
 				ports=$(portmaster -l | grep -Eo '[0-9]+ total installed' | sed 's/ total installed//')
@@ -757,7 +739,7 @@ detectpkgs () {
 			fi
 		;;
 		'FreeBSD')
-			pkgs=$(if TMPDIR=/dev/null ASSUME_ALWAYS_YES=1 PACKAGESITE=file:///nonexistent pkg info pkg >/dev/null 2>&1; then 
+			pkgs=$(if TMPDIR=/dev/null ASSUME_ALWAYS_YES=1 PACKAGESITE=file:///nonexistent pkg info pkg >/dev/null 2>&1; then
 				pkg info | wc -l | awk '{print $1}'; else pkg_info | wc -l | awk '{sub(" ", "");print $1}'; fi)
 		;;
 		'Cygwin') cygfix=2; pkgs=$(($(cygcheck -cd | wc -l)-$cygfix)) ;;
@@ -771,7 +753,7 @@ detectpkgs () {
 # CPU Detection - Begin
 detectcpu () {
 	REGEXP="-r"
-	if [ "$distro" == "Mac OS X" ]; then 
+	if [ "$distro" == "Mac OS X" ]; then
 		cpu=$(echo $(sysctl -n machdep.cpu.brand_string))
 		REGEXP="-E"
 	elif [ "$distro" == "FreeBSD" ]; then cpu=$(sysctl -n hw.model)
@@ -779,7 +761,7 @@ detectcpu () {
 	elif [ "$distro" == "OpenBSD" ]; then cpu=$(sysctl -n hw.model | sed 's/@.*//')
 	else
 		cpu=$(awk 'BEGIN{FS=":"} /model name/ { print $2; exit }' /proc/cpuinfo | sed 's/ @/\n/' | head -1)
-		if [ -z "$cpu" ]; then 
+		if [ -z "$cpu" ]; then
 			cpu=$(awk 'BEGIN{FS=":"} /^cpu/ { gsub(/  +/," ",$2); print $2; exit}' /proc/cpuinfo | sed 's/, altivec supported//;s/^ //')
 			if [[ $cpu =~ ^(PPC)*9.+ ]]; then
 				model="IBM PowerPC G5 "
@@ -883,7 +865,7 @@ detectdisk () {
 		diskusage_verbose=$(sed 's/%/%%/' <<< $diskusage)
 	fi
 	[[ "$verbosity" -eq "1" ]] && verboseOut "Finding current disk usage...found as '$diskusage_verbose'"
-}	
+}
 # Disk Usage Detection - End
 
 
@@ -1093,7 +1075,7 @@ detectres () {
 
 		xResolution=""
 		len=${#width[@]}
-		
+
 		delim=" "
 		for ((i=0;i<len;i++)); do
 			xResolution="${xResolution}${delim}${width[i]}x${height[i]}"
@@ -1410,7 +1392,7 @@ detectwmtheme () {
 		'dminiwm') Win_theme="Not Present";;
 		'dwm') Win_theme="Not Present";;
 		'E16') Win_theme="$(awk -F"= " '/theme.name/ {print $2}' $HOME/.e16/e_config--0.0.cfg)";;
-		'E17'|'Enlightenment') 
+		'E17'|'Enlightenment')
 			if [ "$(which eet 2>/dev/null)" ]; then
 				econfig="$(eet -d $HOME/.e/e/config/standard/e.cfg config | awk '/value \"file\" string.*.edj/{ print $4 }')"
 				econfigend="${econfig##*/}"
@@ -1789,7 +1771,7 @@ takeShot () {
 	if [[ -z $screenCommand ]]; then
 		if [[ "$hostshot" == "1" ]]; then
 			shotfiles[1]=${shotfile}
-			if [ "$distro" == "Mac OS X" ]; then 
+			if [ "$distro" == "Mac OS X" ]; then
 				displays="$(system_profiler SPDisplaysDataType | grep 'Resolution:' | wc -l | tr -d ' ')"
 				for (( i=2; i<=$displays; i++))
 				do
@@ -1806,7 +1788,7 @@ takeShot () {
 			fi
 		else
 			shotfiles[1]=${shotfile}
-			if [ "$distro" == "Mac OS X" ]; then 
+			if [ "$distro" == "Mac OS X" ]; then
 				displays="$(system_profiler SPDisplaysDataType | grep 'Resolution:' | wc -l | tr -d ' ')"
 				for (( i=2; i<=$displays; i++))
 				do
@@ -1874,7 +1856,7 @@ asciiText () {
 "${c1}          ▒▒▒▒▒█████           "
 "${c1}         ▒▒▒▒▒▒██████          "
 "${c1}        ▒▒▒▒▒▒▒███████         "
-"${c1}       ▒▒▒▒▒▒▒▒████████        " 
+"${c1}       ▒▒▒▒▒▒▒▒████████        "
 "${c1}      ▒▒▒▒▒▒▒▒▒█████████       "
 "${c1}     ▒▒▒▒▒▒▒▒▒▒██████████      "
 "${c1}    ▒▒▒▒▒▒▒▒▒▒▒███████████     "
@@ -2189,7 +2171,7 @@ asciiText () {
 "    "$c1"y/               "$c2"-/\`   -o/       %s"         # Shell
 "   "$c1".-                  "$c2"::/sy+:.      %s"          # Resolution
 "   "$c1"/                     "$c2"\`--  /      %s"         # DE
-"  "$c1"\`:                          "$c2":\`     %s"        # WM 
+"  "$c1"\`:                          "$c2":\`     %s"        # WM
 "  "$c1"\`:                          "$c2":\`     %s"        # WM Theme
 "   "$c1"/                          "$c2"/      %s"          # GTK2 Theme
 "   "$c1".-                        "$c2"-.      %s"          # GTK3 Theme
@@ -2921,7 +2903,7 @@ asciiText () {
 "${c1}                                            .'"
 "${c1}                                             .")
 		;;
-		
+
 		"Kali Linux")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'light blue') # White
@@ -2982,9 +2964,9 @@ asciiText () {
 
                 "KaOS")
 	if [[ "$no_color" != "1" ]]; then
-				c1=$(getColor 'light blue') 
-				c2=$(getColor 'light grey') 
-				c3=$(getColor 'red') 
+				c1=$(getColor 'light blue')
+				c2=$(getColor 'light grey')
+				c3=$(getColor 'red')
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
@@ -3266,36 +3248,36 @@ infoDisplay () {
 			if [[ "${display[@]}" =~ "gtk" ]]; then
 				if [ "$distro" == "Mac OS X" ]; then
 					if [ "$gtkFont" != "Not Found" ]; then
-						if [ -n "$gtkFont" ]; then 
+						if [ -n "$gtkFont" ]; then
 							myfont=$(echo -e "$labelcolor Font:$textcolor $gtkFont"); out_array=( "${out_array[@]}" "$myfont" ); ((display_index++))
 						fi
 					fi
 				else
 					if [ "$gtk2Theme" != "Not Found" ]; then
-						if [ -n "$gtk2Theme" ]; then 
+						if [ -n "$gtk2Theme" ]; then
 							mygtk2="${gtk2Theme} [GTK2]"
 						fi
 					fi
 					if [ "$gtk3Theme" != "Not Found" ]; then
-						if [ -n "$mygtk2" ]; then 
+						if [ -n "$mygtk2" ]; then
 							mygtk3=", ${gtk3Theme} [GTK3]"
 						else
 							mygtk3="${gtk3Theme} [GTK3]"
 						fi
 					fi
-					if [[ "$gtk_2line" == "yes" ]]; then 
+					if [[ "$gtk_2line" == "yes" ]]; then
 						mygtk2=$(echo -e "$labelcolor GTK2 Theme:$textcolor $gtk2Theme"); out_array=( "${out_array[@]}" "$mygtk2" ); ((display_index++))
 						mygtk3=$(echo -e "$labelcolor GTK3 Theme:$textcolor $gtk3Theme"); out_array=( "${out_array[@]}" "$mygtk3" ); ((display_index++))
 					else
 						mygtk=$(echo -e "$labelcolor GTK Theme:$textcolor ${mygtk2}${mygtk3}"); out_array=( "${out_array[@]}" "$mygtk" ); ((display_index++))
 					fi
 					if [ "$gtkIcons" != "Not Found" ]; then
-						if [ -n "$gtkIcons" ]; then 
+						if [ -n "$gtkIcons" ]; then
 							myicons=$(echo -e "$labelcolor Icon Theme:$textcolor $gtkIcons"); out_array=( "${out_array[@]}" "$myicons" ); ((display_index++))
 						fi
 					fi
 					if [ "$gtkFont" != "Not Found" ]; then
-						if [ -n "$gtkFont" ]; then 
+						if [ -n "$gtkFont" ]; then
 							myfont=$(echo -e "$labelcolor Font:$textcolor $gtkFont"); out_array=( "${out_array[@]}" "$myfont" ); ((display_index++))
 						fi
 					fi
@@ -3396,9 +3378,9 @@ for i in "${display[@]}"; do
 		 ! [[ $WM  ]] && detectwm;
 		 ! [[ $Win_theme ]] && detectwmtheme;
 	else
-		if [[ "${display[*]}" =~ "$i" ]]; then 
+		if [[ "${display[*]}" =~ "$i" ]]; then
 			if [[ "$errorSuppress" == "1" ]]; then detect${i} 2>/dev/null
-			else 
+			else
 				exec 3> >(stderrOut)
 				detect${i} 2>&3
 				exec 3>&-

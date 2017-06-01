@@ -7,7 +7,26 @@ Specifically assumes a Fedora-based system. Tested on:
 * Korora 24, 25 (XPS 13 9350, VirtualBox)
 * Fedora 25 (Raspberry Pi 3)
 
-... and found to be horribly inconsistent and buggy. Caveat emptor.
+... and found to be horribly inconsistent and buggy. Currently working on compatibility with:
+
+* Arch (circa 2017-05)
+* Manjaro 17.0.1
+
+ There are some things which I suspect might cause issues with different language or regional settings, like string comparison to check if a package is installed on Fedora sytstems. So to that end, assume if your system language is anything other than English things will break.
+
+ Caveat emptor.
+
+# TODO - Initial setup
+
+Required software:
+
+* stow
+
+Issues:
+
+* if config already exists (e.g. atom creates own on install), what to do?
+* --force flag for above?
+
 
 ### Install
 
@@ -149,7 +168,7 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * rebg and reui into script for turn bars on/off, specify wallp category etc
 * script for wifi management easier than nmcli
 * sysinfo and screenfetch into something better
-* 
+*
 
 ### Thanks / inspiration
 
