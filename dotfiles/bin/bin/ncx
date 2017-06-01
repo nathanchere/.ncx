@@ -45,7 +45,7 @@ import subprocess
 # setup / bootstrap options
 
 def install(args):
-  print(f"Installing: {fg.white}{args[0]}{text.reset}" )
+  print(f"Installing: {fg.white}{args[0]}{text.reset}")
 
 def sync(args):
   print("Syncing settings...")
