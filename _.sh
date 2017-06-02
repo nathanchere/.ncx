@@ -128,7 +128,7 @@ download () {
 
 # Pass in the name of a package as you would provide it to dnf/yum/etc
 installedVersion() {
-  echo $(rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2)
+  rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2
 }
 
 # ensure a value is only added to a file once
