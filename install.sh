@@ -166,6 +166,7 @@ debugCleanInstall() {
 }
 
 installNcxUtil () {
+  echo
   # TODO: stow to /usr/bin
 }
 

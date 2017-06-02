@@ -31,11 +31,11 @@ requireNotRoot() {
 
 
 drawTime() {
-  echo `date +"%T"`
+  date +"%T"
 }
 
 drawTimestamp() {
-  echo `date +"%y%m%d"`
+  date +"%y%m%d"
 }
 
 drawHead() {
@@ -135,13 +135,18 @@ installedVersion() {
 # $1 - FILENAME
 # $2 - content
 appendOnce () {
+# TODO: FIND A BETTER WAY FOR THIS
   touch "$1"
-  if [ ! cat "$1" | grep -q "$2" ]; then
-    echo "Appeding to $1"
-    echo -e "$2" >> "$1"
-  else
-    echo "$1 already contains target string, skipping..."
-  fi
+  # while IFS='' read -r line || [[ -n "$line" ]]; do
+  #   echo "Text read from file: $line"
+  # done < "$1"
+  #
+  # if [ ! cat "$1" | grep -q "$2" ]; then
+  #   echo "Appeding to $1"
+  #   echo -e "$2" >> "$1"
+  # else
+  #   echo "$1 already contains target string, skipping..."
+  # fi
 }
 
 # Init common variables
