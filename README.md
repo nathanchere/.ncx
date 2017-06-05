@@ -61,24 +61,22 @@ Manual things required:
 
 ### Cheat sheet
 
-#### Wifi stuff
+#### Input bindings
 
-* `nmcli device wifi` to list available WiFi connections
-* `nmcli c` to list saved WiFi connections
-* `nmcli c up <name>` to connecto to a saved WiFi connection
-* `nmcli c add con-name <hotspotname> type wifi ifname wlp58s0 ssid <hotspotname>` connect to new hotspot, then `nmcli c up <name>` - wtf this is bullshit... needs to be made less bullshit
-
-#### Key bindings
-
-* Win+Shift+Enter : open new terminal window
+* Win+Shift+Enter : open new terminal (terminator)
 * Win+[1..9] : switch to workspaces n
 * Win+Shift+[1..9] : send focused window to workspace n
 * Win+Space :  toggle window layout for current workspace
-* Win+R : run dialog
+* Win+R : run dialog (rofi)
+* Win+\` : drop-down terminal (urxvt)
+---
+* Win+`Left Click` : drag to un-tile and freely position selected window
+* Win+`Right Click` : drag to resize selected window
+* Win+T : re-tile focused floating window
+---
+* Win+Q : recompile / restart Xmonad
 -------
-* Ctrl+`backtick` or Ctrl+Esc : drop-down terminal
 * ? : kill focused window
-* ? : restart Xmonad
 * ? : monitor focusing
 * ? : dmenu / gmrun ?
 
@@ -89,6 +87,16 @@ Manual things required:
 * logout : cleanly log out from Xmonad (use from rofi, not terminal)
 * recoverxmonad : for when shit hits the fan; restore default Xmonad config
 * uc : convert 4-character unicode value to symbol
+* ucc : convert 4-character unicode value to symbol and copy to X clipboard
+
+#### Useful tools
+
+* `arandr` : simple GUI around xrandr for display management
+* `nmcli` : network manager CLI, useful for easy WiFi management
+ * `nmcli device wifi` to list available WiFi connections
+ * `nmcli c` to list saved WiFi connections
+ * `nmcli c up <name>` to connecto to a saved WiFi connection
+ * `nmcli c add con-name <hotspotname> type wifi ifname wlp58s0 ssid <hotspotname>` connect to new hotspot, then `nmcli c up <name>` - wtf this is bullshit... needs to be made less bullshit
 
 ### Misc notes
 
