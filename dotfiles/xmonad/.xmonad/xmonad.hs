@@ -10,6 +10,7 @@ import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig
+import XMonad.Util.Scratchpad
 
 import XMonad.Actions.CycleRecentWS
 
@@ -20,8 +21,13 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.Reflect
 import XMonad.Layout.DecorationMadness
 
+import qualified XMonad.StackSet as W
+import qualified Data.Map        as M
+import qualified XMonad.StackSet as S
+
 import Graphics.X11.ExtraTypes.XF86
 
+myScratchpadTerminal = "urxvt"
 myTerminal = "terminator"
 myModMask = mod4Mask
 
@@ -68,7 +74,8 @@ myKeys =
   ,(("M4-\\"), sendMessage $ ToggleStruts)
 
   -- OS Misc
-	,(("M4-r"), spawn "rofi -show run")
+  ,(("M4-r"), spawn "rofi -show run")
+	,(("M4-`"), scratchpadSpawnActionTerminal myScratchpadTerminal)
 
   -- Multimedia keys
   ,(("<XF86MonBrightnessUp>"), spawn "notify-send bright up")
@@ -89,6 +96,14 @@ myKeys =
   ,(("<XF86Search>"), spawn "notify-send search")
 	]
 
+myManageHook = manageDocks <+> manageScratchPad
+manageScratchPad :: ManageHook
+manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
+  where
+    h = 0.2     -- terminal height, 20%
+    w = 0.9       -- terminal width, 90%
+    t = 0   -- distance from top edge, 0%
+    l = 1 - w   -- distance from left edge, 0.5%
 
 myConfig = desktopConfig
   { terminal = myTerminal
@@ -103,6 +118,7 @@ myConfig = desktopConfig
 
   , layoutHook = myLayoutHook
   , workspaces = myWorkspaces
+  , manageHook = myManageHook
   } `additionalKeysP` myKeys
 
 --  `additionalKeysP`
