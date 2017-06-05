@@ -16,18 +16,6 @@ Specifically assumes a Fedora-based system. Tested on:
 
  Caveat emptor.
 
-# TODO - Initial setup
-
-Required software:
-
-* stow
-
-Issues:
-
-* if config already exists (e.g. atom creates own on install), what to do?
-* --force flag for above?
-
-
 ### Install
 
     git clone https://github.com/nathanchere/.ncx.git ~/.ncx
@@ -49,6 +37,11 @@ Manual things required:
 * Excercism key from http://www.exercism.io/account/key
 * Git user/pass for Github for uploading SSH public key
 
+Issues:
+
+* if config already exists (e.g. atom creates own on install), what to do?
+* --force flag for above?
+
 ### Summary
 
 * Display manager: LightDM
@@ -57,7 +50,7 @@ Manual things required:
 * Notifications: dunst
 * Launcher: rofi
 * Shell: fish (w/ ohmyfish)
-* Terminal: terminator
+* Terminal: terminator (main), urxvt (scratchpad)
 
 ### Cheat sheet
 
@@ -107,14 +100,13 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 
 * Wifi connection script
 * Monitor connection script
+* Better screen capture
 * Better laptop sleep/resume on lid close
 * remap caps lock to something not shit (probably mod key)
 * LightDM greeter
 * Investigate other bars and panels- taffybar, candybar, dzen, yabar, bmpanel
 * Investigate misc - firejail
-* xmonad screenshot / printscreen binding
 * better launcher / run dialog
-* xmonad mouse bindings (how to un-float?)
 
 ### Notes to me
 
