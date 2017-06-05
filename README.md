@@ -93,10 +93,11 @@ Manual things required:
 
 * `arandr` : simple GUI around xrandr for display management
 * `nmcli` : network manager CLI, useful for easy WiFi management
- * `nmcli device wifi` to list available WiFi connections
- * `nmcli c` to list saved WiFi connections
- * `nmcli c up <name>` to connecto to a saved WiFi connection
- * `nmcli c add con-name <hotspotname> type wifi ifname wlp58s0 ssid <hotspotname>` connect to new hotspot, then `nmcli c up <name>` - wtf this is bullshit... needs to be made less bullshit
+  - `nmcli device wifi` to list available WiFi connections
+  - `nmcli c` to list saved WiFi connections
+  - `nmcli c up <name>` to connecto to a saved WiFi connection
+  - `nmcli c add con-name <hotspotname> type wifi ifname wlp58s0 ssid <hotspotname>` connect to new hotspot, then `nmcli c up <name>` - wtf this is bullshit... needs to be made less bullshit
+* `screenfetch` / `sysinfo` - both half-measures but OK for quick system info
 
 ### Misc notes
 
