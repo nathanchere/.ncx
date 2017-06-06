@@ -27,8 +27,9 @@ import qualified XMonad.StackSet as S
 
 import Graphics.X11.ExtraTypes.XF86
 
-myScratchpadTerminal = "urxvt"
 myTerminal = "terminator"
+--myScratchpadTerminal = "urxvt"
+myScratchpadTerminal = "st"
 myModMask = mod4Mask
 
 -- vivaldi-snapshot
@@ -100,10 +101,10 @@ myManageHook = manageDocks <+> manageScratchPad
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
   where
-    h = 0.2     -- terminal height, 20%
-    w = 0.9       -- terminal width, 90%
+    h = 0.4     -- terminal height, 20%
+    w = 0.6       -- terminal width, 90%
     t = 0   -- distance from top edge, 0%
-    l = 1 - w   -- distance from left edge, 0.5%
+    l = (1 - w) * 0.5   -- distance from left edge
 
 myConfig = desktopConfig
   { terminal = myTerminal
