@@ -17,6 +17,7 @@ main() {
   dnf install -y neofetch cmatrix
   dnf install -y figlet ddate shutter xclip surf
   dnf install -y docker
+  dnf install -y fuse fuse-devel # required for running AppImage
 
   dnf install -y xmonad ghc-xmonad-contrib ghc-xmonad-devel ghc-xmonad-contrib-devel
 
