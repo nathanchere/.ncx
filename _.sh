@@ -150,8 +150,9 @@ appendOnce () {
 }
 
 # Init common variables
-export HOME="$(dirname $(pwd))" # make sure sudo doesn't mess up $HOME
-export NCXROOT=$(pwd)
+#TODO: this is a really crap way of handling $HOME for sudo
+export HOME; HOME="$(dirname $(pwd))" # make sure sudo doesn't mess up $HOME
+export NCXROOT; NCXROOT="$(pwd)"
 LOGROOT="$NCXROOT/logs"
 TMPROOT="$NCXROOT/tmp"
 export LOGFILE="$LOGROOT/$0.log"
