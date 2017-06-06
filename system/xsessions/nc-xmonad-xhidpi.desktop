@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=NCX Xmonad HiDPI
-Comment=Xmonad minimalist session for high-DPI displays
+Comment=Xmonad minimalist session for high-DPI displays and bad eyesight
 Exec=$HOME/.xmonad/xmonad-start 192
 
 [Window Manager]

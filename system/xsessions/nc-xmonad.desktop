@@ -2,6 +2,7 @@
 Name=NCX Xmonad
 Comment=Xmonad minimalist session
 Exec=$HOME/.xmonad/xmonad-start 96
-
+sdf
 [Window Manager]
 SessionManaged=true
+ssdf
