@@ -1,8 +1,26 @@
 #!/usr/bin/env bash
 
-. "./_.sh"
+set -euo pipefail
+IFS=$'\n\t'
 
-requireNotRoot
+readonly LOG_FILE="/tmp/$(basename "$0").log"
+info()    { echo "[INFO]    $@" | tee -a "$LOG_FILE" >&2 ; }
+warning() { echo "[WARNING] $@" | tee -a "$LOG_FILE" >&2 ; }
+error()   { echo "[ERROR]   $@" | tee -a "$LOG_FILE" >&2 ; }
+fatal()   { echo "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
+
+# Must run as root
+if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
+  die "This script requires root privilege. Try again with sudo."
+fi
+
+drawTime() {
+  date +"%T"
+}
+
+drawTimestamp() {
+  date +"%y%m%d"
+}
 
 # TODO:
 # [DONE] detect environemnt (which package manager to use etc)
@@ -65,7 +83,7 @@ detectEnvironment () {
 }
 
 detectCorrectPath() {
-  if [ "$HOME/.ncx" != $(pwd) ]; then
+  if [ "$HOME/.ncx" != "$(pwd)" ]; then
     die ".ncx installer must be run from '\$HOME/.ncx'. Because reasons."
   fi
   echo "Install path: OK"
@@ -189,3 +207,8 @@ initConfigFile
 addExtraPaths
 installPrereqs
 installNcxUtil
+
+cleanup() {
+  echo Cleaning up
+}
+trap cleanup EXIT
