@@ -7,7 +7,10 @@ readonly LOG_FILE="/tmp/$(basename "$0").log"
 info()    { echo "[INFO]    $@" | tee -a "$LOG_FILE" >&2 ; }
 warning() { echo "[WARNING] $@" | tee -a "$LOG_FILE" >&2 ; }
 error()   { echo "[ERROR]   $@" | tee -a "$LOG_FILE" >&2 ; }
-fatal()   { echo "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
+die()   { echo "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
+
+readonly USERNAME=`logname`
+readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
 
 # Must run as root
 if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
@@ -27,6 +30,7 @@ drawTimestamp() {
 # [DONE] config goes into ~/.config
 # install dependencies (python etc)
 # install essentials e.g. fish stow git
+# configure system stuff
 # configure essentials e.g git omf
 # verify install
 # - and cleanup partial install on fail? overkill?
@@ -41,7 +45,7 @@ distro='Unknown'
 
 detectEnvironment () {
 
-  highlightOut "Checking distro"
+  info "Checking distro"
 
   distro_id='Unknown'
   distro_name='Unknown'
@@ -70,19 +74,20 @@ detectEnvironment () {
   # Warnings for probably-safe-but-untested distros
 
   if [ "$distro_family" == 'arch' ] && [ "$distro_id" != 'antergos' ] && [ "$distro_id" != 'arch' ]; then
-    warnOut 'Arch and Antergos are the only tested Arch variants. Experiences with other distros may vary. Caveat emptor.'
+    warning 'Arch and Antergos are the only tested Arch variants. Experiences with other distros may vary. Caveat emptor.'
   fi
 
   if [ "$distro_family" == 'fedora' ] && [ "$distro_id" != 'fedora' ] && [ "$distro_id" != 'korora' ]; then
-     warnOut 'Fedora and Korora are the only tested Fedora variants. Experiences with other distros may vary. Caveat emptor.'
+     warning 'Fedora and Korora are the only tested Fedora variants. Experiences with other distros may vary. Caveat emptor.'
   fi
 
-  highlightOut "Distro: OK; detected: ${distro_name} (${distro_family} family)"
+  info "Distro: OK; detected: ${distro_name} (${distro_family} family)"
 
   distro=$distro_family
 }
 
 detectCorrectPath() {
+  echo $HOME is home
   if [ "$HOME/.ncx" != "$(pwd)" ]; then
     die ".ncx installer must be run from '\$HOME/.ncx'. Because reasons."
   fi
@@ -124,7 +129,7 @@ addExtraPath(){
 }
 
 addExtraPaths() {
-  highlightOut "Configuring \$PATH"
+  info "Configuring \$PATH"
   addExtraPath /home/usr/bin
   addExtraPath /usr/bin
   addExtraPath foo/e
@@ -177,6 +182,12 @@ installPrereqs() {
   installPackage python3 python "Python 3.x"
 }
 
+installUserConfig() {
+  # add groups and rules for things like user backlight permissions
+  rsync -avm sysconfig/udev/. "/etc/udev/rules.d"
+  gpasswd -a "$USERNAME" video
+}
+
 debugCleanInstall() {
   # TODO: repurpose as a --force flag
   echo "DEBUG: cleaning existing install"
@@ -207,6 +218,7 @@ initConfigFile
 addExtraPaths
 installPrereqs
 installNcxUtil
+installUserConfig
 
 cleanup() {
   echo Cleaning up
