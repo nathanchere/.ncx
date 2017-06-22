@@ -91,6 +91,9 @@ Issues:
   - `nmcli c up <name>` to connecto to a saved WiFi connection
   - `nmcli c add con-name <hotspotname> type wifi ifname wlp58s0 ssid <hotspotname>` connect to new hotspot, then `nmcli c up <name>` - wtf this is bullshit... needs to be made less bullshit
 * `screenfetch` / `sysinfo` - both half-measures but OK for quick system info
+* `ncdu` - disk usage explorer
+* `remmina` - pretty versatile RDP/VNC/etc-in-one client
+* `nnn` - terminal file browser
 
 ### Misc notes
 
