@@ -87,7 +87,7 @@ detectEnvironment () {
 }
 
 detectCorrectPath() {
-  echo $HOME is home
+  echo "Home is $HOME; running from $(pwd)"
   if [ "$HOME/.ncx" != "$(pwd)" ]; then
     die ".ncx installer must be run from '\$HOME/.ncx'. Because reasons."
   fi
@@ -184,7 +184,7 @@ installPrereqs() {
 
 installUserConfig() {
   # add groups and rules for things like user backlight permissions
-  rsync -avm sysconfig/udev/. "/etc/udev/rules.d"
+  rsync -avm "system/udev/" "/etc/udev/rules.d"
   gpasswd -a "$USERNAME" video
 }
 
