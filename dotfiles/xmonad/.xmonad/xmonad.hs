@@ -79,13 +79,13 @@ myKeys =
 	,(("M4-`"), scratchpadSpawnActionTerminal myScratchpadTerminal)
 
   -- Multimedia keys
-  ,(("<XF86MonBrightnessUp>"), spawn "light -inc 15")
-  ,(("<XF86MonBrightnessDown>"), spawn "light -dec 15")
-  ,(("C-<XF86MonBrightnessUp>"), spawn "light -set 100")
-  ,(("C-<XF86MonBrightnessDown>"), spawn "light -set 1")
+  ,(("<XF86MonBrightnessUp>"), spawn "light -inc 5")
+  ,(("<XF86MonBrightnessDown>"), spawn "light -dec 5")
+  ,(("C-<XF86MonBrightnessUp>"), spawn "light -max")
+  ,(("C-<XF86MonBrightnessDown>"), spawn "light -min")
   ,(("<XF86AudioLowerVolume>"), spawn "amixer set Master 5%-")
   ,(("<XF86AudioRaiseVolume>"), spawn "amixer set Master 5%+")
-  ,(("C-<XF86AudioLowerVolume>"), spawn "amixer set Master 5%")
+  ,(("C-<XF86AudioLowerVolume>"), spawn "amixer set Master 1%")
   ,(("C-<XF86AudioRaiseVolume>"), spawn "amixer set Master 100%")
 
   ,(("<Print>"), spawn "shutter -f") -- capture entire screen

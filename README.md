@@ -67,13 +67,22 @@ Issues:
 * Win+`Right Click` : drag to resize selected window
 * Win+T : re-tile focused floating window
 ---
+* VolumeUp : increase volume by 5%
+* VolumeDown : decrease volume by 5%
+* Ctrl+VolumeUp : set volume to maximum
+* Ctrl+VolumeDown : set volume to minimum
+* BrightnessUp : increase backlight brightness by 5%
+* BrightnessDown : decrease backlight brightness by 5%
+* Ctrl+BrightnessUp : set backlight brightness to maximum
+* Ctrl+BrightnessDown : set backlight brightness to minimum
+---
 * Win+Q : recompile / restart Xmonad
 -------
-* ? : kill focused window
+* Win+Shift+C : kill focused window
 * ? : monitor focusing
 * ? : dmenu / gmrun ?
 
-#### Shell commands
+#### Useful ncx-specific tools
 
 * lock : lock the desktop; password required to unlock
 * reui : reload desktop candy (bars, compositor etc)
@@ -81,8 +90,17 @@ Issues:
 * recoverxmonad : for when shit hits the fan; restore default Xmonad config
 * uc : convert 4-character unicode value to symbol
 * ucc : convert 4-character unicode value to symbol and copy to X clipboard
+* light : easier alternative to /sys/class/backlight/* or xrandr for controlling backlight
+  - `light -max` - set backlight to 100%
+  - `light -min` - set backlight to minimum visible strength (i.e. not absolute zero)
+  - `light -inc 25` - increase backlight strength by 25%
+  - `light -dec 10` - decrease backlight strength by 10%
+  - `light -get` - decrease backlight strength by 10%
+  More options available with `light -help`
+* wifi : wrapper around nmcli for easier adhoc WiFi connection and keeping passwords out
+  of your terminal history.
 
-#### Useful tools
+#### Useful generic tools
 
 * `arandr` : simple GUI around xrandr for display management
 * `nmcli` : network manager CLI, useful for easy WiFi management
