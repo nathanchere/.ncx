@@ -123,12 +123,10 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * Wifi connection script
 * Monitor connection script
 * Better screen capture
-* Better laptop sleep/resume on lid close
+* Better laptop sleep/resume on lid close (and lock on wake)
 * remap caps lock to something not shit (probably mod key)
 * LightDM greeter
-* Investigate other bars and panels- taffybar, candybar, dzen, yabar, bmpanel
 * Investigate misc - firejail
-* better launcher / run dialog
 * use `trash` instead of rm
 * screen locking - xautolock ?
 * log view helper tool
@@ -143,7 +141,6 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * weechat
 * icon packs
 * taskwarrior or similar
-* termite, urvxt?
 * refactor installers for common GitHub releases installer script
 * vodik xmonad
 * replace figlet with toilet?
@@ -151,9 +148,7 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * feed reader - newsbueter? Termfeed? snownews? turses?
 * Email - mutt?
 * Some kind of start page
-* noice, rover, ranger, mc
-* launcher - albert? dmenu? synapse?
-* quakish terminal - altyo?
+* noice, rover, ranger, mc, nnn
 * stuff on k4m4-terminalsaresexy for inspiration
 * udiskie (usb mounting etc)
 * notify-osd, statnot
