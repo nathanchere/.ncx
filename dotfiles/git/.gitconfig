@@ -22,7 +22,7 @@
   amend = commit --amend --no-edit
 
   # Varying degrees of detail
-  l = log --decorate --date=short --pretty=format:"%C(reset)%h\\ %C(yellow)%ad%d\\ %C(reset)%s%C(blue)\\ [%cn]"
+  l = log --decorate --date=short --pretty=format:"%C(reset)%h\\ %C(yellow)%ad%C(green)%d\\ %C(reset)%s%C(blue)\\ [%cn]"
   ll = log --decorate --date=short --pretty=format:"%C(reset)%h\\ %C(yellow)%ad%d\\ %C(reset)(%ar)%n\\ \\-\\ %s%C(blue)\\ [%cN]"
 
   lll = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%C(blue)%x20(%ce)%x20%C(cyan)[gpg:%GK%x20%G?]%C(reset)%n%s"
