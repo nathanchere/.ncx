@@ -6,6 +6,8 @@ Xft.hintstyle: hintfull
 Xft.dpi:       120
 ! }}}
 
+Xcursor.size: 128
+
 ! special
 .foreground: #eeeeee .background: #101610
 *.cursorColor: #eeeeee
