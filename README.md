@@ -86,7 +86,8 @@ Issues:
 
 * lock : lock the desktop; password required to unlock
 * reui : reload desktop candy (bars, compositor etc)
-* logout : cleanly log out from Xmonad (use from rofi, not terminal)
+* rebg : change to a new random background wallpaper
+* logout : cleanly log out from Xmonad (use from rofi or dmenu, not terminal)
 * recoverxmonad : for when shit hits the fan; restore default Xmonad config
 * uc : convert 4-character unicode value to symbol
 * ucc : convert 4-character unicode value to symbol and copy to X clipboard
