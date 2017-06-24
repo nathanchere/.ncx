@@ -169,7 +169,7 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * rebg and reui into script for turn bars on/off, specify wallp category etc
 * script for wifi management easier than nmcli
 * sysinfo and screenfetch into something better
-*
+
 
 ### Thanks / inspiration
 
