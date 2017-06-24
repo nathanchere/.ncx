@@ -5,6 +5,7 @@
 -- ezconfig
 -- cycleRecentWS
 -- xmonad docs extending
+-- hintedTile
 
 import XMonad
 import XMonad.Config.Desktop
@@ -13,6 +14,7 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Scratchpad
 
 import XMonad.Actions.CycleRecentWS
+import XMonad.Actions.WindowGo
 
 import XMonad.Layout.DragPane
 import XMonad.Layout.Spacing
@@ -48,8 +50,8 @@ myBorderWidth = 3
 myFocusedBorderColor = "#BBFF00"
 myNormalBorderColor = "#778877"
 
--- TODO: investigate
--- hintedTile
+workspace1 = "1:\xf121" -- Code
+workspace2 = "2:\xf02d" -- Stuff
 
 myLayoutHook = spacingWithEdge mySpacingWidth
   $ smartBorders
@@ -65,20 +67,26 @@ myLayoutHook = spacingWithEdge mySpacingWidth
   where
     tall = Tall 1 0.03 0.5
 
--- TODO: workspaces 9..16 for minimised windows
-myWorkspaces = ["1:\xf121","2:\xf02d","3:", "4:"] ++ map show [5..8]
+-- TODO: workspaces 9..16 for 'minimised' windows
+myWorkspaces =
+  [workspace1
+  ,workspace2
+  ,"3:"
+  , "4:"
+  ] ++ map show [5..8]
 
 myKeys =
-	--[(("M4-l"), runOrRaise "lock" (className =? "Firefox"))
-
   -- Layout manipulatiom
   [(("M4-["), sendMessage $ Toggle REFLECTX)
   ,(("M4-]"), sendMessage $ Toggle REFLECTY)
   ,(("M4-\\"), sendMessage $ ToggleStruts)
 
   -- OS Misc
-  ,(("M4-r"), spawn "rofi -show run")
+  ,(("M4-r"), spawn "dmenu")
+  --,(("M4-r"), spawn "rofi -show run")
 	,(("M4-`"), scratchpadSpawnActionTerminal myScratchpadTerminal)
+  --,(("M4-M1-L"), runOrRaise "lock" (className =? "i3lock"))
+  --,(("m4-shift-L"), spawn "notify-send locking")
 
   -- Multimedia keys
   ,(("<XF86MonBrightnessUp>"), spawn "light -inc 5")
@@ -103,6 +111,7 @@ myKeys =
   -- TODO: lock (and load screensaver maybe?)
 
   -- TODO: explicit hard exit binding
+  --,(("M4-S-C", kill)
   --,(("M4-S-Q", io (exitWith ExitSuccess))
   --,(("M4-S-Q", spawn "notify-send quitting ok"))
 	]
