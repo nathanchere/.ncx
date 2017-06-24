@@ -128,6 +128,8 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * Investigate other bars and panels- taffybar, candybar, dzen, yabar, bmpanel
 * Investigate misc - firejail
 * better launcher / run dialog
+* use `trash` instead of rm
+* screen locking - xautolock ?
 
 ### Notes to me
 
