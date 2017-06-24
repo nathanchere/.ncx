@@ -20,6 +20,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.Reflect
 import XMonad.Layout.DecorationMadness
+import XMonad.Layout.NoBorders (smartBorders)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -51,6 +52,7 @@ myNormalBorderColor = "#778877"
 -- hintedTile
 
 myLayoutHook = spacingWithEdge mySpacingWidth
+  $ smartBorders
   $ avoidStruts
   $ mkToggle (single REFLECTX)
   $ mkToggle (single REFLECTY)
@@ -97,6 +99,12 @@ myKeys =
   ,(("<XF86AudioPrev>"), spawn "notify-send back")
   ,(("<XF86AudioNext>"), spawn "notify-send forward")
   ,(("<XF86Search>"), spawn "notify-send search")
+
+  -- TODO: lock (and load screensaver maybe?)
+
+  -- TODO: explicit hard exit binding
+  --,(("M4-S-Q", io (exitWith ExitSuccess))
+  --,(("M4-S-Q", spawn "notify-send quitting ok"))
 	]
 
 myManageHook = manageDocks <+> manageScratchPad
