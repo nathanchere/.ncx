@@ -7,7 +7,7 @@ touch $LOGFILE
 
 main() {
 
-  killall -q polybar compton dunst
+  killall -q polybar compton dunst tint2
 
   while pgrep -x polybar >/dev/null; do sleep 1; done
   while pgrep -x compton >/dev/null; do sleep 1; done
