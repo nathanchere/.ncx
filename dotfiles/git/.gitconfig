@@ -19,14 +19,15 @@
 
   unstage = reset HEAD --
 
-  amend = commit --amend --no-edit
+  amend = commit --amend --no-editq
 
   # Varying degrees of detail
   l = log --decorate --date=short --pretty=format:"%C(reset)%h\\ %C(yellow)%ad%C(green)%d\\ %C(reset)%s%C(blue)\\ [%cn]"
-  ll = log --decorate --date=short --pretty=format:"%C(yellow)%ad%C(reset)\\ %ar\\ %C(blue)[%cN]%C(green)%d\\ %n\\ %C(reset)%h:\\ %s"
+  ll = log --decorate --date=short --pretty=format:"%C(yellow)%ad%C(reset)\\ %ar\\ %C(blue)[%cN]%C(green)%d\\ %n\\ %C(magenta)%h%C(reset):\\ %s"
+  lll = log --pretty=format:"%C(yellow)%ad%C(reset)\\ %ar\\ %C(blue)[%cN]%C(green)%d\\ %n%C(magenta)%h%C(reset):\\ %s" --decorate --numstat
 
-  lll = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%C(blue)%x20(%ce)%x20%C(cyan)[gpg:%GK%x20%G?]%C(reset)%n%s"
-  llll = log --pretty=format"%C(yellow)%h%C(red)%d\\ %C(reset)%s%C(blue)\\ [%cn]" --decorate --numstat
+  # Stil haven't found a way to make --graph look nice through this (to my taste)
+  llll = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%C(blue)%x20(%ce)%x20%C(cyan)[gpg:%GK%x20%G?]%C(reset)%n%s"
 
   # List all aliases
   aliases = "!git config -l | grep alias | cut -c 7-"
