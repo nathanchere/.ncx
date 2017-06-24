@@ -199,5 +199,6 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * joedicastro
 * xero
 * sn0rlax
+* leoxiong
 
 Apologies to anyone else who I've stolen from but forgotten to mention
