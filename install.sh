@@ -30,6 +30,7 @@ drawTimestamp() {
 # [DONE] config goes into ~/.config
 # install dependencies (python etc)
 # install essentials e.g. fish stow git
+# fix PATH is updated for root, not for user
 # configure system stuff
 # configure essentials e.g git omf
 # verify install
@@ -87,18 +88,18 @@ detectEnvironment () {
 }
 
 detectCorrectPath() {
-  echo "Home is $HOME; running from $(pwd)"
   if [ "$HOME/.ncx" != "$(pwd)" ]; then
+    echo "Home is $HOME; running from $(pwd)"
     die ".ncx installer must be run from '\$HOME/.ncx'. Because reasons."
   fi
-  echo "Install path: OK"
+  info "Install path: OK; running from $(pwd)"
 }
 
 detectAlreadyInstalled() {
   if [ -f "$CONFIG_FILE" ]; then
     die ".ncx has already been installed. Use 'ncx help' to see usage."
   fi
-  echo "No prior install: OK"
+  info "No prior install: OK"
 }
 
 confirmBeforeContinue() {
@@ -117,13 +118,16 @@ initConfigFile() {
 }
 
 addExtraPath(){
+  # TODO: this adds to root's PATH - how to add for user?
   case :$PATH: in
     *:$1:*)
       echo "'$1' already exists in \$PATH"
       ;;
     *)
       echo "Adding '$1' to \$PATH"
+      echo $PATH
       PATH=$1:$PATH
+      echo $PATH
       ;;
   esac
 }
@@ -186,11 +190,15 @@ installUserConfig() {
   # add groups and rules for things like user backlight permissions
   rsync -avm "system/udev/" "/etc/udev/rules.d"
   gpasswd -a "$USERNAME" video
+
+  #reload newly synced udev rules
+  udevadm control --reload-rules
+  udevadm trigger
 }
 
 debugCleanInstall() {
   # TODO: repurpose as a --force flag
-  echo "DEBUG: cleaning existing install"
+  info "Cleaning existing install"
   rm -f "$CONFIG_FILE"
 }
 
