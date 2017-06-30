@@ -181,6 +181,7 @@ installPackage() {
 }
 
 installPrereqs() {
+  info "Installing prerequisite packages"
   # These should be the only packages to need installing outside ncx
   installPackage stow stow "GNU stow"
   installPackage python3 python "Python 3.x"
