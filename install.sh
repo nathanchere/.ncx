@@ -42,6 +42,7 @@ drawTimestamp() {
 # Important stuff
 
 CONFIG_FILE="$HOME/.config/.ncx"
+GLOBAL_PROFILE_FILE="/etc/profile.d/ncx.profile.d"
 distro='Unknown'
 
 detectEnvironment () {
@@ -195,12 +196,19 @@ installUserConfig() {
   #reload newly synced udev rules
   udevadm control --reload-rules
   udevadm trigger
+
+  # add to global path - can't remember why i thought this was needed
+  if [ ! -f $GLOBAL_PROFILE_FILE ]; then
+    echo "PATH=\$PATH:$HOME/.ncx/bin" >> $GLOBAL_PROFILE_FILE
+    echo "export PATH" >> $GLOBAL_PROFILE_FILE
+  fi
 }
 
 debugCleanInstall() {
   # TODO: repurpose as a --force flag
   info "Cleaning existing install"
   rm -f "$CONFIG_FILE"
+  rm -rf "$GLOBAL_PROFILE_FILE"
 }
 
 installNcxUtil () {
