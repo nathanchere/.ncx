@@ -28,9 +28,9 @@ drawTimestamp() {
 # TODO:
 # [DONE] detect environemnt (which package manager to use etc)
 # [DONE] config goes into ~/.config
+# [DONE] fix PATH is updated for root, not for user
 # install dependencies (python etc)
 # install essentials e.g. fish stow git
-# fix PATH is updated for root, not for user
 # configure system stuff
 # configure essentials e.g git omf
 # verify install
