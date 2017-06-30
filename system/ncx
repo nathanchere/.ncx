@@ -2,6 +2,17 @@
 
 # start in default .ncx dir
 
+# Things to do:
+#  Maintenance
+#   fix permissions
+#   update from git
+#   push updates
+#  Reinstall
+#   remove itself
+#   clone new copy
+#   run installer
+# install/update/push/fix
+
 class fg:
     black='\033[30m'
     red='\033[31m'
@@ -68,8 +79,6 @@ def backlight(args):
     if(args[0] == 'max'):
         print('Setting to max')
         return
-
-
 
     if(args[0] == 'min'):
         print('Setting to min')
