@@ -82,8 +82,8 @@ myKeys =
   ,(("M4-\\"), sendMessage $ ToggleStruts)
 
   -- OS Misc
-  ,(("M4-r"), spawn "dmenu_run | dmenu")
-  --,(("M4-r"), spawn "rofi -show run")
+  --,(("M4-r"), spawn "dmenu_run | dmenu")
+  ,(("M4-r"), spawn "rofi -show run")
 	,(("M4-`"), scratchpadSpawnActionTerminal myScratchpadTerminal)
   --,(("M4-M1-L"), runOrRaise "lock" (className =? "i3lock"))
   --,(("m4-shift-L"), spawn "notify-send locking")
