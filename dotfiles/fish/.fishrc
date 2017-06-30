@@ -1,10 +1,5 @@
-set PATH $HOME/bin $PATH
+set PATH $PATH $HOME/.ncx/bin
+export PATH
 
 setenv EDITOR "vim"
 setenv GIT_EDITOR "vim"
-
-# todo alias for .ncx sync
-# alias restart xmonad
-# alias restart bars
-
-# enable keys backlight
