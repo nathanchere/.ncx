@@ -130,6 +130,7 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * use `trash` instead of rm
 * screen locking - xautolock ?
 * log view helper tool
+* gpg stuff eg https://github.com/jaagr/shellscripts/blob/master/standalone/encryptandsign
 
 ### Notes to me
 * dm-tool for bringing up lightdm
