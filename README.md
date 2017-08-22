@@ -21,7 +21,7 @@ Specifically assumes a Fedora-based system. Tested on:
     git clone https://github.com/nathanchere/.ncx.git ~/.ncx
     cd ~/.ncx
 
-    sudo ./ncx install
+    sudo ./install.sh
 
 From there
 
