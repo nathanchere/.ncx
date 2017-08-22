@@ -9,7 +9,9 @@ warning() { echo "[WARNING] $@" | tee -a "$LOG_FILE" >&2 ; }
 error()   { echo "[ERROR]   $@" | tee -a "$LOG_FILE" >&2 ; }
 die()   { echo "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
 
-readonly USERNAME=`logname`
+readonly USERNAME=`echo $SUDO_USER`
+echo USER: $USER USername: $USERNAME
+exit
 readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
 
 # Must run as root
