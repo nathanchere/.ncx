@@ -171,11 +171,14 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 
 ### Thanks / inspiration
 
+Various dotfiles, skins, colour themes, xmonad configurations and helper scripts inspired by, adapted from or otherwise stolen from:
+
 * jaagr
 * rawsh
 * joedicastro
 * xero
 * sn0rlax
 * leoxiong
+* ethanschoonover
 
 Apologies to anyone else who I've stolen from but forgotten to mention
