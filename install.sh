@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+l#!/usr/bin/env bash
 
 set -euo pipefail
 IFS=$'\n\t'
@@ -10,14 +10,23 @@ error()   { echo "[ERROR]   $@" | tee -a "$LOG_FILE" >&2 ; }
 die()   { echo "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
 
 readonly USERNAME=`echo $SUDO_USER`
-echo USER: $USER USername: $USERNAME
-exit
 readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
+
+if [[ -z $USERNAME ]]; then
+  die "Unable to determine main username"
+fi
 
 # Must run as root
 if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
   die "This script requires root privilege. Try again with sudo."
 fi
+
+# $1 - the string to be added (if not already present)
+# $2 - the file to add to
+addToFileOnce() {
+  addToFile
+  grep -qF "$1" "$2" || echo "$1" >> "$2"
+}
 
 drawTime() {
   date +"%T"
@@ -121,7 +130,7 @@ initConfigFile() {
 }
 
 addExtraPath(){
-  # TODO: this adds to root's PATH - how to add for user?
+  # TODO: this adds to root's PATH - how to add persistently for user?
   case :$PATH: in
     *:$1:*)
       echo "'$1' already exists in \$PATH"
