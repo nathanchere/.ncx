@@ -24,7 +24,6 @@ fi
 # $1 - the string to be added (if not already present)
 # $2 - the file to add to
 addToFileOnce() {
-  addToFile
   grep -qF "$1" "$2" || echo "$1" >> "$2"
 }
 
@@ -41,11 +40,13 @@ drawTimestamp() {
 # [DONE] config goes into ~/.config
 # [DONE] fix PATH is updated for root, not for user
 # install dependencies (python etc)
+# - rsync - untested on Fedora
 # install essentials e.g. fish stow git
 # configure system stuff
 # configure essentials e.g git omf
 # verify install
 # - and cleanup partial install on fail? overkill?
+# mark and detect failed installs or incomplete installs via .config?
 
 # standardise output (e.g. die format, headers etc)
 # Add --force flag support to re-install
@@ -53,7 +54,8 @@ drawTimestamp() {
 # Important stuff
 
 CONFIG_FILE="$HOME/.config/.ncx"
-GLOBAL_PROFILE_FILE="/etc/profile.d/ncx.profile.d"
+BIN_INSTALL_PATH="/usr/bin/.ncx"
+GLOBAL_PROFILE_FILE="ncx.profile.d"
 distro='Unknown'
 
 detectEnvironment () {
@@ -127,28 +129,16 @@ confirmBeforeContinue() {
 initConfigFile() {
   rm -f "$CONFIG_FILE"
   touch "$CONFIG_FILE"
-}
-
-addExtraPath(){
-  # TODO: this adds to root's PATH - how to add persistently for user?
-  case :$PATH: in
-    *:$1:*)
-      echo "'$1' already exists in \$PATH"
-      ;;
-    *)
-      echo "Adding '$1' to \$PATH"
-      echo $PATH
-      PATH=$1:$PATH
-      echo $PATH
-      ;;
-  esac
+  echo ""
 }
 
 addExtraPaths() {
-  info "Configuring \$PATH"
-  addExtraPath /home/usr/bin
-  addExtraPath /usr/bin
-  addExtraPath foo/e
+  info "Configuring \$PATH through $GLOBAL_PROFILE_FILE"
+  rm -f "$GLOBAL_PROFILE_FILE"
+  #TODO - do this cleaner - maybe generic method for create file and parent folders
+  mkdir -p /etc/profile.d
+  touch "/etc/profile.d/$GLOBAL_PROFILE_FILE"
+  addToFileOnce "PATH=$BIN_INSTALL_PATH:$PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
 }
 
 isPackageInstalled() {
@@ -159,6 +149,8 @@ isPackageInstalled() {
   if [ $distro != "arch" ]; then
     pacman -Qi "$1" &> /dev/null
   fi
+
+  # TODO: how to check for non-pacman in arch, eg AUR
 
   # note: shitty way of doing this. If any other errors occur,
   #  it will give the impression the package isn't installed when
@@ -197,6 +189,7 @@ installPrereqs() {
   # These should be the only packages to need installing outside ncx
   installPackage stow stow "GNU stow"
   installPackage python3 python "Python 3.x"
+  installPackage rsync rsync "Python 3.x"
 }
 
 installUserConfig() {
@@ -219,7 +212,7 @@ debugCleanInstall() {
   # TODO: repurpose as a --force flag
   info "Cleaning existing install"
   rm -f "$CONFIG_FILE"
-  rm -rf "$GLOBAL_PROFILE_FILE"
+  rm -rf "/etc/profile.d/$GLOBAL_PROFILE_FILE"
 }
 
 installNcxUtil () {
