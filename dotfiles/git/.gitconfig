@@ -19,7 +19,7 @@
 
   unstage = reset HEAD --
 
-  amend = commit --amend --no-editq
+  amend = commit --amend --no-edit
 
   # Varying degrees of detail
   l = log --decorate --date=short --pretty=format:"%C(reset)%h\\ %C(yellow)%ad%C(green)%d\\ %C(reset)%s%C(blue)\\ [%cn]"
