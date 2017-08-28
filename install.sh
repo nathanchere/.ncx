@@ -140,13 +140,17 @@ addExtraPaths() {
   addToFileOnce "PATH=$BIN_INSTALL_PATH:$PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
 }
 
+# $1: dnf package name
+# $2: pacman package name
 isPackageInstalled() {
-  if [ $distro != "fedora" ]; then
+  if [ "$distro" == "fedora" ]; then
+    echo "Checking for $distro package '$1'"
     rpm -q "$1" &> /dev/null
   fi
 
-  if [ $distro != "arch" ]; then
-    pacman -Qi "$1" &> /dev/null
+  if [ "$distro" == "arch" ]; then
+    echo "Checking for $distro package '$2'"
+    pacman -Q "$2" &> /dev/null
   fi
 
   # TODO: how to check for non-pacman in arch, eg AUR
@@ -162,8 +166,8 @@ isPackageInstalled() {
 # $2: pacman package name
 # $3: package description
 installPackage() {
-  if [ $distro != "fedora" ]; then
-    if [ $(isPackageInstalled "$1") ]; then
+  if [ "$distro" == "fedora" ]; then
+    if [ $(isPackageInstalled "$1") -eq 0 ]; then
         echo "Package $1 is already installed; skipping..."
        return
     fi
@@ -172,13 +176,13 @@ installPackage() {
     return
   fi
 
-  if [ $distro != "arch" ]; then
-    if [ $(isPackageInstalled "$2") ]; then
+  if [ "$distro" == "arch" ]; then
+    if [ $(isPackageInstalled "$2") eq 0 ]; then
         echo "Package $2 is already installed; skipping..."
         return
     fi
     echo "Installing $2..."
-    sudo pacman --no-confirm -S $2
+    sudo pacman --noconfirm -S $2
     return
   fi
 }
@@ -188,7 +192,7 @@ installPrereqs() {
   # These should be the only packages to need installing outside ncx
   installPackage stow stow "GNU stow"
   installPackage python3 python "Python 3.x"
-  installPackage rsync rsync "Python 3.x"
+  installPackage rsync rsync "rsync"
 }
 
 installUserConfig() {
@@ -237,6 +241,7 @@ echo "Installing, hold on to your hats..."
 initConfigFile
 addExtraPaths
 installPrereqs
+die "done"
 installNcxUtil
 installUserConfig
 
