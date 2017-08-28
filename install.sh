@@ -40,7 +40,6 @@ drawTimestamp() {
 # [DONE] config goes into ~/.config
 # [DONE] fix PATH is updated for root, not for user
 # install dependencies (python etc)
-# - rsync - untested on Fedora
 # install essentials e.g. fish stow git
 # configure system stuff
 # configure essentials e.g git omf
