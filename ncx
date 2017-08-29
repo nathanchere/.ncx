@@ -2,6 +2,8 @@
 
 # start in default .ncx dir
 
+# Check if installed first - eller stick fran stan
+
 # Things to do:
 #  Maintenance
 #   fix permissions
@@ -12,6 +14,8 @@
 #   clone new copy
 #   run installer
 # install/update/push/fix
+
+# TODO : CHeck for config. if not installed: printf("Must install first from install.sh")
 
 class fg:
     black='\033[30m'
