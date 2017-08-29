@@ -99,8 +99,9 @@ detectCorrectPath() {
 
 detectAlreadyInstalled() {
   if [ -f "$CONFIG_FILE" ]; then
+
+    read -p ".ncx has already been installed. Remove and re-install? [y/n]: " yn
     while true; do
-      read -p ".ncx has already been installed. Remove and re-install? [y/n]: " yn
       case $yn in
           [Yy]* ) cleanInstall; break;;
           [Nn]* ) die "Exiting..."
@@ -113,12 +114,14 @@ detectAlreadyInstalled() {
 }
 
 confirmBeforeContinue() {
-  read -p "Are you sure you want to run the installer? [y/n]" choice
-  case "$choice" in
-    y|Y ) return ;;
-    n|N ) die "Exiting..." ;;
-    * ) echo "Invalid response (choose 'y' or 'n')" ;;
-  esac
+  read -p "Are you sure you want to run the installer? [y/n]" yn
+  while true; do
+    case $yn in
+        [Yy]* ) return ;;
+        [Nn]* ) die "Exiting..."
+    esac
+  done
+
   confirmBeforeContinue
 }
 
@@ -145,18 +148,19 @@ addExtraPaths() {
 }
 
 # $1: dnf package name
-# $2: pacman package name
-# TODO: how to check for non-pacman in arch, eg AUR
-isPackageInstalled() {
-  if [ "$distro" == "fedora" ]; then
-    echo "Checking for $distro package '$1'"
-    rpm -q "$1" &> /dev/null
-  fi
+isPackageInstalledFedora() {
+  echo "Checking for $distro package '$1'"
+  rpm -q "$1" &> /dev/null
 
-  if [ "$distro" == "arch" ]; then
-    echo "Checking for $distro package '$1'"
-    pacman -Q "$1" &> /dev/null
-  fi
+  # note: shitty way of doing this. Will give potentially give false negative if any errors occur
+  echo $?
+}
+
+# $1: pacman package name
+# TODO: how to check for non-pacman in arch, eg AUR
+isPackageInstalledArch() {
+  echo "Checking for $distro package '$1'"
+  pacman -Q "$1" &> /dev/null
 
   # note: shitty way of doing this. Will give potentially give false negative if any errors occur
   echo $?
@@ -168,7 +172,7 @@ isPackageInstalled() {
 # $3: package description
 installPackage() {
   if [ "$distro" == "fedora" ]; then
-    if [ $(isPackageInstalled "$1") -eq 0 ]; then
+    if [ $(isPackageInstalledFedora "$1") -eq 0 ]; then
         log "Package $1 is already installed; skipping..."
        return
     fi
@@ -178,12 +182,12 @@ installPackage() {
   fi
 
   if [ "$distro" == "arch" ]; then
-    if [ $(isPackageInstalled "$2") -eq 0 ]; then
+    if [ $(isPackageInstalledArch "$2") -eq 0 ]; then
         log "Package $2 is already installed; skipping..."
         return
     fi
     log "Installing $2..."
-    sudo pacman --noconfirm -S $2
+    sudo pacman --noconfirm -S $2 | log
     return
   fi
 }
@@ -247,8 +251,6 @@ cleanInstall() {
   rm -f "$CONFIG_FILE"
   log " * Removing profile.d entry"
   rm -rf "/etc/profile.d/$GLOBAL_PROFILE_FILE"
-  log " * Removing .ncx global utils"
-  rm -rf "$BIN_INSTALL_PATH"
   log " * Removing ncx util from /usr/bin"
   rm -f "/usr/bin/ncx"
 }
