@@ -99,23 +99,21 @@ detectCorrectPath() {
 
 detectAlreadyInstalled() {
   if [ -f "$CONFIG_FILE" ]; then
-
-    read -p ".ncx has already been installed. Remove and re-install? [y/n]: " yn
     while true; do
+      read -p ".ncx has already been installed. Remove and re-install? [y/n]: " yn
       case $yn in
           [Yy]* ) cleanInstall; break;;
           [Nn]* ) die "Exiting..."
       esac
     done
-
   else
     info "No prior install: OK"
   fi
 }
 
 confirmBeforeContinue() {
-  read -p "Are you sure you want to run the installer? [y/n]" yn
   while true; do
+    read -p "Are you sure you want to run the installer? [y/n]" yn
     case $yn in
         [Yy]* ) return ;;
         [Nn]* ) die "Exiting..."
@@ -149,21 +147,21 @@ addExtraPaths() {
 
 # $1: dnf package name
 isPackageInstalledFedora() {
-  echo "Checking for $distro package '$1'"
+  echo "Checking for Fedora package '$1'"
   rpm -q "$1" &> /dev/null
 
   # note: shitty way of doing this. Will give potentially give false negative if any errors occur
-  echo $?
+  return $?
 }
 
 # $1: pacman package name
 # TODO: how to check for non-pacman in arch, eg AUR
 isPackageInstalledArch() {
-  echo "Checking for $distro package '$1'"
+  echo "Checking for Arch package '$1'"
   pacman -Q "$1" &> /dev/null
 
   # note: shitty way of doing this. Will give potentially give false negative if any errors occur
-  echo $?
+  return $?
 }
 
 # Meh, does the job
@@ -172,7 +170,7 @@ isPackageInstalledArch() {
 # $3: package description
 installPackage() {
   if [ "$distro" == "fedora" ]; then
-    if [ $(isPackageInstalledFedora "$1") -eq 0 ]; then
+    if isPackageInstalledFedora "$1"; then
         log "Package $1 is already installed; skipping..."
        return
     fi
@@ -182,12 +180,12 @@ installPackage() {
   fi
 
   if [ "$distro" == "arch" ]; then
-    if [ $(isPackageInstalledArch "$2") -eq 0 ]; then
+    if isPackageInstalledArch "$2" ]; then
         log "Package $2 is already installed; skipping..."
         return
     fi
     log "Installing $2..."
-    sudo pacman --noconfirm -S $2 | log
+    sudo pacman --noconfirm -S $2
     return
   fi
 }
