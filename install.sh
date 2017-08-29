@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # TODO:
-# [DONE] config goes into ~/.config
-# install essentials e.g. fish stow git
+winamp
 
 # configure system stuff
 # configure essentials e.g git omf
@@ -25,7 +24,7 @@ BIN_INSTALL_PATH="/usr/bin/.ncx"
 GLOBAL_PROFILE_FILE="ncx.profile.d"
 distro='Unknown'
 
-echo -e "\n  **************************"
+echo -e "\n  **************************d"
 echo -e " **                        **"
 echo -e "**    .ncx Bootstrapper     **"
 echo -e " **                        **"
@@ -154,7 +153,7 @@ isPackageInstalled() {
     pacman -Q "$1" &> /dev/null
   fi
 
-  # note: shitty way of doing this. Will give potentially false negative if any errors occur
+  # note: shitty way of doing this. Will give potentially give false negative if any errors occur
   echo $?
 }
 
@@ -188,8 +187,15 @@ installPrereqs() {
   info "Installing prerequisite packages"
   # These should be the only packages to need installing outside ncx
   installPackage stow stow "GNU stow"
-  installPackage python3 python "Python 3.x"
   installPackage rsync rsync "rsync"
+}
+
+installSoftware() {
+  info "Installing software packages"
+
+  installPackage python3 python "Python 3.x"
+  installPackage fish fish "fish shell"
+
 }
 
 installUserConfig() {
@@ -204,8 +210,8 @@ installUserConfig() {
 
 
 installNcxUtils () {
-  echo "TODO"
-  # TODO: stow to /usr/bin
+  mkdir -p "$BIN_INSTALL_PATH"
+  rsync -avm "system/bin/" "$BIN_INSTALL_PATH"
 }
 
 #######################################
@@ -266,8 +272,6 @@ echo "Installing, hold on to your hats..."
 initConfigFile
 addExtraPaths
 installPrereqs
-exit
-
 installNcxUtils
 installUserConfig
 
