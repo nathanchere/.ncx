@@ -1,46 +1,9 @@
-l#!/usr/bin/env bash
-
-set -euo pipefail
-IFS=$'\n\t'
-
-readonly LOG_FILE="/tmp/$(basename "$0").log"
-info()    { echo "[INFO]    $@" | tee -a "$LOG_FILE" >&2 ; }
-warning() { echo "[WARNING] $@" | tee -a "$LOG_FILE" >&2 ; }
-error()   { echo "[ERROR]   $@" | tee -a "$LOG_FILE" >&2 ; }
-die()   { echo "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
-
-readonly USERNAME=`echo $SUDO_USER`
-readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
-
-if [[ -z $USERNAME ]]; then
-  die "Unable to determine main username"
-fi
-
-# Must run as root
-if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
-  die "This script requires root privilege. Try again with sudo."
-fi
-
-# $1 - the string to be added (if not already present)
-# $2 - the file to add to
-addToFileOnce() {
-  grep -qF "$1" "$2" || echo "$1" >> "$2"
-}
-
-drawTime() {
-  date +"%T"
-}
-
-drawTimestamp() {
-  date +"%y%m%d"
-}
+#!/usr/bin/env bash
 
 # TODO:
-# [DONE] detect environemnt (which package manager to use etc)
 # [DONE] config goes into ~/.config
-# [DONE] fix PATH is updated for root, not for user
-# install dependencies (python etc)
 # install essentials e.g. fish stow git
+
 # configure system stuff
 # configure essentials e.g git omf
 # verify install
@@ -50,12 +13,42 @@ drawTimestamp() {
 # standardise output (e.g. die format, headers etc)
 # Add --force flag support to re-install
 
-# Important stuff
 
+set -euo pipefail
+IFS=$'\n\t'
+
+readonly LOG_FILE="/tmp/$(basename "$0").log"
+readonly USERNAME=`echo $SUDO_USER`
+readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
 CONFIG_FILE="$HOME/.config/.ncx"
 BIN_INSTALL_PATH="/usr/bin/.ncx"
 GLOBAL_PROFILE_FILE="ncx.profile.d"
 distro='Unknown'
+
+echo -e "\n  **************************"
+echo -e " **                        **"
+echo -e "**    .ncx Bootstrapper     **"
+echo -e " **                        **"
+echo -e "  **************************\n"
+
+echo -e "  -- Logging to: $LOG_FILE --\n"
+
+#######################################
+#
+#  Pre-setup validation steps
+#
+#######################################
+
+detectUser () {
+  if [[ -z $USERNAME ]]; then
+    die "Unable to determine main username"
+  fi
+
+  # Must run as root
+  if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
+    die "This script requires root privilege. Try again with sudo."
+  fi
+}
 
 detectEnvironment () {
 
@@ -125,6 +118,12 @@ confirmBeforeContinue() {
   confirmBeforeContinue
 }
 
+#######################################
+#
+#  Main installation steps
+#
+#######################################
+
 initConfigFile() {
   rm -f "$CONFIG_FILE"
   touch "$CONFIG_FILE"
@@ -138,10 +137,12 @@ addExtraPaths() {
   mkdir -p /etc/profile.d
   touch "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   addToFileOnce "PATH=$BIN_INSTALL_PATH:$PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
+  addToFileOnce "export PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
 }
 
 # $1: dnf package name
 # $2: pacman package name
+# TODO: how to check for non-pacman in arch, eg AUR
 isPackageInstalled() {
   if [ "$distro" == "fedora" ]; then
     echo "Checking for $distro package '$1'"
@@ -149,15 +150,11 @@ isPackageInstalled() {
   fi
 
   if [ "$distro" == "arch" ]; then
-    echo "Checking for $distro package '$2'"
-    pacman -Q "$2" &> /dev/null
+    echo "Checking for $distro package '$1'"
+    pacman -Q "$1" &> /dev/null
   fi
 
-  # TODO: how to check for non-pacman in arch, eg AUR
-
-  # note: shitty way of doing this. If any other errors occur,
-  #  it will give the impression the package isn't installed when
-  #  you really have no idea
+  # note: shitty way of doing this. Will give potentially false negative if any errors occur
   echo $?
 }
 
@@ -168,20 +165,20 @@ isPackageInstalled() {
 installPackage() {
   if [ "$distro" == "fedora" ]; then
     if [ $(isPackageInstalled "$1") -eq 0 ]; then
-        echo "Package $1 is already installed; skipping..."
+        log "Package $1 is already installed; skipping..."
        return
     fi
-    echo "Installing $1..."
+    log "Installing $1..."
     sudo dnf install -y $1
     return
   fi
 
   if [ "$distro" == "arch" ]; then
-    if [ $(isPackageInstalled "$2") eq 0 ]; then
-        echo "Package $2 is already installed; skipping..."
+    if [ $(isPackageInstalled "$2") -eq 0 ]; then
+        log "Package $2 is already installed; skipping..."
         return
     fi
-    echo "Installing $2..."
+    log "Installing $2..."
     sudo pacman --noconfirm -S $2
     return
   fi
@@ -203,29 +200,57 @@ installUserConfig() {
   #reload newly synced udev rules
   udevadm control --reload-rules
   udevadm trigger
+}
 
-  # add to global path - can't remember why i thought this was needed
-  if [ ! -f $GLOBAL_PROFILE_FILE ]; then
-    echo "PATH=\$PATH:$HOME/.ncx/bin" >> $GLOBAL_PROFILE_FILE
-    echo "export PATH" >> $GLOBAL_PROFILE_FILE
-  fi
+
+installNcxUtils () {
+  echo "TODO"
+  # TODO: stow to /usr/bin
+}
+
+#######################################
+#
+#  Misc helpers
+#
+#######################################
+
+# $1 - the string to be added (if not already present)
+# $2 - the file to add to
+addToFileOnce() {
+  grep -qF "$1" "$2" || echo "$1" >> "$2"
+}
+
+drawTime() {
+  date +"%T"
+}
+
+drawTimestamp() {
+  date +"%y%m%d"
 }
 
 debugCleanInstall() {
   # TODO: repurpose as a --force flag
-  info "Cleaning existing install"
+  info "Cleaning existing install..."
+  log " * Removing old config file"
   rm -f "$CONFIG_FILE"
+  log " * Removing profile.d entry"
   rm -rf "/etc/profile.d/$GLOBAL_PROFILE_FILE"
+  log " * Removing .ncx global utils"
+  rm -rf "$BIN_INSTALL_PATH"
 }
 
-installNcxUtil () {
-  echo
-  # TODO: stow to /usr/bin
-}
+head() { echo -e "========================\n$@\n========================\n\n" | tee -a "$LOG_FILE" >&2 ; }
+log()    { echo -e "$@" | tee -a "$LOG_FILE" >&2 ; }
+info()    { echo -e "[INFO]    $@" | tee -a "$LOG_FILE" >&2 ; }
+warning() { echo -e "[WARNING] $@" | tee -a "$LOG_FILE" >&2 ; }
+error()   { echo -e "[ERROR]   $@" | tee -a "$LOG_FILE" >&2 ; }
+die()   { echo -e "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
 
-# # # # # # # # # # # # # # # # # #
-# Main
-# # # # # # # # # # # # # # # # # #
+#######################################
+#
+#  Main
+#
+#######################################
 
 debugCleanInstall # To manually force to treat as a 'clean install'
 
@@ -241,8 +266,9 @@ echo "Installing, hold on to your hats..."
 initConfigFile
 addExtraPaths
 installPrereqs
-die "done"
-installNcxUtil
+exit
+
+installNcxUtils
 installUserConfig
 
 cleanup() {
