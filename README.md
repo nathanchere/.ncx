@@ -16,6 +16,13 @@ Specifically assumes a Fedora-based system. Tested on:
 
  Caveat emptor.
 
+### Branches
+
+* `ver1` - first native dotfile inpementation
+* `ver2` - major rethink of software installer and config maintenance
+* `ver3` - experimenting with python, add arch support
+* `master` - split install [bash] and ncx [python] concerns more clearly, ncx #allthethings
+
 ### Install
 
     git clone https://github.com/nathanchere/.ncx.git ~/.ncx

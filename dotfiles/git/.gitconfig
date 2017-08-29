@@ -48,6 +48,7 @@
   prune=  fetch --prune
 
   undo = reset --soft HEAD^
+  uncommit = reset HEAD~1
 
   stashall = stash save --include-untracked
 

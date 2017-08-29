@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO:
-winamp
-
 # configure system stuff
 # configure essentials e.g git omf
 # verify install
@@ -20,7 +17,7 @@ readonly LOG_FILE="/tmp/$(basename "$0").log"
 readonly USERNAME=`echo $SUDO_USER`
 readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
 CONFIG_FILE="$HOME/.config/.ncx"
-BIN_INSTALL_PATH="/usr/bin/.ncx"
+BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
 GLOBAL_PROFILE_FILE="ncx.profile.d"
 distro='Unknown'
 
@@ -102,9 +99,17 @@ detectCorrectPath() {
 
 detectAlreadyInstalled() {
   if [ -f "$CONFIG_FILE" ]; then
-    die ".ncx has already been installed. Use 'ncx help' to see usage."
+    while true; do
+      read -p ".ncx has already been installed. Remove and re-install? [y/n]: " yn
+      case $yn in
+          [Yy]* ) cleanInstall; break;;
+          [Nn]* ) die "Exiting..."
+      esac
+    done
+
+  else
+    info "No prior install: OK"
   fi
-  info "No prior install: OK"
 }
 
 confirmBeforeContinue() {
@@ -126,14 +131,14 @@ confirmBeforeContinue() {
 initConfigFile() {
   rm -f "$CONFIG_FILE"
   touch "$CONFIG_FILE"
-  echo ""
+  echo "distro=$distro" >> "$CONFIG_FILE"
 }
 
 addExtraPaths() {
   info "Configuring \$PATH through $GLOBAL_PROFILE_FILE"
   rm -f "$GLOBAL_PROFILE_FILE"
   #TODO - do this cleaner - maybe generic method for create file and parent folders
-  mkdir -p /etc/profile.d
+  mkdir -p "/etc/profile.d"
   touch "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   addToFileOnce "PATH=$BIN_INSTALL_PATH:$PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   addToFileOnce "export PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
@@ -195,7 +200,6 @@ installSoftware() {
 
   installPackage python3 python "Python 3.x"
   installPackage fish fish "fish shell"
-
 }
 
 installUserConfig() {
@@ -209,9 +213,12 @@ installUserConfig() {
 }
 
 
-installNcxUtils () {
-  mkdir -p "$BIN_INSTALL_PATH"
-  rsync -avm "system/bin/" "$BIN_INSTALL_PATH"
+installNcxUtil () {
+    ln -s "$HOME/.ncx/ncx" "/usr/bin/ncx"
+}
+
+finaliseInstallation() {
+  echo "complete=1" >> "$CONFIG_FILE"
 }
 
 #######################################
@@ -234,8 +241,7 @@ drawTimestamp() {
   date +"%y%m%d"
 }
 
-debugCleanInstall() {
-  # TODO: repurpose as a --force flag
+cleanInstall() {
   info "Cleaning existing install..."
   log " * Removing old config file"
   rm -f "$CONFIG_FILE"
@@ -243,6 +249,8 @@ debugCleanInstall() {
   rm -rf "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   log " * Removing .ncx global utils"
   rm -rf "$BIN_INSTALL_PATH"
+  log " * Removing ncx util from /usr/bin"
+  rm -f "/usr/bin/ncx"
 }
 
 head() { echo -e "========================\n$@\n========================\n\n" | tee -a "$LOG_FILE" >&2 ; }
@@ -258,8 +266,6 @@ die()   { echo -e "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
 #
 #######################################
 
-debugCleanInstall # To manually force to treat as a 'clean install'
-
 # Pre-install validations
 
 detectEnvironment
@@ -272,8 +278,10 @@ echo "Installing, hold on to your hats..."
 initConfigFile
 addExtraPaths
 installPrereqs
-installNcxUtils
+installNcxUtil
 installUserConfig
+
+finaliseInstallation
 
 cleanup() {
   echo Cleaning up
