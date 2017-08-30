@@ -107,7 +107,7 @@ detectAlreadyInstalled() {
 }
 
 confirmBeforeContinue() {
-  promptYesNo "Are you sure you want to run the installer? [y/n]" || die "Exiting..."
+  promptYesNo "Are you sure you want to run the installer?" || die "Exiting..."
 }
 
 #######################################
@@ -125,8 +125,6 @@ initConfigFile() {
 addExtraPaths() {
   info "Configuring \$PATH through $GLOBAL_PROFILE_FILE"
   rm -f "$GLOBAL_PROFILE_FILE"
-  #TODO - do this cleaner - maybe generic method for create file and parent folders
-  mkdir -p "/etc/profile.d"
   touch "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   addToFileOnce "PATH=$BIN_INSTALL_PATH:$PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   addToFileOnce "export PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
@@ -242,7 +240,7 @@ cleanInstall() {
 
 promptYesNo() {
   while true; do
-    read -p "$1 [y/n]" yn
+    read -p "$1 [y/n]: " yn
     case $yn in
         [Yy]* ) return 0 ;;
         [Nn]* ) return 1 ;;
