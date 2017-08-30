@@ -1,5 +1,2 @@
-set PATH $PATH $HOME/bin
-export PATH
-
 setenv EDITOR "vim"
 setenv GIT_EDITOR "vim"

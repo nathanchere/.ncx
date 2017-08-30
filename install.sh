@@ -18,7 +18,7 @@ readonly USERNAME=`echo $SUDO_USER`
 readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
 CONFIG_FILE="$HOME/.config/.ncx"
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
-GLOBAL_PROFILE_FILE="ncx.profile.d"
+GLOBAL_PROFILE_FILE="ncx.profile.sh"
 distro='Unknown'
 
 echo -e "\n  **************************d"
