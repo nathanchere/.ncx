@@ -99,28 +99,15 @@ detectCorrectPath() {
 
 detectAlreadyInstalled() {
   if [ -f "$CONFIG_FILE" ]; then
-    while true; do
-      read -p ".ncx has already been installed. Remove and re-install? [y/n]: " yn
-      case $yn in
-          [Yy]* ) cleanInstall; break;;
-          [Nn]* ) die "Exiting..."
-      esac
-    done
+    promptYesNo ".ncx has already been installed. Remove and re-install?" || die "Exiting..."
+    cleanInstall
   else
     info "No prior install: OK"
   fi
 }
 
 confirmBeforeContinue() {
-  while true; do
-    read -p "Are you sure you want to run the installer? [y/n]" yn
-    case $yn in
-        [Yy]* ) return ;;
-        [Nn]* ) die "Exiting..."
-    esac
-  done
-
-  confirmBeforeContinue
+  promptYesNo "Are you sure you want to run the installer? [y/n]" || die "Exiting..."
 }
 
 #######################################
@@ -251,6 +238,16 @@ cleanInstall() {
   rm -rf "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   log " * Removing ncx util from /usr/bin"
   rm -f "/usr/bin/ncx"
+}
+
+promptYesNo() {
+  while true; do
+    read -p "$1 [y/n]" yn
+    case $yn in
+        [Yy]* ) return 0 ;;
+        [Nn]* ) return 1 ;;
+    esac
+  done
 }
 
 head() { echo -e "========================\n$@\n========================\n\n" | tee -a "$LOG_FILE" >&2 ; }
