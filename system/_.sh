@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-[[ ${INCLUDEONCE:-} -eq 1 ]] && return || readonly INCLUDEONCE=1
-
 set -euo pipefail
 IFS=$'\n\t'
 
-# Export all functions and variables
-set -a
+[[ ${INCLUDEONCE:-} -eq 1 ]] && return || readonly INCLUDEONCE=1
+[ $(basename "$0") = $(basename "$BASH_SOURCE") ] && echo "This should not be run directly" && exit 111
+
+#######################################
+#
+#  Environment and package management stuff
+#
+#######################################
 
 getUserName(){
   if [[ $EUID -ne 0 ]]; then
@@ -79,15 +83,30 @@ download () {
   curl -L "$1" --create-dirs -o "$2"
 }
 
-readonly USERNAME=`getUserName`
-readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
-readonly NCXROOT="$HOME/.ncx"
-readonly CONFIG_FILE="$HOME/.config/.ncx"
+ #######################################
+ #
+ #  Variable exports
+ #
+ #######################################
 
-LOGROOT="$NCXROOT/logs"
-TMPROOT="$NCXROOT/tmp"
-export LOGFILE="$LOGROOT/$0.log"
+export USERNAME=`getUserName`
+export HOME=`getent passwd "$USERNAME" | cut -d: -f6`
+export NCXROOT="$HOME/.ncx"
+export LOGROOT="$NCXROOT/logs"
+export TMPROOT="$NCXROOT/tmp"
+
+export CONFIG_FILE="$HOME/.config/.ncx"
+export LOGFILE="$LOGROOT/$(basename "$0").log"
+
 mkdir -p "$LOGROOT"
 
-# Turn off export-all
-set +a
+export -f yell
+export -f die
+export -f try
+export -f requireRoot
+export -f requireNotRoot
+export -f addToFileOnce
+export -f drawTime
+export -f drawTimestamp
+export -f promptYesNo
+export -f download

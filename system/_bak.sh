@@ -84,30 +84,3 @@ doHardStow() {
     fi
   done
 }
-
-# Pass in the name of a package as you would provide it to dnf/yum/etc
-installedVersion() {
-  rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2
-}
-
-# Init common variables
-#TODO: this is a really crap way of handling $HOME for sudo
-export HOME; HOME="$(dirname $(pwd))" # make sure sudo doesn't mess up $HOME
-export NCXROOT; NCXROOT="$(pwd)"
-LOGROOT="$NCXROOT/logs"
-TMPROOT="$NCXROOT/tmp"
-export LOGFILE="$LOGROOT/$0.log"
-
-if [ $0 != "ncx" ]; then
-  # Init log
-  mkdir -p logs
-  # Common header format
-  drawHead "$0 [$(date)]" |& tee -a "$LOGFILE"
-fi
-
-# Function exports
-export -f drawHead
-export -f yell
-export -f die
-export -f try
-export -f requireRoot

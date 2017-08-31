@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 
 . "system/_.sh"
+. "system/_.sh"
 
-installedVersion() {
-  rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2
-
-}
-
-echo `installedVersion "rsync"`
 exit 11
 
 # configure system stuff
@@ -19,7 +14,7 @@ exit 11
 # standardise output (e.g. die format, headers etc)
 # Add --force flag support to re-install
 
-readonly LOG_FILE="/tmp/$(basename "$0").log"
+readonly LOG_FILE="/tmp/.log"
 
 
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
