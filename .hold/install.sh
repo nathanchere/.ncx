@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
-. "system/_.sh"
+set -euo pipefail
+IFS=$'\n\t'
 
-installedVersion() {
-  rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2
-
-}
-
-echo `installedVersion "rsync"`
-exit 11
+. "./_.sh"
+die "OK"
+echo "WTF"
+exit 4
 
 # configure system stuff
 # configure essentials e.g git omf
@@ -20,8 +18,9 @@ exit 11
 # Add --force flag support to re-install
 
 readonly LOG_FILE="/tmp/$(basename "$0").log"
-
-
+readonly USERNAME=`echo $SUDO_USER`
+readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
+CONFIG_FILE="$HOME/.config/.ncx"
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
 GLOBAL_PROFILE_FILE="ncx.profile.sh"
 distro='Unknown'

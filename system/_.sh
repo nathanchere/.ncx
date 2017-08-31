@@ -2,33 +2,55 @@
 
 [[ ${INCLUDEONCE:-} -eq 1 ]] && return || readonly INCLUDEONCE=1
 
-# Common config stuff
+set -euo pipefail
+IFS=$'\n\t'
 
-# Exit on the first failure - it's bulletproof or GTFO
-set -e
+# Export all functions and variables
+set -a
 
-# Error on referencing any undefined variables (sanity check)
-set -u
+getUserName(){
+  if [[ $EUID -ne 0 ]]; then
+    echo `whoami`
+  else
+    echo "$SUDO_USER"
+  fi
+}
 
 # Tips from http://stackoverflow.com/a/25515370/243557
+# Print the script name and all arguments to std:err
 yell() { echo "$*" 2>&1 |& tee -a "$LOGFILE"; }
+# Same as yell but exits with error status
 die() { yell "$*"; exit 111; }
+# Uses boolean shortcircuit to only die if the specified command failed
 try() { "$@" || die "cannot $*"; }
 
-# Nice formatty stuff
-
 requireRoot() {
-  if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
-    die "This script requires root privilege. Try again with sudo."
-  fi
+  "$(whoami)" == "root" || die "This script requires root privileges. Try again with sudo."
 }
 
 requireNotRoot() {
-  if [ "$(whoami)" = "root" ]; then # Can also check $UID != 0
-    die "This script should not be run as root."
+  "$(whoami)" != "root" || die "This script should not be run as root."
+}
+
+# Stolen from Redhat /etc/profile
+# Append to PATH if not already specified
+# $1 - string to add to PATH if not already present
+# $2 - if 'after', $1 will be added to the end of PATH instead of the start
+pathMunge() {
+  if ! echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
+    if [ "$2" = "after" ] ; then
+      PATH=$PATH:$1
+    else
+      PATH=$1:$PATH
+    fi
   fi
 }
 
+# $1 - the string to be added (if not already present)
+# $2 - the file to add to
+addToFileOnce() {
+  grep -qF "$1" "$2" || echo "$1" >> "$2"
+}
 
 drawTime() {
   date +"%T"
@@ -38,84 +60,15 @@ drawTimestamp() {
   date +"%y%m%d"
 }
 
-drawHead() {
-  echo " "
-  echo "########################################################"
-  echo "#  $1"
-  echo "########################################################"
-  echo " "
-}
-
-drawSubhead() {
-  echo " "
-  echo "[$(drawTime)]------------------------------------------------"
-  echo "          ::: $1"
-  echo " "
-}
-
-verboseOut() {
-	printf "\033[1;31m:: \033[0m$1\n"
-}
-
-highlightOut() {
-	printf "\033[1;37m[[ \033[1;36m* \033[1;37m]] \033[0m$1\n"
-}
-
-warnOut() {
-	printf "\033[1;37m[[ \033[1;33m! \033[1;37m]] \033[0m$1\n"
-}
-
-errorOut() {
-	printf "\033[1;37m[[ \033[1;31m! \033[1;37m]] \033[0m$1\n"
-}
-
-# Stow common wrapper
-#   $1 - root name of stow source
-#   $2 - parent folder of stow source
-#   $3 - root of stow target
-# e.g. doStow compton dotfiles /home/johnnychomp
-
-doStow() {
-  drawSubhead "Cleaning up existing $1 files"
-  stow --verbose=2 -D -d "$2" -t "$3" "$1"
-  drawSubhead "Stowing $1"
-  stow --verbose=2 -d "$2" -t "$3" "$1"
-}
-
-# Since stow only works with symlinks, and because permission issues arise for
-# things like display manager config which is not run from an account which
-# has permission to access files in the main .ncx repository (when it is cloned
-# under /home/{user} as intended), this is a kind of work-around using hard links.
-# NOTE: does not recurse through subdirectories.
-# Basically intended as a simplistic shallow stow with hard links.
-#   $1 - path to the 'stow' source folder, relative from .ncx root
-#   $2 - root of stow target
-
-doHardStow() {
-  drawSubhead "Hard-stowing $1 config"
-
-  for SOURCEPATH in "$NCXROOT/$1"/*.*; do
-    FILENAME=$(basename "$SOURCEPATH")
-    TARGETPATH="$2/$FILENAME"
-
-    if [ -d "$TARGETPATH" ]; then
-      echo "Skipping directory $TARGETPATH"
-    else
-      if [ -L "$TARGETPATH" ]; then
-        echo "$FILENAME already symlinked; unlinking..."
-        unlink "$TARGETPATH"
-      elif [ -f "$TARGETPATH" ]; then
-          echo "$FILENAME already exists as $TARGETPATH; backing up..."
-          BAKNAME="$TARGETPATH.$(drawTimestamp).bak"
-          rm -f "$BAKNAME"
-          mv "$TARGETPATH" "$BAKNAME"
-      fi
-
-      echo "Hard-linking $SOURCEPATH to $TARGETPATH"
-      ln "$SOURCEPATH" "$TARGETPATH"
-      echo "Setting a+rx on $TARGETPATH"
-      chmod a+rx "$TARGETPATH"
-    fi
+# Prompt for Y/N input and return either true (Y) or false (N)
+# $1 - prompt text
+promptYesNo() {
+  while true; do
+    read -p "$1 [y/n]: " yn
+    case $yn in
+        [Yy]* ) return 0 ;;
+        [Nn]* ) return 1 ;;
+    esac
   done
 }
 
@@ -126,47 +79,15 @@ download () {
   curl -L "$1" --create-dirs -o "$2"
 }
 
-# Pass in the name of a package as you would provide it to dnf/yum/etc
-installedVersion() {
-  rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2
-}
+readonly USERNAME=`getUserName`
+readonly HOME=`getent passwd "$USERNAME" | cut -d: -f6`
+readonly NCXROOT="$HOME/.ncx"
+readonly CONFIG_FILE="$HOME/.config/.ncx"
 
-# ensure a value is only added to a file once
-# $1 - FILENAME
-# $2 - content
-appendOnce () {
-# TODO: FIND A BETTER WAY FOR THIS
-  touch "$1"
-  # while IFS='' read -r line || [[ -n "$line" ]]; do
-  #   echo "Text read from file: $line"
-  # done < "$1"
-  #
-  # if [ ! cat "$1" | grep -q "$2" ]; then
-  #   echo "Appeding to $1"
-  #   echo -e "$2" >> "$1"
-  # else
-  #   echo "$1 already contains target string, skipping..."
-  # fi
-}
-
-# Init common variables
-#TODO: this is a really crap way of handling $HOME for sudo
-export HOME; HOME="$(dirname $(pwd))" # make sure sudo doesn't mess up $HOME
-export NCXROOT; NCXROOT="$(pwd)"
 LOGROOT="$NCXROOT/logs"
 TMPROOT="$NCXROOT/tmp"
 export LOGFILE="$LOGROOT/$0.log"
+mkdir -p "$LOGROOT"
 
-if [ $0 != "ncx" ]; then
-  # Init log
-  mkdir -p logs
-  # Common header format
-  drawHead "$0 [$(date)]" |& tee -a "$LOGFILE"
-fi
-
-# Function exports
-export -f drawHead
-export -f yell
-export -f die
-export -f try
-export -f requireRoot
+# Turn off export-all
+set +a
