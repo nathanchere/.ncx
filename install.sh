@@ -10,10 +10,10 @@ if false ; then
   # isPackageInstalled "git" && echo "git OK" || echo "git not OK"
   # isPackageInstalled "igit" && echo "igit OK" || echo "igit not OK"
 
-  installedVersion git
   installedVersion igit
   installedVersion git
 
+  installPackage "GNU stow" stow stow
   exit
 fi
 
@@ -93,7 +93,7 @@ installPrereqs() {
   # These should be the only packages to need installing outside ncx
   installPackage "GNU stow" stow stow
   installPackage "rsync" rsync rsync
-  installPackage "curl" curl curl 
+  installPackage "curl" curl curl
 }
 
 installSoftware() {
