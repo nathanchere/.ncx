@@ -46,7 +46,6 @@ log "  -- Logging to: $LOG_FILE --\n"
 #
 #######################################
 
-
 detectCorrectPath() {
   if [ "$NCXROOT" != "$(pwd)" ]; then
     log "Home: $HOME; running from $(pwd)"
@@ -62,10 +61,6 @@ detectAlreadyInstalled() {
   else
     info "No prior install: OK"
   fi
-}
-
-confirmBeforeContinue() {
-  promptYesNo "Are you sure you want to run the installer?" || die "Exiting..."
 }
 
 #######################################
@@ -137,8 +132,6 @@ cleanInstall() {
   rm -f "/usr/bin/ncx"
 }
 
-
-
 head() { echo -e "========================\n$@\n========================\n\n" | tee -a "$LOG_FILE" >&2 ; }
 log()    { echo -e "$@" | tee -a "$LOG_FILE" >&2 ; }
 info()    { echo -e "[INFO]    $@" | tee -a "$LOG_FILE" >&2 ; }
@@ -156,9 +149,8 @@ die()   { echo -e "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
 requireRoot
 detectAlreadyInstalled
 detectCorrectPath
-confirmBeforeContinue
 
-echo "Installing, hold on to your hats..."
+promptYesNo "Are you sure you want to run the installer?" || die "Exiting..."
 
 initConfigFile
 addExtraPaths

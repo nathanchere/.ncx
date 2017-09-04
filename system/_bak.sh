@@ -84,3 +84,10 @@ doHardStow() {
     fi
   done
 }
+
+# head() { echo -e "========================\n$@\n========================\n\n" | tee -a "$LOG_FILE" >&2 ; }
+# log()    { echo -e "$@" | tee -a "$LOG_FILE" >&2 ; }
+# info()    { echo -e "[INFO]    $@" | tee -a "$LOG_FILE" >&2 ; }
+# warning() { echo -e "[WARNING] $@" | tee -a "$LOG_FILE" >&2 ; }
+# error()   { echo -e "[ERROR]   $@" | tee -a "$LOG_FILE" >&2 ; }
+# die()   { echo -e "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }

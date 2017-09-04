@@ -34,7 +34,6 @@ log() {
   echo $@ >> "$LOGFILE"
 }
 
-
 requireRoot() {
   [[ "$(whoami)" == "root" ]] || die "This script requires root privileges. Try again with sudo."
 }
