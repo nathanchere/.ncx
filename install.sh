@@ -5,7 +5,7 @@
 . "system/_package.sh"
 
 # just some misc debug helper stuff
-if true ; then
+if false ; then
   echo "Exported distro is $DISTRO"
   # isPackageInstalled "git" && echo "git OK" || echo "git not OK"
   # isPackageInstalled "igit" && echo "igit OK" || echo "igit not OK"
@@ -13,10 +13,10 @@ if true ; then
   installedVersion git
   installedVersion igit
   installedVersion git
+
+  exit
 fi
 
-
-exit
 # configure system stuff
 # configure essentials e.g git omf
 # verify install
@@ -28,18 +28,16 @@ exit
 
 readonly LOG_FILE="/tmp/.log"
 
-
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
 GLOBAL_PROFILE_FILE="ncx.profile.sh"
 
 
-echo -e "\n  **************************d"
-echo -e " **                        **"
-echo -e "**    .ncx Bootstrapper     **"
-echo -e " **                        **"
-echo -e "  **************************\n"
-
-echo -e "  -- Logging to: $LOG_FILE --\n"
+log "\n  **************************d"
+log " **                        **"
+log "**    .ncx Bootstrapper     **"
+log " **                        **"
+log "  **************************\n"
+log "  -- Logging to: $LOG_FILE --\n"
 
 #######################################
 #
@@ -47,20 +45,10 @@ echo -e "  -- Logging to: $LOG_FILE --\n"
 #
 #######################################
 
-detectUser () {
-  if [[ -z $USERNAME ]]; then
-    die "Unable to determine main username"
-  fi
-
-  # Must run as root
-  if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
-    die "This script requires root privilege. Try again with sudo."
-  fi
-}
 
 detectCorrectPath() {
-  if [ "$HOME/.ncx" != "$(pwd)" ]; then
-    echo "Home is $HOME; running from $(pwd)"
+  if [ "$NCXROOT" != "$(pwd)" ]; then
+    log "Home: $HOME; running from $(pwd)"
     die ".ncx installer must be run from '\$HOME/.ncx'. Because reasons."
   fi
   info "Install path: OK; running from $(pwd)"
@@ -191,7 +179,7 @@ die()   { echo -e "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
 #######################################
 
 # Pre-install validations
-
+requireRoot
 detectEnvironment
 detectAlreadyInstalled
 detectCorrectPath

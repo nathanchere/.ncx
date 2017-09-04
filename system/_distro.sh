@@ -4,7 +4,7 @@
 
 [[ ${ONCE_DISTRO:-} -eq 1 ]] && return || readonly ONCE_DISTRO=1
 [ $(basename "$0") = $(basename "$BASH_SOURCE") ] && echo "This should not be run directly" && exit 111
-echo "[ including _distro.sh]"
+echo "[ including _distro.sh ]"
 
 . "system/_.sh"
 

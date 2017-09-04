@@ -3,12 +3,13 @@
 
 [[ ${ONCE_PACKAGE:-} -eq 1 ]] && return || readonly ONCE_PACKAGE=1
 [ $(basename "$0") = $(basename "$BASH_SOURCE") ] && echo "This should not be run directly" && exit 111
-echo "[ including _package.sh]"
+echo "[ including _package.sh ]"
 
 . "system/_.sh"
 . "system/_distro.sh"
 
 # $1: package name as you would provide it to dnf/pacman/etc
+# Returns installed package version number, or empty if not installed
 installedVersion() {
   log "Checking for status of package $1"
 
@@ -41,29 +42,15 @@ installedVersion() {
 }
 
 # $1: package name as you would provide it to dnf/pacman/etc
-# Disclaimer: kinda shitty way of doing this.
-# Will give potentially give false negative if any errors occur
+# Returns true if specified package is installed, false otherwise
+# Will give potentially give false negative if any errors occur :(
 isPackageInstalled() {
   case "$DISTRO" in
-    'fedora')
-      isPackageInstalledFedora $1
-      ;;
-
-    'arch')
-      isPackageInstalledArch $1
-      ;;
-
-    'ubuntu')
-      isPackageInstalledDebian $1
-      ;;
-
-    'nixos')
-      isPackageInstalledNixos $1
-      ;;
-
-    *)
-      die "Unable to check packages for $DISTRO family of distros"
-      ;;
+    'fedora') isPackageInstalledFedora $1 ;;
+    'arch') isPackageInstalledArch $1 ;;
+    'ubuntu') isPackageInstalledDebian $1 ;;
+    'nixos') isPackageInstalledNixos $1 ;;
+    *) die "Unable to check packages for $DISTRO family of distros" ;;
   esac
 }
 
