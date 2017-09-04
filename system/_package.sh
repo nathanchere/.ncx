@@ -74,11 +74,37 @@ isPackageInstalledNixos() {
   nix-dev -q "$1" &> /dev/null
 }
 
+# Meh, does the job
+# $1: package description
+# $2: dnf package name
+# $3: pacman package name
+installPackage() {
+  package=''
+  case "$DISTRO" in
+    'fedora') package=$2 ;;
+    'arch') package=$3 ;;
+    *) die "Package installation not supported for $DISTRO; can't install $1" ;;
+  esac
+
+  if [ isPackageInstalledFedora "$package" ] ; then
+      log "Package '$package' ($1) is already installed; skipping..."
+      return
+  fi
+
+  log "Installing $package..."
+  case "$DISTRO" in
+    'fedora') sudo dnf install -y $package ;;
+    'arch') sudo pacman --noconfirm -S $package ;;
+    *) die "Package installation not supported for $DISTRO; can't install $1" ;;
+  esac
+}
+
 #######################################
 #
 #  Exports
 #
 #######################################
 
+export -f installPackage
 export -f installedVersion
 export -f isPackageInstalled

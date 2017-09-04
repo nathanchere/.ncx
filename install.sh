@@ -31,12 +31,13 @@ readonly LOG_FILE="/tmp/.log"
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
 GLOBAL_PROFILE_FILE="ncx.profile.sh"
 
-
-log "\n  **************************d"
+log ""
+log "  **************************"
 log " **                        **"
 log "**    .ncx Bootstrapper     **"
 log " **                        **"
-log "  **************************\n"
+log "  **************************"
+log ""
 log "  -- Logging to: $LOG_FILE --\n"
 
 #######################################
@@ -76,7 +77,7 @@ confirmBeforeContinue() {
 initConfigFile() {
   rm -f "$CONFIG_FILE"
   touch "$CONFIG_FILE"
-  echo "distro=$distro" >> "$CONFIG_FILE"
+  echo "distro=$DISTRO" >> "$CONFIG_FILE"
 }
 
 addExtraPaths() {
@@ -87,38 +88,12 @@ addExtraPaths() {
   addToFileOnce "export PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
 }
 
-# Meh, does the job
-# $1: dnf package name
-# $2: pacman package name
-# $3: package description
-installPackage() {
-  if [ "$distro" == "fedora" ]; then
-    if isPackageInstalledFedora "$1"; then
-        log "Package $1 is already installed; skipping..."
-       return
-    fi
-    log "Installing $1..."
-    sudo dnf install -y $1
-    return
-  fi
-
-  if [ "$distro" == "arch" ]; then
-    if isPackageInstalledArch "$2" ]; then
-        log "Package $2 is already installed; skipping..."
-        return
-    fi
-    log "Installing $2..."
-    sudo pacman --noconfirm -S $2
-    return
-  fi
-}
-
 installPrereqs() {
   info "Installing prerequisite packages"
   # These should be the only packages to need installing outside ncx
-  installPackage stow stow "GNU stow"
-  installPackage rsync rsync "rsync"
-  installPackage curl curl "curl"
+  installPackage "GNU stow" stow stow
+  installPackage "rsync" rsync rsync
+  installPackage "curl" curl curl 
 }
 
 installSoftware() {
@@ -137,7 +112,6 @@ installUserConfig() {
   udevadm control --reload-rules
   udevadm trigger
 }
-
 
 installNcxUtil () {
     ln -s "$HOME/.ncx/ncx" "/usr/bin/ncx"
@@ -180,7 +154,6 @@ die()   { echo -e "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
 
 # Pre-install validations
 requireRoot
-detectEnvironment
 detectAlreadyInstalled
 detectCorrectPath
 confirmBeforeContinue
