@@ -4,8 +4,11 @@
 . "system/_distro.sh"
 . "system/_package.sh"
 
-getDistro
-echo "Exported distro is $distro"
+if false ; then
+  echo "Exported distro is $DISTRO"
+fi
+
+echo "Finished"
 exit 11
 
 # configure system stuff

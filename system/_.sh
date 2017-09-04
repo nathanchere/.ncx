@@ -28,6 +28,12 @@ die() { yell "$*"; exit 111; }
 # Uses boolean shortcircuit to only die if the specified command failed
 try() { "$@" || die "cannot $*"; }
 
+log() {
+  printf "\033[1;37m[[ \033[1;36m* \033[1;37m]] \033[0m$1\n"
+  echo $@ >> "$LOGFILE"
+}
+
+
 requireRoot() {
   "$(whoami)" == "root" || die "This script requires root privileges. Try again with sudo."
 }

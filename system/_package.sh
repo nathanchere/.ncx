@@ -44,7 +44,7 @@ isPackageInstalledArch() {
 
 #######################################
 #
-#  Variable exports
+#  Exports
 #
 #######################################
 
