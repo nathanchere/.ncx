@@ -42,6 +42,22 @@ isPackageInstalledArch() {
  return $?
 }
 
+isPackageInstalledDebian() {
+ echo "Checking for Arch package '$1'"
+ pacman -Q "$1" &> /dev/null
+
+ # note: shitty way of doing this. Will give potentially give false negative if any errors occur
+ return $?
+}
+
+isPackageInstalledNix() {
+ echo "Checking for Arch package '$1'"
+ pacman -Q "$1" &> /dev/null
+
+ # note: shitty way of doing this. Will give potentially give false negative if any errors occur
+ return $?
+}
+
 #######################################
 #
 #  Exports

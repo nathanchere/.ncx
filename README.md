@@ -4,50 +4,39 @@ Just my Linux box setup / bootstrap scripts / dotfiles / etc.
 
 Specifically assumes a Fedora-based system. Tested on:
 
-* Korora 24, 25 (XPS 13 9350, VirtualBox)
-* Fedora 25 (Raspberry Pi 3)
+* Fedora family
+    * Korora 24, 25 (XPS 13 9350, VirtualBox)
+    * Fedora 25, 26 (Raspberry Pi 3)    
+* Arch family
+    * Arch (circa 2017-05) (XPS 13 9350, VirtalBox)
+    * Manjaro 17.0.1, 17.3 (VirtualBox)
 
-... and found to be horribly inconsistent and buggy. Currently working on compatibility with:
+Work-in-progress:
 
-* Arch (circa 2017-05)
-* Manjaro 17.0.1
+* NixOS 17.03 (VirtualBox)
 
- There are some things which I suspect might cause issues with different language or regional settings, like string comparison to check if a package is installed on Fedora sytstems. So to that end, assume if your system language is anything other than English things will break.
+There are some things which I suspect might cause issues with different system languages or regional settings, like string comparison to check if a package is installed. If your system language is anything other than English, assume that things will break.
 
- Caveat emptor.
-
-### Branches
-
-* `ver1` - first native dotfile inpementation
-* `ver2` - major rethink of software installer and config maintenance
-* `ver3` - experimenting with python, add arch support
-* `master` - split install [bash] and ncx [python] concerns more clearly, ncx #allthethings
+As always, caveat emptor.
 
 ### Install
 
     git clone https://github.com/nathanchere/.ncx.git ~/.ncx
     cd ~/.ncx
-
     sudo ./install.sh
 
-From there
+From there:
 
-    ./init_dotfiles.sh
-    ./init_fonts.sh
+    ~./init_dotfiles.sh~
+    ~./init_fonts.sh~
+    ~./install_[whatever].sh~
 
-    ./install_[whatever].sh
-
-These docs are shit but what can you do?
+These docs are shit *and outdated now* but what can you do?
 
 Manual things required:
 
 * Excercism key from http://www.exercism.io/account/key
 * Git user/pass for Github for uploading SSH public key
-
-Issues:
-
-* if config already exists (e.g. atom creates own on install), what to do?
-* --force flag for above?
 
 ### Summary
 
@@ -133,7 +122,7 @@ Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka pref
 * Better laptop sleep/resume on lid close (and lock on wake)
 * remap caps lock to something not shit (probably mod key)
 * LightDM greeter
-* Investigate misc - firejail
+* Investigate misc - firejail, allacrity
 * use `trash` instead of rm
 * screen locking - xautolock ?
 * log view helper tool
