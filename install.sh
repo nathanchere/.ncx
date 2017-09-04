@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
 . "system/_.sh"
-. "system/_.sh"
+. "system/_distro.sh"
+. "system/_package.sh"
 
+getDistro
+echo "Exported distro is $distro"
 exit 11
 
 # configure system stuff
@@ -19,7 +22,7 @@ readonly LOG_FILE="/tmp/.log"
 
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
 GLOBAL_PROFILE_FILE="ncx.profile.sh"
-distro='Unknown'
+
 
 echo -e "\n  **************************d"
 echo -e " **                        **"
@@ -44,49 +47,6 @@ detectUser () {
   if [ "$(whoami)" != "root" ]; then # Can also check $UID != 0
     die "This script requires root privilege. Try again with sudo."
   fi
-}
-
-detectEnvironment () {
-
-  info "Checking distro"
-
-  distro_id='Unknown'
-  distro_name='Unknown'
-  distro_family='Unknown'
-
-  if [ -f /etc/os-release ]; then
-
-    while read line; do
-      if [[ ${line} =~ ^ID= ]]; then distro_id=${line//*=}; fi
-      if [[ ${line} =~ ^ID_LIKE= ]]; then distro_family=${line//*=}; fi
-      if [[ ${line} =~ ^PRETTY_NAME= ]]; then distro_name=${line//*=}; fi
-    done < /etc/os-release
-
-  fi
-
-  # Unknown or unsupported distros
-
-  if [ "$distro_family" == 'Unknown' ]; then
-    die "Unable to detect distro information; see README.md for supported distros"
-  fi
-
-  if [ "$distro_family" != 'arch' ] && [ "$distro_family" != 'fedora' ]; then
-    die "${distro_name} is not supported; see README.md for supported distros"
-  fi
-
-  # Warnings for probably-safe-but-untested distros
-
-  if [ "$distro_family" == 'arch' ] && [ "$distro_id" != 'antergos' ] && [ "$distro_id" != 'arch' ]; then
-    warning 'Arch and Antergos are the only tested Arch variants. Experiences with other distros may vary. Caveat emptor.'
-  fi
-
-  if [ "$distro_family" == 'fedora' ] && [ "$distro_id" != 'fedora' ] && [ "$distro_id" != 'korora' ]; then
-     warning 'Fedora and Korora are the only tested Fedora variants. Experiences with other distros may vary. Caveat emptor.'
-  fi
-
-  info "Distro: OK; detected: ${distro_name} (${distro_family} family)"
-
-  distro=$distro_family
 }
 
 detectCorrectPath() {
@@ -128,25 +88,6 @@ addExtraPaths() {
   touch "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   addToFileOnce "PATH=$BIN_INSTALL_PATH:$PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   addToFileOnce "export PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
-}
-
-# $1: dnf package name
-isPackageInstalledFedora() {
-  echo "Checking for Fedora package '$1'"
-  rpm -q "$1" &> /dev/null
-
-  # note: shitty way of doing this. Will give potentially give false negative if any errors occur
-  return $?
-}
-
-# $1: pacman package name
-# TODO: how to check for non-pacman in arch, eg AUR
-isPackageInstalledArch() {
-  echo "Checking for Arch package '$1'"
-  pacman -Q "$1" &> /dev/null
-
-  # note: shitty way of doing this. Will give potentially give false negative if any errors occur
-  return $?
 }
 
 # Meh, does the job
