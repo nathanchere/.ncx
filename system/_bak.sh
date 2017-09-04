@@ -66,7 +66,7 @@ doHardStow() {
 
     if [ -d "$TARGETPATH" ]; then
       echo "Skipping directory $TARGETPATH"
-    else
+    elses
       if [ -L "$TARGETPATH" ]; then
         echo "$FILENAME already symlinked; unlinking..."
         unlink "$TARGETPATH"

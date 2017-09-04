@@ -5,6 +5,7 @@ IFS=$'\n\t'
 
 [[ ${INCLUDEONCE:-} -eq 1 ]] && return || readonly INCLUDEONCE=1
 [ $(basename "$0") = $(basename "$BASH_SOURCE") ] && echo "This should not be run directly" && exit 111
+echo "[ including _.sh]"
 
 #######################################
 #

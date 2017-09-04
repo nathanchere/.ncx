@@ -4,13 +4,19 @@
 . "system/_distro.sh"
 . "system/_package.sh"
 
-if false ; then
+# just some misc debug helper stuff
+if true ; then
   echo "Exported distro is $DISTRO"
+  # isPackageInstalled "git" && echo "git OK" || echo "git not OK"
+  # isPackageInstalled "igit" && echo "igit OK" || echo "igit not OK"
+
+  installedVersion git
+  installedVersion igit
+  installedVersion git
 fi
 
-echo "Finished"
-exit 11
 
+exit
 # configure system stuff
 # configure essentials e.g git omf
 # verify install
