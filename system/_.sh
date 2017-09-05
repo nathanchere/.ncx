@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -uo pipefail
 IFS=$'\n\t'
 
 [[ ${INCLUDEONCE:-} -eq 1 ]] && return || readonly INCLUDEONCE=1

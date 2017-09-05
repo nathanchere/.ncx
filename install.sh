@@ -1,30 +1,22 @@
 #!/usr/bin/env bash
 
 errorTrap() {
-   RED="\033[91m" ; RESET="\033[0m" ; printf "\n$RED*****************************************************************$RESET\n\n\tSomething went wrong; Aboring...\n$RED*****************************************************************$RESET\n\n"
+   RED="\033[91m" ; RESET="\033[0m" ; printf "\n$RED*****************************************************************$RESET\n\n\tError on $(caller)\n\tSomething went wrong; Aboring...\n$RED*****************************************************************$RESET\n\n"
+   exit
+}
+exitTrap() {
+  RED="\033[91m" ; RESET="\033[0m" ; printf "\n$RED -- == Script exited prematurely == -- $RESET\n"
 }
 debugTrap() {
   YELLOW="\033[93m" ;  RESET="\033[0m" ; printf "[ * ]$YELLOW DEBUG: $(caller)$RESET [ * ]\n"
 }
-trap errorTrap EXIT
+trap errorTrap ERR
+trap exitTrap EXIT
 trap debugTrap DEBUG
 
 . "system/_.sh"
 . "system/_distro.sh"
 . "system/_package.sh"
-
-# just some misc debug helper stuff
-if false ; then
-  echo "Exported distro is $DISTRO"
-  # isPackageInstalled "git" && echo "git OK" || echo "git not OK"
-  # isPackageInstalled "igit" && echo "igit OK" || echo "igit not OK"
-
-  installedVersion igit
-  installedVersion git
-
-  installPackage "GNU stow" stow stow
-  exit
-fi
 
 # configure system stuff
 # configure essentials e.g git omf
@@ -34,8 +26,6 @@ fi
 
 # standardise output (e.g. die format, headers etc)
 # Add --force flag support to re-install
-
-readonly LOG_FILE="/tmp/.log"
 
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
 GLOBAL_PROFILE_FILE="ncx.profile.sh"
@@ -47,7 +37,7 @@ log "**    .ncx Bootstrapper     **"
 log " **                        **"
 log "  **************************"
 log ""
-log "  -- Logging to: $LOG_FILE --\n"
+log "  -- Logging to: $LOGFILE --\n"
 
 #######################################
 #
@@ -146,6 +136,21 @@ cleanInstall() {
 #  Main
 #
 #######################################
+
+if $1 ; then
+  # just some misc debug helper stuff
+  if false ; then
+    echo "Exported distro is $DISTRO"
+    # isPackageInstalled "git" && echo "git OK" || echo "git not OK"
+    # isPackageInstalled "igit" && echo "igit OK" || echo "igit not OK"
+
+    installedVersion igit
+    installedVersion git
+
+    installPackage "GNU stow" stow stow
+    exit
+  fi
+fi
 
 # Pre-install validations
 requireRoot
