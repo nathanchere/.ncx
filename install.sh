@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+errorTrap() {
+   RED="\033[91m" ; RESET="\033[0m" ; printf "\n$RED*****************************************************************$RESET\n\n\tSomething went wrong; Aboring...\n$RED*****************************************************************$RESET\n\n"
+}
+debugTrap() {
+  YELLOW="\033[93m" ;  RESET="\033[0m" ; printf "[ * ]$YELLOW DEBUG: $(caller)$RESET [ * ]\n"
+}
+trap errorTrap EXIT
+trap debugTrap DEBUG
+
 . "system/_.sh"
 . "system/_distro.sh"
 . "system/_package.sh"
@@ -51,7 +60,7 @@ detectCorrectPath() {
     log "Home: $HOME; running from $(pwd)"
     die ".ncx installer must be run from '\$HOME/.ncx'. Because reasons."
   fi
-  info "Install path: OK; running from $(pwd)"
+  log "Install path: OK; running from $(pwd)"
 }
 
 detectAlreadyInstalled() {
@@ -59,7 +68,7 @@ detectAlreadyInstalled() {
     promptYesNo ".ncx has already been installed. Remove and re-install?" || die "Exiting..."
     cleanInstall
   else
-    info "No prior install: OK"
+    log "No prior install: OK"
   fi
 }
 
@@ -76,7 +85,7 @@ initConfigFile() {
 }
 
 addExtraPaths() {
-  info "Configuring \$PATH through $GLOBAL_PROFILE_FILE"
+  log "Configuring \$PATH through $GLOBAL_PROFILE_FILE"
   rm -f "$GLOBAL_PROFILE_FILE"
   touch "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   addToFileOnce "PATH=$BIN_INSTALL_PATH:$PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
@@ -84,7 +93,7 @@ addExtraPaths() {
 }
 
 installPrereqs() {
-  info "Installing prerequisite packages"
+  log "Installing prerequisite packages"
   # These should be the only packages to need installing outside ncx
   installPackage "GNU stow" stow stow
   installPackage "rsync" rsync rsync
@@ -92,10 +101,9 @@ installPrereqs() {
 }
 
 installSoftware() {
-  info "Installing software packages"
-
-  installPackage python3 python "Python 3.x"
-  installPackage fish fish "fish shell"
+  log "Installing software packages"
+  installPackage "Python 3.x" python3 python
+  installPackage "fish shell" fish fish
 }
 
 installUserConfig() {
@@ -109,11 +117,12 @@ installUserConfig() {
 }
 
 installNcxUtil () {
-    ln -s "$HOME/.ncx/ncx" "/usr/bin/ncx"
+  ln -s "$HOME/.ncx/ncx" "/usr/bin/ncx"
 }
 
 finaliseInstallation() {
   echo "complete=1" >> "$CONFIG_FILE"
+  log ".ncx bootstrap install complete!"
 }
 
 #######################################
@@ -123,7 +132,7 @@ finaliseInstallation() {
 #######################################
 
 cleanInstall() {
-  info "Cleaning existing install..."
+  log "Cleaning existing install..."
   log " * Removing old config file"
   rm -f "$CONFIG_FILE"
   log " * Removing profile.d entry"
@@ -131,13 +140,6 @@ cleanInstall() {
   log " * Removing ncx util from /usr/bin"
   rm -f "/usr/bin/ncx"
 }
-
-head() { echo -e "========================\n$@\n========================\n\n" | tee -a "$LOG_FILE" >&2 ; }
-log()    { echo -e "$@" | tee -a "$LOG_FILE" >&2 ; }
-info()    { echo -e "[INFO]    $@" | tee -a "$LOG_FILE" >&2 ; }
-warning() { echo -e "[WARNING] $@" | tee -a "$LOG_FILE" >&2 ; }
-error()   { echo -e "[ERROR]   $@" | tee -a "$LOG_FILE" >&2 ; }
-die()   { echo -e "[FATAL]   $@" | tee -a "$LOG_FILE" >&2 ; exit 1 ; }
 
 #######################################
 #
@@ -155,12 +157,10 @@ promptYesNo "Are you sure you want to run the installer?" || die "Exiting..."
 initConfigFile
 addExtraPaths
 installPrereqs
+installSoftware
 installNcxUtil
 installUserConfig
-
 finaliseInstallation
 
-cleanup() {
-  echo Cleaning up
-}
-trap cleanup EXIT
+trap - DEBUG
+trap - EXIT
