@@ -7,12 +7,6 @@ IFS=$'\n\t'
 [ $(basename "$0") = $(basename "$BASH_SOURCE") ] && echo "This should not be run directly" && exit 111
 echo "[ including _.sh ]"
 
-#######################################
-#
-#  Environment and package management stuff
-#
-#######################################
-
 getUserName(){
   if [[ $EUID -ne 0 ]]; then
     echo `whoami`
@@ -30,7 +24,7 @@ die() { yell "$*"; exit 111; }
 try() { "$@" || die "cannot $*"; }
 
 log() {
-  printf "\033[1;37m[[ \033[1;36m* \033[1;37m]] \033[0m$1\n"
+  printf "\033[1;37m[ \033[1;36m* \033[1;37m] \033[0m$1\n"
   echo $@ >> "$LOGFILE"
 }
 

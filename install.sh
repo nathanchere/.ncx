@@ -1,31 +1,37 @@
 #!/usr/bin/env bash
 
 errorTrap() {
-   RED="\033[91m" ; RESET="\033[0m" ; printf "\n$RED*****************************************************************$RESET\n\n\tError on $(caller)\n\tSomething went wrong; Aboring...\n$RED*****************************************************************$RESET\n\n"
+   RED="\033[91m" ; RESET="\033[0m" ; printf "\n$RED*****************************************************************$RESET\n\n\tError on $(caller)\n\tSomething went wrong; Aboring...\n\n$RED*****************************************************************$RESET\n\n"
    exit
 }
 exitTrap() {
-  RED="\033[91m" ; RESET="\033[0m" ; printf "\n$RED -- == Script exited prematurely == -- $RESET\n"
+  RED="\033[91m" ; RESET="\033[0m" ; printf "\n\033[1;37m[[ \033[1;31m! \033[1;37m]] \033[0m Script exited prematurely\n"
 }
 debugTrap() {
   YELLOW="\033[93m" ;  RESET="\033[0m" ; printf "[ * ]$YELLOW DEBUG: $(caller)$RESET [ * ]\n"
 }
+
+if [ "${1:-}" == 'debug' ] ; then
+  readonly DEBUG_MODE=true
+else
+  readonly DEBUG_MODE=false
+fi
+
 trap errorTrap ERR
 trap exitTrap EXIT
-trap debugTrap DEBUG
+$DEBUG_MODE && trap debugTrap DEBUG
+
+#######################################
+#
+#  .ncx Bootstrapper
+#
+# Installs the main `ncx` tool and dependencies
+#
+#######################################
 
 . "system/_.sh"
 . "system/_distro.sh"
 . "system/_package.sh"
-
-# configure system stuff
-# configure essentials e.g git omf
-# verify install
-# - and cleanup partial install on fail? overkill?
-# mark and detect failed installs or incomplete installs via .config?
-
-# standardise output (e.g. die format, headers etc)
-# Add --force flag support to re-install
 
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
 GLOBAL_PROFILE_FILE="ncx.profile.sh"
@@ -104,10 +110,15 @@ installUserConfig() {
   #reload newly synced udev rules
   udevadm control --reload-rules
   udevadm trigger
+
+  # set default shell to fish
+  usermod -s /usr/bin/fish $USERNAME
+  # install oh-my-fish
+  curl -L https://get.oh-my.fish | fish
 }
 
 installNcxUtil () {
-  ln -s "$HOME/.ncx/ncx" "/usr/bin/ncx"
+  ln -s "$HOME/.ncx/system/ncx" "/usr/bin/ncx"
 }
 
 finaliseInstallation() {
@@ -137,7 +148,7 @@ cleanInstall() {
 #
 #######################################
 
-if $1 ; then
+if "${1:-}" = 'debug' ; then
   # just some misc debug helper stuff
   if false ; then
     echo "Exported distro is $DISTRO"
