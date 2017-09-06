@@ -137,8 +137,10 @@ Manual things required:
 
 Includes various Nerd Fonts. ProggyClean or Gohu for 'bitmap' look, Iosevka preferred for everything else.
 
-### TODO
+### TODO / BUGS /ETC
 
+* BUG: log files created by sudo are not readble/overwritable/etc by user by default
+* better flag parser for debug, help/usage etc
 * Wifi connection script
 * Monitor connection script
 * Better screen capture
@@ -199,5 +201,11 @@ Various dotfiles, skins, colour themes, xmonad configurations and helper scripts
 * sn0rlax
 * leoxiong
 * ethanschoonover
+
+References which helped me a lot along the way:
+
+* bash
+    * https://dev.to/thiht/shell-scripts-matter
+
 
 Apologies to anyone else who I've stolen from but forgotten to mention

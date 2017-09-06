@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 errorTrap() {
-   RED="\033[91m" ; RESET="\033[0m" ; printf "\n$RED*****************************************************************$RESET\n\n\tError on $(caller)\n\tSomething went wrong; Aboring...\n\n$RED*****************************************************************$RESET\n\n"
-   exit
+  printf "\n\033[91m*****************************************************************\033[0m\n\n\tError on %s\n\tSomething went wrong; Aboring...\n\n\033[91m*****************************************************************\033[0m\n\n" "$(caller)"
+  exit
 }
 exitTrap() {
-  RED="\033[91m" ; RESET="\033[0m" ; printf "\n\033[1;37m[[ \033[1;31m! \033[1;37m]] \033[0m Script exited prematurely\n"
+  printf "\n\033[1;37m[[ \033[1;31m! \033[1;37m]] \033[0m Script exited prematurely\n"
 }
 debugTrap() {
-  YELLOW="\033[93m" ;  RESET="\033[0m" ; printf "[ * ]$YELLOW DEBUG: $(caller)$RESET [ * ]\n"
+  printf "[ * ]\033[93m DEBUG: %s\033[0m [ * ]\n" "$(caller)"
 }
 
 if [ "${1:-}" == 'debug' ] ; then
@@ -113,7 +113,7 @@ installUserConfig() {
   udevadm trigger
 
   # set default shell to fish
-  usermod -s /usr/bin/fish $USERNAME
+  usermod -s /usr/bin/fish "$USERNAME"
   # install oh-my-fish
   curl -L https://get.oh-my.fish | fish
 }
