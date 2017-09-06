@@ -2,7 +2,7 @@
 
 Just my Linux box setup / bootstrap scripts / dotfiles / etc.
 
-Specifically assumes a Fedora-based system. Tested on:
+Originally for Fedora-based systems only. Currently tested and working targets:
 
 * Fedora family
     * Korora 24, 25 (XPS 13 9350, VirtualBox)
@@ -13,17 +13,40 @@ Specifically assumes a Fedora-based system. Tested on:
 
 Work-in-progress:
 
-* NixOS 17.03 (VirtualBox)
+* NixOS 17.03 (VirtualBox) (tonnes of things not working)
+* Debian and [n]buntu variants (very early stages)
 
-There are some things which I suspect might cause issues with different system languages or regional settings, like string comparison to check if a package is installed. If your system language is anything other than English, assume that things will break.
+Also assumes system language is set to English, otherwise many things will
+break and I have no interest in fixing these.
 
 As always, caveat emptor.
 
 ### Install
 
+#### Bootstrap
+
+First clone locally and run the bootstrapper:
+
     git clone https://github.com/nathanchere/.ncx.git ~/.ncx
     cd ~/.ncx
     sudo ./install.sh
+
+This will:
+
+* initialise a config file for the `ncx` tool
+* install various common dependencies
+* configure udev rules
+* install fish (with oh-my-fish and various plugins)
+* set the default shell for the current user to be fish
+* add `$HOME/.ncx/system/bin` to $PATH via profiles.d
+
+If something breaks unexpectedly try instead running as:
+
+    sudo ./install.sh debug
+
+#### Post-bootstrap
+
+TODO: outdated
 
 From there:
 
@@ -38,7 +61,7 @@ Manual things required:
 * Excercism key from http://www.exercism.io/account/key
 * Git user/pass for Github for uploading SSH public key
 
-### Summary
+### Configuration Summary
 
 * Display manager: LightDM
 * Window manager: XMonad

@@ -13,6 +13,7 @@ debugTrap() {
 
 if [ "${1:-}" == 'debug' ] ; then
   readonly DEBUG_MODE=true
+  set -x
 else
   readonly DEBUG_MODE=false
 fi
