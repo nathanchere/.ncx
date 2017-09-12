@@ -78,7 +78,9 @@ detectAlreadyInstalled() {
 initConfigFile() {
   rm -f "$CONFIG_FILE"
   touch "$CONFIG_FILE"
-  echo "distro=$DISTRO" >> "$CONFIG_FILE"
+  echo "distro_id=$DISTRO_ID" >> "$CONFIG_FILE"
+  echo "distro_family=$DISTRO_FAMILY" >> "$CONFIG_FILE"
+  echo "distro_package_manager=$DISTRO_PACKAGE_MANAGER" >> "$CONFIG_FILE"
 }
 
 addExtraPaths() {
@@ -148,21 +150,6 @@ cleanInstall() {
 #  Main
 #
 #######################################
-
-if "${1:-}" = 'debug' ; then
-  # just some misc debug helper stuff
-  if false ; then
-    echo "Exported distro is $DISTRO"
-    # isPackageInstalled "git" && echo "git OK" || echo "git not OK"
-    # isPackageInstalled "igit" && echo "igit OK" || echo "igit not OK"
-
-    installedVersion igit
-    installedVersion git
-
-    installPackage "GNU stow" stow stow
-    exit
-  fi
-fi
 
 # Pre-install validations
 requireRoot

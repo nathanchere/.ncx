@@ -16,7 +16,7 @@ installedVersion() {
     return
   fi
 
-  case "$DISTRO" in
+  case "$DISTRO_FAMILY" in
     'fedora') rpm -qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2  ;;
     'arch') pacman -Qi "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2 ;;
     'ubuntu') dkpg -s "$1" | grep "Version" | cut -d ':' -f 2 | cut -d ' ' -f 2 ;;
@@ -29,7 +29,7 @@ installedVersion() {
 # Returns true if specified package is installed, false otherwise
 # Will give potentially give false negative if any errors occur :(
 isPackageInstalled() {
-  case "$DISTRO" in
+  case "$DISTRO_FAMILY" in
     'fedora') isPackageInstalledFedora $1 ;;
     'arch') isPackageInstalledArch $1 ;;
     'ubuntu') isPackageInstalledDebian $1 ;;
@@ -65,7 +65,7 @@ isPackageInstalledNixos() {
 # if a package isn't needed for a particular system, leave as ''
 installPackage() {
   package=''
-  case "$DISTRO" in
+  case "$DISTRO_FAMILY" in
     'fedora') package=$2 ;;
     'arch') package=$3 ;;
     *) die "Package installation not supported for $DISTRO; can't install $1" ;;
@@ -82,7 +82,7 @@ installPackage() {
   fi
 
   log "Installing $package..."
-  case "$DISTRO" in
+  case "$DISTRO_FAMILY" in
     'fedora') sudo dnf install -y $package ;;
     'arch') sudo pacman --noconfirm -S $package ;;
     *) die "Package installation not supported for $DISTRO; can't install $1" ;;
