@@ -124,8 +124,6 @@ installUserConfig() {
 
   # set default shell to fish
   usermod -s /usr/bin/fish "$USERNAME"
-  # install oh-my-fish
-  curl -L https://get.oh-my.fish | fish
 }
 
 installNcxUtil () {
