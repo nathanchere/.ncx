@@ -85,10 +85,18 @@ initConfigFile() {
 
 addExtraPaths() {
   log "Configuring \$PATH through $GLOBAL_PROFILE_FILE"
-  rm -f "$GLOBAL_PROFILE_FILE"
-  touch "/etc/profile.d/$GLOBAL_PROFILE_FILE"
-  addToFileOnce "PATH=$BIN_INSTALL_PATH:$PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
-  addToFileOnce "export PATH" "/etc/profile.d/$GLOBAL_PROFILE_FILE"
+
+  profile_file="/etc/profile.d/$GLOBAL_PROFILE_FILE"
+
+  # Re-initialise clean profile.d template
+  rm -f "$profile_file"
+  cp "system/profile.d/ncx.profile.sh" "$profile_file"
+
+  # Add .ncx bin helpers/tools
+  addToFileOnce "pathMungeBefore '$BIN_INSTALL_PATH'" "$profile_file"
+
+  log "Sourcing profile.d to avoid restart"
+  source "$profile_file"
 }
 
 installPrereqs() {
