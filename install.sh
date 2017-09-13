@@ -114,6 +114,7 @@ installSoftware() {
 }
 
 installUserConfig() {
+  log "Configuring miscellaneous user settings"
   # add groups and rules for things like user backlight permissions
   rsync -avm "system/udev/" "/etc/udev/rules.d"
   gpasswd -a "$USERNAME" video
@@ -124,6 +125,14 @@ installUserConfig() {
 
   # set default shell to fish
   usermod -s /usr/bin/fish "$USERNAME"
+
+  log "Configuring ohmyfish for $USERNAME"
+  # install oh-my-fish
+
+  OMF_INSTALLER="$TMPROOT/ohmyfi.sh"
+  download "https://get.oh-my.fish" "$OMF_INSTALLER"
+  su $USERNAME -c `fish "$OMF_INSTALLER"  --noninteractive`
+  echo "TODO omf update"
 }
 
 installNcxUtil () {
@@ -133,6 +142,8 @@ installNcxUtil () {
 finaliseInstallation() {
   echo "complete=1" >> "$CONFIG_FILE"
   log ".ncx bootstrap install complete!"
+  log "Your next terminal will be filled with joy"
+  log "  ncx      to see fun stuff"
 }
 
 #######################################
@@ -149,6 +160,8 @@ cleanInstall() {
   rm -rf "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   log " * Removing ncx util from /usr/bin"
   rm -f "/usr/bin/ncx"
+  log " * Removing ohmyfish"
+  rm -rf "$HOME/.local/share/omf"
 }
 
 #######################################
