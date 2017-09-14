@@ -33,6 +33,7 @@ $DEBUG_MODE && trap debugTrap DEBUG
 . "system/_.sh"
 . "system/_distro.sh"
 . "system/_package.sh"
+. "system/_sync.sh"
 
 BIN_INSTALL_PATH="$HOME/.ncx/system/bin"
 GLOBAL_PROFILE_FILE="ncx.profile.sh"
@@ -45,7 +46,6 @@ log " **                        **"
 log "  **************************"
 log ""
 log "  -- Logging to: $LOGFILE --\n"
-
 #######################################
 #
 #  Pre-setup validation steps
@@ -113,6 +113,27 @@ installSoftware() {
   installPackage "fish shell" fish fish
 }
 
+installOhMyFish() {
+  log "Installing and configuring ohmyfish..."
+
+  OMFPATH="$HOME/.local/share/omf"
+  OMFCONFIGPATH="$HOME/.config/omf"
+  OMF_INSTALLER="$TMPROOT/ohmy.fish"
+
+  log "Cleaning old fish configuration..."
+  rm -rf "$HOME/.config/fish"
+  rm -rf "$OMFPATH"
+
+  download "https://get.oh-my.fish" "$OMF_INSTALLER"
+
+  su $USERNAME -c `fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive`
+
+  log "Restoring dotfiles for fish and omf"
+  rm -rf "$OMFCONFIGPATH"
+  #doStow fish dotfiles "$HOME"
+  #su $USERNAME -c `fish omf install --nointeractive`
+}
+
 installUserConfig() {
   log "Configuring miscellaneous user settings"
   # add groups and rules for things like user backlight permissions
@@ -126,13 +147,7 @@ installUserConfig() {
   # set default shell to fish
   usermod -s /usr/bin/fish "$USERNAME"
 
-  log "Configuring ohmyfish for $USERNAME"
-  # install oh-my-fish
-
-  OMF_INSTALLER="$TMPROOT/ohmyfi.sh"
-  download "https://get.oh-my.fish" "$OMF_INSTALLER"
-  su $USERNAME -c `fish "$OMF_INSTALLER"  --noninteractive`
-  echo "TODO omf update"
+  installOhMyFish
 }
 
 installNcxUtil () {
@@ -169,6 +184,9 @@ cleanInstall() {
 #  Main
 #
 #######################################
+
+installOhMyFish
+exit
 
 # Pre-install validations
 requireRoot
