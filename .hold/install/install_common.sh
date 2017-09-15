@@ -15,7 +15,7 @@ main() {
   dnf install -y tint2 rofi
   dnf install -y htop glances
   dnf install -y neofetch cmatrix
-  dnf install -y figlet ddate shutter xclip surf
+  dnf install -y figlet ddate shutter xclip surf jq
   dnf install -y docker
   dnf install -y fuse fuse-devel # required for running AppImage
 

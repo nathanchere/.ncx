@@ -206,6 +206,9 @@ References which helped me a lot along the way:
 
 * bash
     * https://dev.to/thiht/shell-scripts-matter
+    * http://robertmuth.blogspot.se/2012/08/better-bash-scripting-in-15-minutes.html
+    * https://jvns.ca/blog/2017/03/26/bash-quirks/
+    * http://bash3boilerplate.sh/
 
 
 Apologies to anyone else who I've stolen from but forgotten to mention
