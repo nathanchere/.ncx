@@ -19,6 +19,7 @@
 * Install fonts
 * Monitor connection / config
 * script for wifi management easier than nmcli
+* firewall management (e.g. allow chromecast)
 
 ## xmonad
 
@@ -28,6 +29,7 @@
 
 ## Misc features
 
+* Add `DOTNET_CLI_TELEMETRY_OPTOUT = 1` to everything, because fuck you Microsoft
 * Better laptop sleep/resume on lid close (and lock on wake)
 * remap caps lock to something not shit (probably mod key)
 * LightDM greeter
