@@ -126,7 +126,9 @@ installOhMyFish() {
 
   download "https://get.oh-my.fish" "$OMF_INSTALLER"
 
-  su $USERNAME -c `fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive`
+  # Trying to run under normal user account - to be revisited
+  #su $USERNAME -c `fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive`
+  fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive
 
   log "Restoring dotfiles for fish and omf"
   rm -rf "$OMFCONFIGPATH"
@@ -146,8 +148,6 @@ installUserConfig() {
 
   # set default shell to fish
   usermod -s /usr/bin/fish "$USERNAME"
-
-  installOhMyFish
 }
 
 installNcxUtil () {
@@ -187,9 +187,6 @@ cleanInstall() {
 #
 #######################################
 
-installOhMyFish
-exit
-
 # Pre-install validations
 requireRoot
 detectAlreadyInstalled
@@ -203,6 +200,7 @@ installPrereqs
 installSoftware
 installNcxUtil
 installUserConfig
+#installOhMyFish
 finaliseInstallation
 
 trap - DEBUG

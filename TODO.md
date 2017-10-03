@@ -3,6 +3,7 @@
 ## Blocking
 
 * $HOME/.config/* entries created as root owner instead of user
+* move install ohmyish to ncx python script
 
 ## README.md
 
