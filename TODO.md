@@ -1,5 +1,9 @@
 # TODO
 
+## Blocking
+
+* $HOME/.config/* entries created as root owner instead of user
+
 ## README.md
 
 * Current install instructions

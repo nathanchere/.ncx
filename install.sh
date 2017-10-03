@@ -155,6 +155,8 @@ installNcxUtil () {
 }
 
 finaliseInstallation() {
+  echo "Fixing permissions"
+  chown -R $USERNAME:$USERNAME $HOME/.config
   echo "complete=1" >> "$CONFIG_FILE"
   log ".ncx bootstrap install complete!"
   log "Your next terminal will be filled with joy"
