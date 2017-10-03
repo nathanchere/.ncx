@@ -84,19 +84,32 @@ initConfigFile() {
 }
 
 addExtraPaths() {
-  log "Configuring \$PATH through $GLOBAL_PROFILE_FILE"
+  addExtraPathsFish
+  addExtraPathsBash
+}
 
-  profile_file="/etc/profile.d/$GLOBAL_PROFILE_FILE"
+addExtraPathsFish() {
+  log "Configuring \$PATH for fish through config.fish"
+  # This should be done through stowed config.fish
+  # For now nothing else using it?
+  log "Sourcing config.fish to avoid restart"
+  source ""
+}
+
+addExtraPathsBash() {
+  log "Configuring \$PATH for bash through $GLOBAL_PROFILE_FILE"
+
+  profile_d="/etc/profile.d/$GLOBAL_PROFILE_FILE"
 
   # Re-initialise clean profile.d template
-  rm -f "$profile_file"
-  cp "system/profile.d/ncx.profile.sh" "$profile_file"
+  rm -f "$profile_d"
+  cp "system/profile.d/ncx.profile.sh" "$profile_d"
 
   # Add .ncx bin helpers/tools
-  addToFileOnce "pathMungeBefore '$BIN_INSTALL_PATH'" "$profile_file"
+  addToFileOnce "pathMungeBefore '$BIN_INSTALL_PATH'" "$profile_d"
 
   log "Sourcing profile.d to avoid restart"
-  source "$profile_file"
+  source "$profile_d"
 }
 
 installPrereqs() {
