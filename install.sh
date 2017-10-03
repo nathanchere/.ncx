@@ -90,10 +90,11 @@ addExtraPaths() {
 
 addExtraPathsFish() {
   log "Configuring \$PATH for fish through config.fish"
+  fishConfig="$HOME/.config/fish/config.fish"
   # This should be done through stowed config.fish
-  # For now nothing else using it?
+  addToFileOnce "set -gx PATH \"\$HOME/.ncx/system/bin\" \$PATH" "$fishConfig"
   log "Sourcing config.fish to avoid restart"
-  source ""
+  source "$fishConfig"
 }
 
 addExtraPathsBash() {
