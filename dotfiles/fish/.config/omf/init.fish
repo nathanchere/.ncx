@@ -1,5 +1,5 @@
-source ~/.asdf/asdf.fish
-set -gx PATH ~/bin $PATH
+# source ~/.asdf/asdf.fish
+set -gx PATH ~/.ncx/system/bin $PATH
 
 # bobthefish theme overrides
 set -g theme_display_vagrant no
