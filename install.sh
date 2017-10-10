@@ -135,13 +135,11 @@ installOhMyFish() {
   OMF_INSTALLER="$TMPROOT/ohmy.fish"
 
   if [ -d "$OMFPATH" ]; then
-    if promptYesNo "OhMyFish already installed; remove/reinstall?"; then
-      log " * Removing existing ohmyfish; removing..."
-      rm -rf "$OMFPATH"
-    else
-      # log " * Updating existing ohmyfish install..."
-      return
-    fi
+    # # Maybe later - shouldn't be fixing broken omf installs here
+    # if promptYesNo "OhMyFish already installed; remove/reinstall?"; then
+    # log " * Removing existing ohmyfish; removing..."
+    # rm -rf "$OMFPATH"
+    return
   fi
 
   download "https://get.oh-my.fish" "$OMF_INSTALLER"
@@ -244,5 +242,5 @@ finaliseInstallation
 trap - DEBUG
 trap - EXIT
 
-echo "At the end please run: 'omf update'"
+echo "At the end please run 'fish' then : 'omf update'"
 echo "then `omf install`"
