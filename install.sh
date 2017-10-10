@@ -140,16 +140,20 @@ installOhMyFish() {
       rm -rf "$OMFPATH"
     else
       log " * Updating existing ohmyfish install..."
-      su $USERNAME -c `fish omf update --nointeractive`
+      su -c "omf theme shellder --noninteractive" $USERNAME
+      su -c "omf update --noninteractive" $USERNAME
       return
     fi
   fi
 
   download "https://get.oh-my.fish" "$OMF_INSTALLER"
 
-  # Trying to run under normal user account - to be revisited
+  # su -c 'fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive' - $USERNAME
   #su $USERNAME -c `fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive`
   fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive
+
+  chown -R $USERNAME:$USERNAME "$OMFPATH"
+  chmod -R a+rwx "$OMFPATH"
 }
 
 installOhMyFishConfig() {
@@ -164,9 +168,13 @@ installOhMyFishConfig() {
   log "* Restoring dotfiles for fish and omf"
   rm -rf "$OMFCONFIGPATH"
   doStow fish dotfiles "$HOME"
-  chown -R $USERNAME:$USERNAME $HOME/.config
 
-  su $USERNAME -c `fish omf install --nointeractive`
+  log "* Fixing permissions on stowed files"
+  chown -R $USERNAME:$USERNAME "$OMFPATH"
+  chown -R $USERNAME:$USERNAME $HOME/.config
+  chmod -R a+rwx "$OMFPATH"
+  chmod -R a+rwx $HOME/.config
+  su -c "omf install --noninteractive" $USERNAME
 }
 
 installUserConfig() {
