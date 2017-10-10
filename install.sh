@@ -128,26 +128,45 @@ installSoftware() {
 }
 
 installOhMyFish() {
-  log "Installing and configuring ohmyfish..."
+  log "Installing ohmyfish..."
 
   OMFPATH="$HOME/.local/share/omf"
   OMFCONFIGPATH="$HOME/.config/omf"
   OMF_INSTALLER="$TMPROOT/ohmy.fish"
 
-  log "Cleaning old fish configuration..."
-  rm -rf "$HOME/.config/fish"
-  rm -rf "$OMFPATH"
+  if [ -f "$OMFCONFIGPATH" ]; then
+    if [ promptYesNo "OhMyFish already installed; remove/reinstall?" ]; then
+      log " * Removing existing ohmyfish; removing..."
+      rm -rf "$HOME/.local/share/omf"
+    else
+      log " * Updating existing ohmyfish install..."
+      omf update
+      return
+    fi
+  fi
 
   download "https://get.oh-my.fish" "$OMF_INSTALLER"
 
   # Trying to run under normal user account - to be revisited
   #su $USERNAME -c `fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive`
   fish "$OMF_INSTALLER" --path="$OMFPATH" --config="$OMFCONFIGPATH" --noninteractive
+}
 
-  log "Restoring dotfiles for fish and omf"
+installOhMyFishConfig() {
+  log "Configuring ohmyfish..."
+
+  OMFPATH="$HOME/.local/share/omf"
+  OMFCONFIGPATH="$HOME/.config/omf"
+
+  log "* Cleaning old fish configuration..."
+  rm -rf "$HOME/.config/fish"
+
+  log "* Restoring dotfiles for fish and omf"
   rm -rf "$OMFCONFIGPATH"
-  #doStow fish dotfiles "$HOME"
-  #su $USERNAME -c `fish omf install --nointeractive`
+  doStow fish dotfiles "$HOME"
+  chown -R $USERNAME:$USERNAME $HOME/.config
+
+  su $USERNAME -c `fish omf install --nointeractive`
 }
 
 installUserConfig() {
@@ -191,8 +210,6 @@ cleanInstall() {
   rm -rf "/etc/profile.d/$GLOBAL_PROFILE_FILE"
   log " * Removing ncx util from /usr/bin"
   rm -f "/usr/bin/ncx"
-  log " * Removing ohmyfish"
-  rm -rf "$HOME/.local/share/omf"
 }
 
 #######################################
@@ -200,6 +217,9 @@ cleanInstall() {
 #  Main
 #
 #######################################
+
+installOhMyFish
+exit
 
 # Pre-install validations
 requireRoot
@@ -214,7 +234,7 @@ installPrereqs
 installSoftware
 installNcxUtil
 installUserConfig
-#installOhMyFish
+installOhMyFish
 finaliseInstallation
 
 trap - DEBUG
