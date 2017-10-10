@@ -242,5 +242,11 @@ finaliseInstallation
 trap - DEBUG
 trap - EXIT
 
+# NCX stuff to add:
+# Python install pyenv -
+###curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+# set up omf
+
+
 echo "At the end please run 'fish' then : 'omf update'"
 echo "then `omf install`"
