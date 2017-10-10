@@ -134,13 +134,13 @@ installOhMyFish() {
   OMFCONFIGPATH="$HOME/.config/omf"
   OMF_INSTALLER="$TMPROOT/ohmy.fish"
 
-  if [ -f "$OMFCONFIGPATH" ]; then
-    if [ promptYesNo "OhMyFish already installed; remove/reinstall?" ]; then
+  if [ -d "$OMFPATH" ]; then
+    if promptYesNo "OhMyFish already installed; remove/reinstall?"; then
       log " * Removing existing ohmyfish; removing..."
-      rm -rf "$HOME/.local/share/omf"
+      rm -rf "$OMFPATH"
     else
       log " * Updating existing ohmyfish install..."
-      omf update
+      su $USERNAME -c `fish omf update --nointeractive`
       return
     fi
   fi
@@ -219,6 +219,7 @@ cleanInstall() {
 #######################################
 
 installOhMyFish
+installOhMyFishConfig
 exit
 
 # Pre-install validations
