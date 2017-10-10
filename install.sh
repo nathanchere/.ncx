@@ -139,9 +139,7 @@ installOhMyFish() {
       log " * Removing existing ohmyfish; removing..."
       rm -rf "$OMFPATH"
     else
-      log " * Updating existing ohmyfish install..."
-      su -c "omf theme shellder --noninteractive" $USERNAME
-      su -c "omf update --noninteractive" $USERNAME
+      # log " * Updating existing ohmyfish install..."
       return
     fi
   fi
@@ -169,12 +167,12 @@ installOhMyFishConfig() {
   rm -rf "$OMFCONFIGPATH"
   doStow fish dotfiles "$HOME"
 
-  log "* Fixing permissions on stowed files"
-  chown -R $USERNAME:$USERNAME "$OMFPATH"
-  chown -R $USERNAME:$USERNAME $HOME/.config
-  chmod -R a+rwx "$OMFPATH"
-  chmod -R a+rwx $HOME/.config
-  su -c "omf install --noninteractive" $USERNAME
+  # log "* Fixing permissions on stowed files"
+  # chown -R $USERNAME:$USERNAME "$OMFPATH"
+  # chown -R $USERNAME:$USERNAME $HOME/.config
+  # chmod -R a+rwx "$OMFPATH"
+  # chmod -R a+rwx $HOME/.config
+  # su -c "omf install --noninteractive" $USERNAME
 }
 
 installUserConfig() {
@@ -226,10 +224,6 @@ cleanInstall() {
 #
 #######################################
 
-installOhMyFish
-installOhMyFishConfig
-exit
-
 # Pre-install validations
 requireRoot
 detectAlreadyInstalled
@@ -244,7 +238,11 @@ installSoftware
 installNcxUtil
 installUserConfig
 installOhMyFish
+installOhMyFishConfig
 finaliseInstallation
 
 trap - DEBUG
 trap - EXIT
+
+echo "At the end please run: 'omf update'"
+echo "then `omf install`"
